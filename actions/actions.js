@@ -11,3 +11,10 @@ export function editGuitar(guitar) {
     payload: guitar
   };
 }
+
+export function showNotifications(show) {
+  return {
+    type: "SHOW_NOTIFICATIONS",
+    payload: show
+  };
+}

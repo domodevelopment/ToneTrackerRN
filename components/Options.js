@@ -33,12 +33,12 @@ class Options extends Component {
           <Icon name="options-vertical" size={20} />
         </MenuTrigger>
         <MenuOptions>
+          <MenuOption onSelect={() => Share.open(shareOptions)} text="Share" />
+          <MenuOption onSelect={() => this.handleEmail()} text="Contact" />
           <MenuOption
             onSelect={() => this.props.navigation.navigate(`Settings`)}
             text="Settings"
           />
-          <MenuOption onSelect={() => Share.open(shareOptions)} text="Share" />
-          <MenuOption onSelect={() => this.handleEmail()} text="Contact" />
         </MenuOptions>
       </Menu>
     );
