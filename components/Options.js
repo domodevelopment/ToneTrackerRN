@@ -8,8 +8,16 @@ import {
   MenuOption,
   MenuTrigger
 } from "react-native-popup-menu";
+import Share, { ShareSheet, Button } from "react-native-share";
 
 const EMAIL = "violenthoboenterprises@gmail.com";
+
+const shareOptions = {
+  title: "React Native",
+  message: "Hola mundo",
+  url: "http://facebook.github.io/react-native/",
+  subject: "Share Link" //  for email
+};
 
 class Options extends Component {
   handleEmail = () => {
@@ -25,24 +33,11 @@ class Options extends Component {
           <Icon name="options-vertical" size={20} />
         </MenuTrigger>
         <MenuOptions>
-          <MenuOption onSelect={() => alert(`Save`)} text="Save" />
-          <MenuOption onSelect={() => alert(`Delete`)}>
-            <Text style={{ color: "red" }}>Delete</Text>
-          </MenuOption>
-          <MenuOption
-            onSelect={() => alert(`Not called`)}
-            disabled={true}
-            text="Disabled"
-          />
           <MenuOption
             onSelect={() => this.props.navigation.navigate(`Settings`)}
             text="Settings"
           />
-          <MenuOption
-            onSelect={() => Alert.alert("Share clicked")}
-            text="Share"
-          />
-
+          <MenuOption onSelect={() => Share.open(shareOptions)} text="Share" />
           <MenuOption onSelect={() => this.handleEmail()} text="Contact" />
         </MenuOptions>
       </Menu>
