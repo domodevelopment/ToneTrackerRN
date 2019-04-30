@@ -1,9 +1,10 @@
 import { createAppContainer, createStackNavigator } from "react-navigation";
-import React, { Component } from "react";
+import React from "react";
 import { Text } from "react-native";
 import Home from "./Home";
 import Add from "./Add";
 import Edit from "./Edit";
+import Icon from "react-native-vector-icons/SimpleLineIcons";
 import {
   Menu,
   MenuOptions,
@@ -18,7 +19,9 @@ const Navigator = createStackNavigator({
       drawerLabel: "Home",
       headerRight: (
         <Menu>
-          <MenuTrigger text="Select action" />
+          <MenuTrigger>
+            <Icon name="options-vertical" size={20} />
+          </MenuTrigger>
           <MenuOptions>
             <MenuOption onSelect={() => alert(`Save`)} text="Save" />
             <MenuOption onSelect={() => alert(`Delete`)}>
