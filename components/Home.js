@@ -29,10 +29,6 @@ class Home extends Component {
           title="Edit"
           onPress={() => this.props.navigation.navigate("Edit")}
         />
-        <Button
-          title="Settings"
-          onPress={() => this.props.navigation.navigate("Settings")}
-        />
       </View>
     );
   }
