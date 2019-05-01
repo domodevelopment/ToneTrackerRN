@@ -3,19 +3,29 @@ export default {
     height: "100%",
     backgroundColor: "#555"
   },
-  nameInput: {
-    height: "10%",
+  nameInputWrapper: {
+    height: "15%",
     borderColor: "white",
     borderStyle: "solid",
-    borderWidth: 1
+    borderWidth: 1,
+    justifyContent: "center"
+  },
+  nameInput: {
+    backgroundColor: "pink",
+    marginLeft: 10,
+    marginRight: 10,
+    fontSize: 20
   },
   questionRow: {
-    height: "10%",
+    height: "7.5%",
+    justifyContent: "center",
     borderColor: "white",
     borderStyle: "solid",
-    borderWidth: 1
+    borderWidth: 1,
+    marginLeft: 10,
+    marginRight: 10
   },
-  typeRow: {
+  selectableImgRow: {
     height: "15%",
     flexDirection: "row",
     justifyContent: "space-around",
@@ -36,19 +46,49 @@ export default {
     flexDirection: "row",
     borderColor: "white",
     borderStyle: "solid",
-    borderWidth: 1
+    borderWidth: 1,
+    alignItems: "center",
+    marginLeft: 10,
+    marginRight: 10
+  },
+  datePickerBtn: {
+    flex: 1,
+    marginLeft: 10,
+    marginRight: 10,
+    height: "80%",
+    borderColor: "white",
+    borderStyle: "solid",
+    borderWidth: 1,
+    justifyContent: "center",
+    alignItems: "center"
   },
   coated: {
     height: "10%",
     flexDirection: "row",
     borderColor: "white",
     borderStyle: "solid",
-    borderWidth: 1
+    borderWidth: 1,
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginLeft: 10,
+    marginRight: 10
   },
   submit: {
     height: "20%",
     borderColor: "white",
     borderStyle: "solid",
-    borderWidth: 1
+    borderWidth: 1,
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  gradient: {
+    height: "75%",
+    width: "90%",
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  text: {
+    color: "white",
+    fontSize: 17
   }
 };
