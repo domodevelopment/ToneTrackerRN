@@ -1,15 +1,10 @@
 import constants from "../constants";
+import uuidv1 from "uuid";
+import { Alert } from "react-native";
 
 function getInitialState() {
   return {
-    guitars: [
-      {
-        name: "Stratocaster",
-        type: "BASS",
-        use: "DAILY",
-        coated: true
-      }
-    ],
+    guitars: [],
     notifications: true
   };
 }
@@ -17,9 +12,11 @@ function getInitialState() {
 const reducer = (state = getInitialState(), action) => {
   switch (action.type) {
     case constants.addGuitar:
+      let newGuitarArr = [action.payload];
+      let concatenatedArray = newGuitarArr.concat(state.guitars);
       return {
         ...state,
-        guitars: state.guitars.push(action.payload)
+        guitars: concatenatedArray
       };
     case constants.editGuitar:
       return {

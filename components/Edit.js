@@ -21,10 +21,10 @@ class Edit extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: this.props.guitar.name,
-      type: this.props.guitar.type,
-      use: this.props.guitar.use,
-      coated: this.props.guitar.coated
+      name: this.props.guitars.name,
+      type: this.props.guitars.type,
+      use: this.props.guitars.use,
+      coated: this.props.guitars.coated
     };
   }
 
@@ -110,7 +110,7 @@ class Edit extends Component {
 
 const mapStateToProps = state => {
   return {
-    guitar: state.guitar
+    guitars: state.guitars
   };
 };
 

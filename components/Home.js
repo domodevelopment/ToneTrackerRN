@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import { View, Text, Button } from "react-native";
+import { View, Text, Button, FlatList } from "react-native";
 import Options from "./Options";
+import { connect } from "react-redux";
 
 class Home extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -20,7 +21,10 @@ class Home extends Component {
   render() {
     return (
       <View>
-        <Text>Home</Text>
+        <FlatList
+          data={this.props.guitars}
+          renderItem={({ item }) => <Text>{item.name}</Text>}
+        />
         <Button
           title="Add"
           onPress={() => this.props.navigation.navigate("Add")}
@@ -34,4 +38,13 @@ class Home extends Component {
   }
 }
 
-export default Home;
+const mapStateToProps = state => {
+  return {
+    guitars: state.guitars
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  null
+)(Home);

@@ -15,11 +15,13 @@ import InstrumentType from "./InstrumentType";
 import InstrumentUse from "./InstrumentUse";
 import { connect } from "react-redux";
 import { addGuitar } from "../actions/actions";
+import uuidv1 from "uuid";
 
 class Add extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      key: uuidv1(),
       name: null,
       type: null,
       use: null,
@@ -85,6 +87,7 @@ class Add extends Component {
         <TouchableHighlight
           style={styles.submit}
           onPress={() => {
+            // this.setState({ key: uuidv1() });
             this.props.addGuitar(this.state);
             this.props.navigation.navigate("Home");
           }}
