@@ -1,25 +1,32 @@
+import constants from "../constants";
+
 function getInitialState() {
   return {
-    guitar: {
-      name: "Stratocaster",
-      type: "BASS",
-      use: "DAILY",
-      coated: true
-    },
+    guitars: [
+      {
+        name: "Stratocaster",
+        type: "BASS",
+        use: "DAILY",
+        coated: true
+      }
+    ],
     notifications: true
   };
 }
 
 const reducer = (state = getInitialState(), action) => {
   switch (action.type) {
-    case "ADD_GUITAR":
-      return {};
-    case "EDIT_GUITAR":
+    case constants.addGuitar:
       return {
         ...state,
-        guitar: action.payload
+        guitars: state.guitars.push(action.payload)
       };
-    case "SHOW_NOTIFICATIONS":
+    case constants.editGuitar:
+      return {
+        ...state,
+        guitars: action.payload
+      };
+    case constants.showNotifications:
       return {
         ...state,
         notifications: action.payload

@@ -16,7 +16,6 @@ import InstrumentUse from "./InstrumentUse";
 import electricImg from "../images/electric_guitar.png";
 import { connect } from "react-redux";
 import { editGuitar } from "../actions/actions";
-import constants from "../constants";
 
 class Edit extends Component {
   constructor(props) {

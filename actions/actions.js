@@ -1,20 +1,22 @@
+import constants from "../constants";
+
 export function addGuitar(guitar) {
   return {
-    type: "ADD_GUITAR",
+    type: constants.addGuitar,
     payload: guitar
   };
 }
 
 export function editGuitar(guitar) {
   return {
-    type: "EDIT_GUITAR",
+    type: constants.editGuitar,
     payload: guitar
   };
 }
 
 export function showNotifications(show) {
   return {
-    type: "SHOW_NOTIFICATIONS",
+    type: constants.showNotifications,
     payload: show
   };
 }

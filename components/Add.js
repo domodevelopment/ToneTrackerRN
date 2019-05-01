@@ -13,6 +13,8 @@ import styles from "../styles/addStyles";
 import LinearGradient from "react-native-linear-gradient";
 import InstrumentType from "./InstrumentType";
 import InstrumentUse from "./InstrumentUse";
+import { connect } from "react-redux";
+import { addGuitar } from "../actions/actions";
 
 class Add extends Component {
   constructor(props) {
@@ -82,7 +84,10 @@ class Add extends Component {
         </View>
         <TouchableHighlight
           style={styles.submit}
-          onPress={() => Alert.alert(this.state.name)}
+          onPress={() => {
+            this.props.addGuitar(this.state);
+            this.props.navigation.navigate("Home");
+          }}
         >
           <LinearGradient
             colors={["#4c669f", "#3b5998", "#192f6a"]}
@@ -96,4 +101,15 @@ class Add extends Component {
   }
 }
 
-export default Add;
+const mapDispatchToProps = dispatch => {
+  return {
+    addGuitar: guitar => {
+      dispatch(addGuitar(guitar));
+    }
+  };
+};
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(Add);

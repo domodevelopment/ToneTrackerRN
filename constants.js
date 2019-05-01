@@ -4,5 +4,8 @@ export default {
   bass: "BASS",
   daily: "DAILY",
   somedays: "SOMEDAYS",
-  weekly: "WEEKLY"
+  weekly: "WEEKLY",
+  addGuitar: "ADD_GUITAR",
+  editGuitar: "EDIT_GUITAR",
+  showNotifications: "SHOW_NOTIFICATIONS"
 };
