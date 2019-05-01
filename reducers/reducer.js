@@ -1,5 +1,11 @@
 function getInitialState() {
   return {
+    guitar: {
+      name: "Stratocaster",
+      type: "BASS",
+      use: "DAILY",
+      coated: true
+    },
     notifications: true
   };
 }
@@ -9,7 +15,10 @@ const reducer = (state = getInitialState(), action) => {
     case "ADD_GUITAR":
       return {};
     case "EDIT_GUITAR":
-      return {};
+      return {
+        ...state,
+        guitar: action.payload
+      };
     case "SHOW_NOTIFICATIONS":
       return {
         ...state,

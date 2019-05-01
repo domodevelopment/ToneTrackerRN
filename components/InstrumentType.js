@@ -11,7 +11,6 @@ import constants from "../constants";
 
 class InstrumentType extends Component {
   render() {
-    // Alert.alert(this.props.type);
     electricImg =
       this.props.type === constants.electric
         ? electricSelectedImg

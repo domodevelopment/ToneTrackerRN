@@ -8,13 +8,21 @@ export default {
     borderColor: "white",
     borderStyle: "solid",
     borderWidth: 1,
-    justifyContent: "center"
+    justifyContent: "center",
+    backgroundColor: "#00f"
   },
   nameInput: {
     backgroundColor: "pink",
     marginLeft: 10,
     marginRight: 10,
     fontSize: 20
+  },
+  profileImg: {
+    position: "absolute",
+    top: 20,
+    right: 5,
+    height: "20%",
+    width: "20%"
   },
   questionRow: {
     height: "7.5%",

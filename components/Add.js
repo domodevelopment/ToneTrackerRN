@@ -9,17 +9,10 @@ import {
   Alert,
   Button
 } from "react-native";
-// import electricFadedImg from "../images/electric_faded.png";
-// import bassFadedImg from "../images/bass_faded.png";
-// import acousticFadedImg from "../images/acoustic_faded.png";
-// import calendar_daily_faded from "../images/calendar_daily_faded.png";
-// import calendar_somedays_faded from "../images/calendar_somedays_faded.png";
-// import calendar_weekly_faded from "../images/calendar_weekly_faded.png";
 import styles from "../styles/addStyles";
 import LinearGradient from "react-native-linear-gradient";
 import InstrumentType from "./InstrumentType";
 import InstrumentUse from "./InstrumentUse";
-import constants from "../constants";
 
 class Add extends Component {
   constructor(props) {
@@ -27,7 +20,8 @@ class Add extends Component {
     this.state = {
       name: null,
       type: null,
-      use: null
+      use: null,
+      coated: false
     };
   }
 
@@ -41,6 +35,10 @@ class Add extends Component {
 
   handleUseChange = newUse => {
     this.setState({ use: newUse });
+  };
+
+  onSwitchChanged = () => {
+    this.setState({ coated: !this.state.coated });
   };
 
   render() {
@@ -57,29 +55,6 @@ class Add extends Component {
         <View style={styles.questionRow}>
           <Text style={styles.text}>What type of guitar is this?</Text>
         </View>
-        {/* <View style={styles.selectableImgRow}>
-          <TouchableHighlight style={styles.imgWrapper}>
-            <Image
-              source={electricFadedImg}
-              style={styles.img}
-              resizeMode="contain"
-            />
-          </TouchableHighlight>
-          <TouchableHighlight style={styles.imgWrapper}>
-            <Image
-              source={bassFadedImg}
-              style={styles.img}
-              resizeMode="contain"
-            />
-          </TouchableHighlight>
-          <TouchableHighlight style={styles.imgWrapper}>
-            <Image
-              source={acousticFadedImg}
-              style={styles.img}
-              resizeMode="contain"
-            />
-          </TouchableHighlight>
-        </View> */}
         <InstrumentType
           type={this.state.type}
           handleTypeChange={this.handleTypeChange}
@@ -87,29 +62,6 @@ class Add extends Component {
         <View style={styles.questionRow}>
           <Text style={styles.text}>How often do you play this guitar?</Text>
         </View>
-        {/* <View style={styles.selectableImgRow}>
-          <TouchableHighlight style={styles.imgWrapper}>
-            <Image
-              source={calendar_daily_faded}
-              style={styles.img}
-              resizeMode="contain"
-            />
-          </TouchableHighlight>
-          <TouchableHighlight style={styles.imgWrapper}>
-            <Image
-              source={calendar_somedays_faded}
-              style={styles.img}
-              resizeMode="contain"
-            />
-          </TouchableHighlight>
-          <TouchableHighlight style={styles.imgWrapper}>
-            <Image
-              source={calendar_weekly_faded}
-              style={styles.img}
-              resizeMode="contain"
-            />
-          </TouchableHighlight>
-        </View> */}
         <InstrumentUse
           use={this.state.use}
           handleUseChange={this.handleUseChange}
@@ -123,7 +75,10 @@ class Add extends Component {
         </View>
         <View style={styles.coated}>
           <Text style={styles.text}>This guitar has coated strings</Text>
-          <Switch />
+          <Switch
+            value={this.state.coated}
+            onValueChange={() => this.onSwitchChanged()}
+          />
         </View>
         <TouchableHighlight
           style={styles.submit}
