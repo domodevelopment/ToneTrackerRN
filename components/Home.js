@@ -1,5 +1,12 @@
 import React, { Component } from "react";
-import { View, Text, Button, FlatList, TouchableHighlight } from "react-native";
+import {
+  View,
+  Text,
+  Button,
+  FlatList,
+  TouchableHighlight,
+  Alert
+} from "react-native";
 import Options from "./Options";
 import { connect } from "react-redux";
 import styles from "../styles/homeStyles";

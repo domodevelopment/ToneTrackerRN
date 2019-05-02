@@ -26,6 +26,7 @@ class Edit extends Component {
     super(props);
     const guitarToEdit = getGuitar(this.props);
     this.state = {
+      key: guitarToEdit.key,
       name: guitarToEdit.name,
       type: guitarToEdit.type,
       use: guitarToEdit.use,
