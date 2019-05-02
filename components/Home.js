@@ -1,7 +1,9 @@
 import React, { Component } from "react";
-import { View, Text, Button, FlatList } from "react-native";
+import { View, Text, Button, FlatList, TouchableHighlight } from "react-native";
 import Options from "./Options";
 import { connect } from "react-redux";
+import styles from "../styles/homeStyles";
+import ListItem from "./ListItem";
 
 class Home extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -20,19 +22,25 @@ class Home extends Component {
   };
   render() {
     return (
-      <View>
+      <View style={styles.parent}>
         <FlatList
           data={this.props.guitars}
-          renderItem={({ item }) => <Text>{item.name}</Text>}
+          // renderItem={({ item }) => <Text>{item.name}</Text>}
+          renderItem={({ item }) => (
+            <ListItem item={item} navigation={this.props.navigation} />
+          )}
         />
-        <Button
-          title="Add"
+        <TouchableHighlight
           onPress={() => this.props.navigation.navigate("Add")}
-        />
-        <Button
-          title="Edit"
+          style={styles.fab}
+        >
+          <Text style={{ color: "white" }}>Add</Text>
+        </TouchableHighlight>
+        {/* <TouchableHighlight
           onPress={() => this.props.navigation.navigate("Edit")}
-        />
+        >
+          <Text>Edit</Text>
+        </TouchableHighlight> */}
       </View>
     );
   }

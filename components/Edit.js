@@ -17,14 +17,19 @@ import electricImg from "../images/electric_guitar.png";
 import { connect } from "react-redux";
 import { editGuitar } from "../actions/actions";
 
+function getGuitar(props) {
+  return props.guitars.find(x => x.key === props.selectedForEditing);
+}
+
 class Edit extends Component {
   constructor(props) {
     super(props);
+    const guitarToEdit = getGuitar(this.props);
     this.state = {
-      name: this.props.guitars.name,
-      type: this.props.guitars.type,
-      use: this.props.guitars.use,
-      coated: this.props.guitars.coated
+      name: guitarToEdit.name,
+      type: guitarToEdit.type,
+      use: guitarToEdit.use,
+      coated: guitarToEdit.coated
     };
   }
 
@@ -110,7 +115,8 @@ class Edit extends Component {
 
 const mapStateToProps = state => {
   return {
-    guitars: state.guitars
+    guitars: state.guitars,
+    selectedForEditing: state.selectedForEditing
   };
 };
 

@@ -5,12 +5,18 @@ import { Alert } from "react-native";
 function getInitialState() {
   return {
     guitars: [],
-    notifications: true
+    notifications: true,
+    selectedForEditing: null
   };
 }
 
 const reducer = (state = getInitialState(), action) => {
   switch (action.type) {
+    case constants.selectedGuitar:
+      return {
+        ...state,
+        selectedForEditing: action.payload
+      };
     case constants.addGuitar:
       let newGuitarArr = [action.payload];
       let concatenatedArray = newGuitarArr.concat(state.guitars);

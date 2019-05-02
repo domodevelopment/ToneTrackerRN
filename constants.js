@@ -7,5 +7,6 @@ export default {
   weekly: "WEEKLY",
   addGuitar: "ADD_GUITAR",
   editGuitar: "EDIT_GUITAR",
-  showNotifications: "SHOW_NOTIFICATIONS"
+  showNotifications: "SHOW_NOTIFICATIONS",
+  selectedGuitar: "SELECTED_GUITAR"
 };
