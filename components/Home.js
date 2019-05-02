@@ -43,11 +43,6 @@ class Home extends Component {
         >
           <Text style={{ color: "white" }}>Add</Text>
         </TouchableHighlight>
-        {/* <TouchableHighlight
-          onPress={() => this.props.navigation.navigate("Edit")}
-        >
-          <Text>Edit</Text>
-        </TouchableHighlight> */}
       </View>
     );
   }

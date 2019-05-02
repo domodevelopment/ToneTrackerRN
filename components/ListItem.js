@@ -31,16 +31,32 @@ class ListItem extends Component {
   render() {
     return (
       <View style={styles.parent}>
-        <Image source={this.instrumentImage()} style={styles.image} />
-        <Text>{this.props.item.name}</Text>
-        <Text>Some days ago</Text>
-        <Button
-          title="Edit"
-          onPress={() => {
-            this.props.selectedGuitar(this.props.item.key);
-            this.props.navigation.navigate("Edit");
-          }}
+        <Image
+          source={this.instrumentImage()}
+          style={styles.image}
+          resizeMode="contain"
         />
+        <View style={styles.detailsWrapper}>
+          <View style={styles.detailsRowOne}>
+            <Text style={styles.nameText}>{this.props.item.name}</Text>
+            <TouchableHighlight
+              onPress={() => {
+                this.props.selectedGuitar(this.props.item.key);
+                this.props.navigation.navigate("Edit");
+              }}
+              style={styles.editButton}
+            >
+              <Text style={styles.text}>Edit</Text>
+            </TouchableHighlight>
+          </View>
+          <View style={styles.detailsRowTwo}>
+            <Text style={styles.text}>Some days ago</Text>
+
+            <TouchableHighlight style={styles.restringButton}>
+              <Text style={styles.text}>Restring</Text>
+            </TouchableHighlight>
+          </View>
+        </View>
       </View>
     );
   }
