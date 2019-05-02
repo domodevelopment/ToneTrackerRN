@@ -12,8 +12,12 @@ export default {
   image: {
     height: "100%",
     width: "20%"
-    // height: 50,
-    // width: 50
+  },
+  coatedImg: {
+    position: "absolute",
+    bottom: 3,
+    left: "10%",
+    height: "30%"
   },
   detailsWrapper: {
     width: "80%",

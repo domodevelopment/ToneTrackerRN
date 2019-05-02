@@ -14,6 +14,7 @@ import styles from "../styles/listItemStyles";
 import electricGuitarImg from "../images/electric_guitar.png";
 import bassImg from "../images/bass_guitar.png";
 import acousticImg from "../images/acoustic_guitar.png";
+import coatedImg from "../images/coated_icon.png";
 import constants from "../constants";
 
 class ListItem extends Component {
@@ -28,6 +29,12 @@ class ListItem extends Component {
         return acousticImg;
     }
   };
+  isCoated = () => {
+    return this.props.item.coated ? (
+      <Image source={coatedImg} style={styles.coatedImg} resizeMode="contain" />
+    ) : null;
+  };
+
   render() {
     return (
       <View style={styles.parent}>
@@ -36,6 +43,7 @@ class ListItem extends Component {
           style={styles.image}
           resizeMode="contain"
         />
+        {this.isCoated()}
         <View style={styles.detailsWrapper}>
           <View style={styles.detailsRowOne}>
             <Text style={styles.nameText}>{this.props.item.name}</Text>
