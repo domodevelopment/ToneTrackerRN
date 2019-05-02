@@ -1,14 +1,39 @@
 import React, { Component } from "react";
-import { View, Text, Button, FlatList, TouchableHighlight } from "react-native";
+import {
+  View,
+  Text,
+  Button,
+  FlatList,
+  TouchableHighlight,
+  Image,
+  Alert
+} from "react-native";
 import { selectedGuitar } from "../actions/actions";
 import { connect } from "react-redux";
+import styles from "../styles/listItemStyles";
+import electricGuitarImg from "../images/electric_guitar.png";
+import bassImg from "../images/bass_guitar.png";
+import acousticImg from "../images/acoustic_guitar.png";
+import constants from "../constants";
 
 class ListItem extends Component {
+  instrumentImage = () => {
+    let { type } = this.props.item;
+    switch (type) {
+      case constants.electric:
+        return electricGuitarImg;
+      case constants.bass:
+        return bassImg;
+      case constants.acoustic:
+        return acousticImg;
+    }
+  };
   render() {
     return (
-      <View>
+      <View style={styles.parent}>
+        <Image source={this.instrumentImage()} style={styles.image} />
         <Text>{this.props.item.name}</Text>
-        <Text>{this.props.item.type}</Text>
+        <Text>Some days ago</Text>
         <Button
           title="Edit"
           onPress={() => {
