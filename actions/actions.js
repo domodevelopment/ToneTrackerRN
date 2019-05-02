@@ -1,5 +1,12 @@
 import constants from "../constants";
 
+export function initializeGuitars(guitars) {
+  return {
+    type: constants.initializeGuitars,
+    payload: guitars
+  };
+}
+
 export function selectedGuitar(key) {
   return {
     type: constants.selectedGuitar,

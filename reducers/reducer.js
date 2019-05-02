@@ -4,16 +4,8 @@ import { Alert } from "react-native";
 import AsyncStorage from "@react-native-community/async-storage";
 
 getInitialState = () => {
-  // let notifications = await AsyncStorage.getItem(
-  //   constants.persistedNotifications
-  // );
-  // Alert.alert(notifications);
-  // if (notifications === null || notifications === "") {
-  // notifications = true;
-  // }
   return {
     guitars: [],
-    // notifications: await AsyncStorage.getItem(constants.persistedNotifications),
     notifications: null,
     selectedForEditing: null
   };
@@ -21,6 +13,12 @@ getInitialState = () => {
 
 const reducer = (state = getInitialState(), action) => {
   switch (action.type) {
+    //Adding all guitars as they are collected from async storage
+    case constants.initializeGuitars:
+      return {
+        ...state,
+        guitars: action.payload === null ? [] : action.payload
+      };
     //This is the guitar selected for editing
     case constants.selectedGuitar:
       return {
@@ -31,6 +29,11 @@ const reducer = (state = getInitialState(), action) => {
     case constants.addGuitar:
       let newGuitarArr = [action.payload];
       let concatenatedArray = newGuitarArr.concat(state.guitars);
+      //Persisting new notifications state in AsyncStorage
+      AsyncStorage.setItem(
+        constants.persistedGuitars,
+        JSON.stringify(concatenatedArray)
+      );
       return {
         ...state,
         guitars: concatenatedArray

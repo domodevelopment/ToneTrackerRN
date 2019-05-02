@@ -13,7 +13,7 @@ import styles from "../styles/homeStyles";
 import ListItem from "./ListItem";
 import AsyncStorage from "@react-native-community/async-storage";
 import constants from "../constants";
-import { showNotifications } from "../actions/actions";
+import { showNotifications, initializeGuitars } from "../actions/actions";
 
 class Home extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -31,8 +31,18 @@ class Home extends Component {
     };
   };
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      initialized: false
+    };
+  }
+
   componentWillMount() {
-    this.getPersistedData();
+    if (!this.state.initialized) {
+      this.getPersistedData();
+      this.setState({ initialized: true });
+    }
   }
 
   getPersistedData = async () => {
@@ -48,8 +58,14 @@ class Home extends Component {
       notifications = notifications === "true" ? true : false;
     }
     if (this.props.notifications !== notifications) {
-      await this.props.showNotifications(notifications);
+      this.props.showNotifications(notifications);
     }
+    /**
+     * getting guitars from async storage
+     */
+    let guitars = await AsyncStorage.getItem(constants.persistedGuitars);
+    // Alert.alert(JSON.parse(guitars));
+    this.props.initializeGuitars(JSON.parse(guitars));
   };
 
   render() {
@@ -84,6 +100,9 @@ const mapDispatchToProps = dispatch => {
   return {
     showNotifications: show => {
       dispatch(showNotifications(show));
+    },
+    initializeGuitars: guitars => {
+      dispatch(initializeGuitars(guitars));
     }
   };
 };
