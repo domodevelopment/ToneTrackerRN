@@ -1,14 +1,23 @@
 import constants from "../constants";
 import uuidv1 from "uuid";
 import { Alert } from "react-native";
+import AsyncStorage from "@react-native-community/async-storage";
 
-function getInitialState() {
+getInitialState = () => {
+  // let notifications = await AsyncStorage.getItem(
+  //   constants.persistedNotifications
+  // );
+  // Alert.alert(notifications);
+  // if (notifications === null || notifications === "") {
+  // notifications = true;
+  // }
   return {
     guitars: [],
-    notifications: true,
+    // notifications: await AsyncStorage.getItem(constants.persistedNotifications),
+    notifications: null,
     selectedForEditing: null
   };
-}
+};
 
 const reducer = (state = getInitialState(), action) => {
   switch (action.type) {
@@ -43,6 +52,11 @@ const reducer = (state = getInitialState(), action) => {
       };
     //Boolean indicating whether or not to inform the user to get new strings
     case constants.showNotifications:
+      //Persisting new notifications state in AsyncStorage
+      AsyncStorage.setItem(
+        constants.persistedNotifications,
+        String(action.payload)
+      );
       return {
         ...state,
         notifications: action.payload

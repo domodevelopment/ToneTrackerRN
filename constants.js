@@ -8,5 +8,6 @@ export default {
   addGuitar: "ADD_GUITAR",
   editGuitar: "EDIT_GUITAR",
   showNotifications: "SHOW_NOTIFICATIONS",
-  selectedGuitar: "SELECTED_GUITAR"
+  selectedGuitar: "SELECTED_GUITAR",
+  persistedNotifications: "PERSISTED_NOTIFICATIONS"
 };
