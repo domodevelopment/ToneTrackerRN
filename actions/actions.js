@@ -28,6 +28,13 @@ export function editGuitar(guitar) {
   };
 }
 
+export function deleteGuitar(key) {
+  return {
+    type: constants.deleteGuitar,
+    payload: key
+  };
+}
+
 export function showNotifications(show) {
   return {
     type: constants.showNotifications,

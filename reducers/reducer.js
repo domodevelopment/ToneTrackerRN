@@ -53,6 +53,21 @@ const reducer = (state = getInitialState(), action) => {
         ...state,
         guitars: AnotherConcatenatedArray
       };
+    //Removing specified guitar permanently
+    case constants.deleteGuitar:
+      let removedGuitarArr = state.guitars;
+      for (let i in removedGuitarArr) {
+        if (removedGuitarArr[i].key === action.payload) {
+          removedGuitarArr.splice(i, 1);
+          break;
+        }
+      }
+      const dummyArr = [];
+      removedGuitarArr = removedGuitarArr.concat(dummyArr);
+      return {
+        ...state,
+        guitars: removedGuitarArr
+      };
     //Boolean indicating whether or not to inform the user to get new strings
     case constants.showNotifications:
       //Persisting new notifications state in AsyncStorage

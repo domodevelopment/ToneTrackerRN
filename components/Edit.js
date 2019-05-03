@@ -17,12 +17,28 @@ import electricImg from "../images/electric_guitar.png";
 import { connect } from "react-redux";
 import { editGuitar } from "../actions/actions";
 import DatePicker from "react-native-datepicker";
+import Delete from "./Delete";
 
 function getGuitar(props) {
   return props.guitars.find(x => x.key === props.selectedForEditing);
 }
 
 class Edit extends Component {
+  static navigationOptions = ({ navigation }) => {
+    return {
+      // //Heading/title of the header
+      // title: navigation.getParam("Title", "Popup Menu Example"),
+      // //Heading style
+      // headerStyle: {
+      //   backgroundColor: navigation.getParam("BackgroundColor", "red")
+      // },
+      // //Heading text color
+      // headerTintColor: navigation.getParam("HeaderTintColor", "#fff"),
+      //Heading Menu in Right Side
+      headerRight: <Delete navigation={navigation} />
+    };
+  };
+
   constructor(props) {
     super(props);
     const guitarToEdit = getGuitar(this.props);
