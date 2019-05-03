@@ -16,6 +16,7 @@ import bassImg from "../images/bass_guitar.png";
 import acousticImg from "../images/acoustic_guitar.png";
 import coatedImg from "../images/coated_icon.png";
 import constants from "../constants";
+import { AnimatedCircularProgress } from "react-native-circular-progress";
 
 class ListItem extends Component {
   instrumentImage = () => {
@@ -49,6 +50,16 @@ class ListItem extends Component {
           source={this.instrumentImage()}
           style={styles.image}
           resizeMode="contain"
+        />
+        <AnimatedCircularProgress
+          style={styles.progressCircle}
+          size={85} //TODO create a dynamic value instead of this hard coded one
+          width={5}
+          backgroundWidth={3}
+          fill={80}
+          tintColor="#00e0ff"
+          onAnimationComplete={() => console.log("onAnimationComplete")}
+          backgroundColor="#3d5875"
         />
         {this.isCoated()}
         <View style={styles.detailsWrapper}>

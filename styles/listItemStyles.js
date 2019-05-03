@@ -11,7 +11,13 @@ export default {
   },
   image: {
     height: "100%",
-    width: "20%"
+    width: "20%",
+    backgroundColor: "#f00"
+  },
+  progressCircle: {
+    position: "absolute"
+    // height: 50,
+    // backgroundColor: "#0ff"
   },
   coatedImg: {
     position: "absolute",
