@@ -113,7 +113,8 @@ class Edit extends Component {
             cancelBtnText="Cancel"
             onDateChange={date => {
               date = date.split("-");
-              const timestamp = date[1] + "/" + date[0] + "/" + date[2];
+              let timestamp = date[1] + "/" + date[0] + "/" + date[2];
+              timestamp = new Date(timestamp).getTime();
               this.setState({ timestamp });
             }}
           />

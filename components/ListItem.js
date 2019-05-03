@@ -29,10 +29,17 @@ class ListItem extends Component {
         return acousticImg;
     }
   };
+
   isCoated = () => {
     return this.props.item.coated ? (
       <Image source={coatedImg} style={styles.coatedImg} resizeMode="contain" />
     ) : null;
+  };
+
+  getDaysElapsed = () => {
+    let diffStamp = new Date().getTime() - this.props.item.timestamp;
+    diffStamp /= 86400000;
+    return Math.floor(diffStamp);
   };
 
   render() {
@@ -58,7 +65,7 @@ class ListItem extends Component {
             </TouchableHighlight>
           </View>
           <View style={styles.detailsRowTwo}>
-            <Text style={styles.text}>Some days ago</Text>
+            <Text style={styles.text}>{this.getDaysElapsed()} days ago</Text>
 
             <TouchableHighlight style={styles.restringButton}>
               <Text style={styles.text}>Restring</Text>
