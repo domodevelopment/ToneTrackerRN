@@ -11,8 +11,8 @@ export default {
   },
   image: {
     height: "100%",
-    width: "20%",
-    backgroundColor: "#f00"
+    width: "20%"
+    // backgroundColor: "#f00"
   },
   progressCircle: {
     position: "absolute"
