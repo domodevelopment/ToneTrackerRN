@@ -27,7 +27,11 @@ class Add extends Component {
       type: null,
       use: null,
       timestamp: null,
-      coated: false
+      coated: false,
+      nameValidated: true,
+      typeValidated: true,
+      useValidated: true,
+      stampValidated: true
     };
   }
 
@@ -41,6 +45,40 @@ class Add extends Component {
 
   handleUseChange = newUse => {
     this.setState({ use: newUse });
+  };
+
+  handleSubmit = () => {
+    //check that no details are missing
+    if (
+      this.state.name !== null &&
+      this.state.type !== null &&
+      this.state.use !== null &&
+      this.state.timestamp !== null
+    ) {
+      this.props.addGuitar(this.state);
+      this.props.navigation.navigate("Home");
+    } else {
+      if (this.state.name === null) {
+        this.setState({ nameValidated: false });
+      } else {
+        this.setState({ nameValidated: true });
+      }
+      if (this.state.type === null) {
+        this.setState({ typeValidated: false });
+      } else {
+        this.setState({ typeValidated: true });
+      }
+      if (this.state.use === null) {
+        this.setState({ useValidated: false });
+      } else {
+        this.setState({ useValidated: true });
+      }
+      if (this.state.timestamp === null) {
+        this.setState({ stampValidated: false });
+      } else {
+        this.setState({ stampValidated: true });
+      }
+    }
   };
 
   onSwitchChanged = () => {
@@ -71,10 +109,27 @@ class Add extends Component {
   };
 
   render() {
-    this.getCurrentDate();
+    // this.getCurrentDate(); //<-find out why this is here
+    nameStyle = this.state.nameValidated
+      ? styles.nameInputWrapper
+      : styles.nameUnvalidatedWrapper;
+
+    typeStyle = this.state.typeValidated
+      ? styles.typeQuestionRow
+      : styles.unvalidatedTypeQuestionRow;
+
+    useStyle = this.state.useValidated
+      ? styles.useQuestionRow
+      : styles.unvalidatedUseQuestionRow;
+
+    stampStyle = this.state.stampValidated
+      ? styles.lastChanged
+      : styles.unvalidatedLastChanged;
+
     return (
       <View style={styles.parent}>
-        <View style={styles.nameInputWrapper}>
+        {/* <View style={styles.nameInputWrapper}> */}
+        <View style={nameStyle}>
           <TextInput
             placeholder="Name (eg. Stratocaster)"
             style={styles.nameInput}
@@ -82,21 +137,21 @@ class Add extends Component {
             onChangeText={this.handleNameChange}
           />
         </View>
-        <View style={styles.questionRow}>
+        <View style={typeStyle}>
           <Text style={styles.text}>What type of guitar is this?</Text>
         </View>
         <InstrumentType
           type={this.state.type}
           handleTypeChange={this.handleTypeChange}
         />
-        <View style={styles.questionRow}>
+        <View style={useStyle}>
           <Text style={styles.text}>How often do you play this guitar?</Text>
         </View>
         <InstrumentUse
           use={this.state.use}
           handleUseChange={this.handleUseChange}
         />
-        <View style={styles.lastChanged}>
+        <View style={stampStyle}>
           <Text style={styles.text}>Strings last changed</Text>
           <DatePicker
             style={styles.datePickerBtn}
@@ -126,8 +181,7 @@ class Add extends Component {
         <TouchableHighlight
           style={styles.submit}
           onPress={() => {
-            this.props.addGuitar(this.state);
-            this.props.navigation.navigate("Home");
+            this.handleSubmit();
           }}
         >
           <LinearGradient

@@ -10,16 +10,50 @@ export default {
     borderWidth: 1,
     justifyContent: "center"
   },
+  nameUnvalidatedWrapper: {
+    height: "15%",
+    borderColor: "red",
+    borderStyle: "solid",
+    borderWidth: 1,
+    justifyContent: "center"
+  },
   nameInput: {
     backgroundColor: "pink",
     marginLeft: 10,
     marginRight: 10,
     fontSize: 20
   },
-  questionRow: {
+  typeQuestionRow: {
     height: "7.5%",
     justifyContent: "center",
     borderColor: "white",
+    borderStyle: "solid",
+    borderWidth: 1,
+    marginLeft: 10,
+    marginRight: 10
+  },
+  unvalidatedTypeQuestionRow: {
+    height: "7.5%",
+    justifyContent: "center",
+    borderColor: "red",
+    borderStyle: "solid",
+    borderWidth: 1,
+    marginLeft: 10,
+    marginRight: 10
+  },
+  useQuestionRow: {
+    height: "7.5%",
+    justifyContent: "center",
+    borderColor: "white",
+    borderStyle: "solid",
+    borderWidth: 1,
+    marginLeft: 10,
+    marginRight: 10
+  },
+  unvalidatedUseQuestionRow: {
+    height: "7.5%",
+    justifyContent: "center",
+    borderColor: "red",
     borderStyle: "solid",
     borderWidth: 1,
     marginLeft: 10,
@@ -29,6 +63,16 @@ export default {
     height: "10%",
     flexDirection: "row",
     borderColor: "white",
+    borderStyle: "solid",
+    borderWidth: 1,
+    alignItems: "center",
+    marginLeft: 10,
+    marginRight: 10
+  },
+  unvalidatedLastChanged: {
+    height: "10%",
+    flexDirection: "row",
+    borderColor: "red",
     borderStyle: "solid",
     borderWidth: 1,
     alignItems: "center",
