@@ -26,6 +26,7 @@ class Add extends Component {
       name: null,
       type: null,
       use: null,
+      timestamp: null,
       coated: false
     };
   }
@@ -46,7 +47,31 @@ class Add extends Component {
     this.setState({ coated: !this.state.coated });
   };
 
+  getFormattedDate = () => {
+    const { timestamp } = this.state;
+    if (timestamp !== null) {
+      const date = new Date(this.state.timestamp);
+      const day = date.getDate();
+      let month = date.getMonth();
+      let year = date.getYear();
+      const displayDate = day + "/" + ++month + "/" + (year - 100);
+      return displayDate;
+    } else {
+      return null;
+    }
+  };
+
+  getCurrentDate = () => {
+    let today = new Date();
+    const day = String(today.getDate()).padStart(2, "0");
+    const month = String(today.getMonth() + 1).padStart(2, "0");
+    const year = today.getFullYear() - 2000;
+    today = day + "-" + month + "-" + year;
+    return today;
+  };
+
   render() {
+    this.getCurrentDate();
     return (
       <View style={styles.parent}>
         <View style={styles.nameInputWrapper}>
@@ -73,41 +98,21 @@ class Add extends Component {
         />
         <View style={styles.lastChanged}>
           <Text style={styles.text}>Strings last changed</Text>
-          {/* Change this to a date picker */}
-          {/* <TouchableHighlight style={styles.datePickerBtn}>
-            <Text style={styles.text}>...</Text>
-          </TouchableHighlight> */}
-          {/* <DatePicker
-            date={this.state.date}
-            onDateChange={date => this.setState({ date })}
-          /> */}
           <DatePicker
-            // style={{ width: 200 }}
             style={styles.datePickerBtn}
-            date={this.state.date}
+            date={this.getFormattedDate()}
             mode="date"
-            placeholder="select date"
-            format="YYYY-MM-DD"
-            minDate="2016-05-01"
-            maxDate="2016-06-01"
+            placeholder="DD-MM-YY"
+            format="DD-MM-YYYY"
+            minDate="01-01-14"
+            maxDate={this.getCurrentDate()}
             confirmBtnText="Confirm"
             cancelBtnText="Cancel"
-            customStyles={
-              {
-                // dateIcon: {
-                //   position: "absolute",
-                //   left: 0,
-                //   top: 4,
-                //   marginLeft: 0
-                // },
-                // dateInput: {
-                //   marginLeft: 36
-                // }
-                // ... You can check the source to find the other keys.
-              }
-            }
             onDateChange={date => {
-              this.setState({ date: date });
+              date = date.split("-");
+              let timestamp = date[1] + "/" + date[0] + "/" + date[2];
+              timestamp = new Date(timestamp).getTime();
+              this.setState({ timestamp });
             }}
           />
         </View>

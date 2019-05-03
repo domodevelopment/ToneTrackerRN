@@ -16,6 +16,7 @@ import InstrumentUse from "./InstrumentUse";
 import electricImg from "../images/electric_guitar.png";
 import { connect } from "react-redux";
 import { editGuitar } from "../actions/actions";
+import DatePicker from "react-native-datepicker";
 
 function getGuitar(props) {
   return props.guitars.find(x => x.key === props.selectedForEditing);
@@ -30,6 +31,7 @@ class Edit extends Component {
       name: guitarToEdit.name,
       type: guitarToEdit.type,
       use: guitarToEdit.use,
+      timestamp: guitarToEdit.timestamp,
       coated: guitarToEdit.coated
     };
   }
@@ -50,16 +52,33 @@ class Edit extends Component {
     this.setState({ coated: !this.state.coated });
   };
 
+  getFormattedDate = () => {
+    const { timestamp } = this.state;
+    if (timestamp !== null) {
+      const date = new Date(this.state.timestamp);
+      const day = date.getDate();
+      let month = date.getMonth();
+      let year = date.getYear();
+      const displayDate = day + "/" + ++month + "/" + (year - 100);
+      return displayDate;
+    } else {
+      return null;
+    }
+  };
+
+  getCurrentDate = () => {
+    let today = new Date();
+    const day = String(today.getDate()).padStart(2, "0");
+    const month = String(today.getMonth() + 1).padStart(2, "0");
+    const year = today.getFullYear() - 2000;
+    today = day + "-" + month + "-" + year;
+    return today;
+  };
+
   render() {
     return (
       <View style={styles.parent}>
         <View style={styles.nameInputWrapper}>
-          {/* <TextInput
-            placeholder="Name (eg. Stratocaster)"
-            style={styles.nameInput}
-            value={this.state.name}
-            onChangeText={this.handleNameChange}
-          /> */}
           <Text style={styles.text}>{this.state.name}</Text>
         </View>
         <Image
@@ -83,10 +102,21 @@ class Edit extends Component {
         />
         <View style={styles.lastChanged}>
           <Text style={styles.text}>Strings last changed</Text>
-          {/* Change this to a date picker */}
-          <TouchableHighlight style={styles.datePickerBtn}>
-            <Text style={styles.text}>...</Text>
-          </TouchableHighlight>
+          <DatePicker
+            style={styles.datePickerBtn}
+            date={this.getFormattedDate()}
+            mode="date"
+            format="DD-MM-YY"
+            minDate="01-01-14"
+            maxDate={this.getCurrentDate()}
+            confirmBtnText="Confirm"
+            cancelBtnText="Cancel"
+            onDateChange={date => {
+              date = date.split("-");
+              const timestamp = date[1] + "/" + date[0] + "/" + date[2];
+              this.setState({ timestamp });
+            }}
+          />
         </View>
         <View style={styles.coated}>
           <Text style={styles.text}>This guitar has coated strings</Text>
