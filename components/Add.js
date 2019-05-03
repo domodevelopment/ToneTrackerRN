@@ -16,6 +16,7 @@ import InstrumentUse from "./InstrumentUse";
 import { connect } from "react-redux";
 import { addGuitar } from "../actions/actions";
 import uuidv1 from "uuid";
+import DatePicker from "react-native-datepicker";
 
 class Add extends Component {
   constructor(props) {
@@ -73,9 +74,42 @@ class Add extends Component {
         <View style={styles.lastChanged}>
           <Text style={styles.text}>Strings last changed</Text>
           {/* Change this to a date picker */}
-          <TouchableHighlight style={styles.datePickerBtn}>
+          {/* <TouchableHighlight style={styles.datePickerBtn}>
             <Text style={styles.text}>...</Text>
-          </TouchableHighlight>
+          </TouchableHighlight> */}
+          {/* <DatePicker
+            date={this.state.date}
+            onDateChange={date => this.setState({ date })}
+          /> */}
+          <DatePicker
+            // style={{ width: 200 }}
+            style={styles.datePickerBtn}
+            date={this.state.date}
+            mode="date"
+            placeholder="select date"
+            format="YYYY-MM-DD"
+            minDate="2016-05-01"
+            maxDate="2016-06-01"
+            confirmBtnText="Confirm"
+            cancelBtnText="Cancel"
+            customStyles={
+              {
+                // dateIcon: {
+                //   position: "absolute",
+                //   left: 0,
+                //   top: 4,
+                //   marginLeft: 0
+                // },
+                // dateInput: {
+                //   marginLeft: 36
+                // }
+                // ... You can check the source to find the other keys.
+              }
+            }
+            onDateChange={date => {
+              this.setState({ date: date });
+            }}
+          />
         </View>
         <View style={styles.coated}>
           <Text style={styles.text}>This guitar has coated strings</Text>
@@ -87,7 +121,6 @@ class Add extends Component {
         <TouchableHighlight
           style={styles.submit}
           onPress={() => {
-            // this.setState({ key: uuidv1() });
             this.props.addGuitar(this.state);
             this.props.navigation.navigate("Home");
           }}

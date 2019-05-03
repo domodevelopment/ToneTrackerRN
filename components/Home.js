@@ -64,7 +64,6 @@ class Home extends Component {
      * getting guitars from async storage
      */
     let guitars = await AsyncStorage.getItem(constants.persistedGuitars);
-    // Alert.alert(JSON.parse(guitars));
     this.props.initializeGuitars(JSON.parse(guitars));
   };
 
