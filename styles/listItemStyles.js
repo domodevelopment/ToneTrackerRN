@@ -7,12 +7,11 @@ export default {
     borderBottomWidth: 1,
     flexDirection: "row",
     backgroundColor: colors.light,
-    padding: 10,
-    height: 100
+    padding: 10
   },
   imageWrapper: {
-    height: "100%",
-    width: "20%"
+    height: 100,
+    width: 100
   },
   image: {
     height: "100%",
@@ -28,20 +27,21 @@ export default {
     height: "30%"
   },
   detailsWrapper: {
-    width: "80%",
+    flex: 1,
     justifyContent: "space-between",
     paddingLeft: 10
   },
   detailsRowOne: {
     flexDirection: "row",
     justifyContent: "space-between",
-    alignItems: "center"
+    alignItems: "center",
+    flex: 1
   },
   detailsRowTwo: {
     flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "flex-end"
+    justifyContent: "space-between"
   },
+  editBtnWrapper: {},
   editButton: {
     padding: 5,
     borderRadius: 6
@@ -51,15 +51,21 @@ export default {
     borderRadius: 6
   },
   nameText: {
-    fontSize: 30,
-    color: "#000"
+    fontSize: 22,
+    color: "#000",
+    flex: 1
   },
   btnText: {
     fontSize: 17,
     color: "#fff"
   },
-  text: {
-    fontSize: 17,
-    color: "#000"
+  ageTextWrapper: {
+    justifyContent: "center",
+    flex: 1
+  },
+  ageText: {
+    fontSize: 15,
+    color: "#000",
+    textAlign: "center"
   }
 };

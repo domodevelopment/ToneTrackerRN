@@ -3,9 +3,16 @@ export default {
     height: "15%",
     flexDirection: "row",
     justifyContent: "space-around",
-    borderColor: "white",
-    borderStyle: "solid",
-    borderWidth: 1
+    padding: 5
+  },
+  unvalidatedSelectableImgRow: {
+    height: "15%",
+    flexDirection: "row",
+    justifyContent: "space-around",
+    padding: 5,
+    borderColor: "red",
+    borderWidth: 3,
+    borderStyle: "solid"
   },
   imgWrapper: {
     flex: 1,

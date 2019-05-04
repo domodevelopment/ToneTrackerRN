@@ -7,12 +7,14 @@ export default {
   },
   fab: {
     position: "absolute",
-    width: 50,
-    height: 50,
+    width: 75,
+    height: 75,
     backgroundColor: "#f00",
     justifyContent: "center",
     alignItems: "center",
-    bottom: 10,
-    right: 10
+    bottom: 30,
+    right: 30,
+    borderRadius: 50,
+    elevation: 10
   }
 };

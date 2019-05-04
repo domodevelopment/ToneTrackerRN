@@ -124,7 +124,7 @@ class ListItem extends Component {
           />
           <AnimatedCircularProgress
             style={styles.progressCircle}
-            size={80} //TODO create a dynamic value instead of this hard coded one
+            size={100} //TODO create a dynamic value instead of this hard coded one
             width={5}
             backgroundWidth={3}
             fill={this.getProgress()}
@@ -142,9 +142,10 @@ class ListItem extends Component {
                 this.props.selectedGuitar(this.props.item.key);
                 this.props.navigation.navigate("Edit");
               }}
+              style={styles.editBtnWrapper}
             >
               <LinearGradient
-                colors={[colors.light, colors.primary, colors.dark]}
+                colors={[colors.primary, colors.primary, colors.dark]}
                 style={styles.editButton}
               >
                 {/* <Text style={styles.btnText}>Edit</Text> */}
@@ -153,7 +154,11 @@ class ListItem extends Component {
             </TouchableHighlight>
           </View>
           <View style={styles.detailsRowTwo}>
-            <Text style={styles.text}>{this.getDaysElapsed()} days ago</Text>
+            <View style={styles.ageTextWrapper}>
+              <Text style={styles.ageText}>
+                {this.getDaysElapsed()} days ago
+              </Text>
+            </View>
             <TouchableHighlight>
               <LinearGradient
                 colors={["#4c669f", "#3b5998", "#192f6a"]}

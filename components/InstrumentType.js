@@ -21,8 +21,13 @@ class InstrumentType extends Component {
         : acousticFadedImg;
     bassImg =
       this.props.type === constants.bass ? bassSelectedImg : bassFadedImg;
+
+    imgRowStyle = this.props.validated
+      ? styles.selectableImgRow
+      : styles.unvalidatedSelectableImgRow;
+
     return (
-      <View style={styles.selectableImgRow}>
+      <View style={imgRowStyle}>
         <TouchableHighlight
           style={styles.imgWrapper}
           onPress={() => this.props.handleTypeChange(constants.electric)}

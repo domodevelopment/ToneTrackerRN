@@ -15,6 +15,7 @@ import AsyncStorage from "@react-native-community/async-storage";
 import constants from "../constants";
 import { showNotifications, initializeGuitars } from "../actions/actions";
 import colors from "../colors";
+import Icon from "react-native-vector-icons/MaterialIcons";
 
 class Home extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -83,7 +84,8 @@ class Home extends Component {
           onPress={() => this.props.navigation.navigate("Add")}
           style={styles.fab}
         >
-          <Text style={{ color: "white" }}>Add</Text>
+          {/* <Text style={{ color: "white" }}>Add</Text> */}
+          <Icon name="add" color={"#fff"} size={45} />
         </TouchableHighlight>
       </View>
     );

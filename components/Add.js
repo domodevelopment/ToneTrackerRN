@@ -17,8 +17,17 @@ import { connect } from "react-redux";
 import { addGuitar } from "../actions/actions";
 import uuidv1 from "uuid";
 import DatePicker from "react-native-datepicker";
+import colors from "../colors";
 
 class Add extends Component {
+  static navigationOptions = ({ navigation }) => {
+    return {
+      headerStyle: {
+        backgroundColor: colors.primary
+      }
+    };
+  };
+
   constructor(props) {
     super(props);
     this.state = {
@@ -92,8 +101,9 @@ class Add extends Component {
       const day = date.getDate();
       let month = date.getMonth();
       let year = date.getYear();
-      const displayDate = day + "/" + ++month + "/" + (year - 100);
-      return displayDate;
+      // const displayDate = day + "/" + ++month + "/" + (year - 100);
+      // return displayDate;
+      return day + "/" + ++month + "/" + (year - 100);
     } else {
       return null;
     }
@@ -109,52 +119,57 @@ class Add extends Component {
   };
 
   render() {
-    // this.getCurrentDate(); //<-find out why this is here
     nameStyle = this.state.nameValidated
-      ? styles.nameInputWrapper
-      : styles.nameUnvalidatedWrapper;
+      ? styles.nameInput
+      : styles.nameUnvalidatedInput;
 
-    typeStyle = this.state.typeValidated
-      ? styles.typeQuestionRow
-      : styles.unvalidatedTypeQuestionRow;
+    // typeStyle = this.state.typeValidated
+    //   ? styles.typeQuestionRow
+    //   : styles.unvalidatedTypeQuestionRow;
 
-    useStyle = this.state.useValidated
-      ? styles.useQuestionRow
-      : styles.unvalidatedUseQuestionRow;
+    // useStyle = this.state.useValidated
+    //   ? styles.useQuestionRow
+    //   : styles.unvalidatedUseQuestionRow;
+
+    // stampStyle = this.state.stampValidated
+    //   ? styles.lastChanged
+    //   : styles.unvalidatedLastChanged;
 
     stampStyle = this.state.stampValidated
-      ? styles.lastChanged
-      : styles.unvalidatedLastChanged;
+      ? styles.datePickerBtn
+      : styles.unvalidatedDatePickerBtn;
 
     return (
       <View style={styles.parent}>
-        {/* <View style={styles.nameInputWrapper}> */}
-        <View style={nameStyle}>
+        <View style={styles.nameInputWrapper}>
           <TextInput
             placeholder="Name (eg. Stratocaster)"
-            style={styles.nameInput}
+            style={nameStyle}
             value={this.state.name}
             onChangeText={this.handleNameChange}
+            maxLength={15}
           />
         </View>
-        <View style={typeStyle}>
+        <View style={styles.typeQuestionRow}>
           <Text style={styles.text}>What type of guitar is this?</Text>
         </View>
         <InstrumentType
           type={this.state.type}
           handleTypeChange={this.handleTypeChange}
+          validated={this.state.typeValidated}
         />
-        <View style={useStyle}>
+        <View style={styles.useQuestionRow}>
           <Text style={styles.text}>How often do you play this guitar?</Text>
         </View>
         <InstrumentUse
           use={this.state.use}
           handleUseChange={this.handleUseChange}
+          validated={this.state.useValidated}
         />
-        <View style={stampStyle}>
+        <View style={styles.lastChanged}>
           <Text style={styles.text}>Strings last changed</Text>
           <DatePicker
-            style={styles.datePickerBtn}
+            style={stampStyle}
             date={this.getFormattedDate()}
             mode="date"
             placeholder="DD-MM-YY"

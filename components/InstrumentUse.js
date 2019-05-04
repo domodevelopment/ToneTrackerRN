@@ -19,8 +19,13 @@ class InstrumentUse extends Component {
         : somedaysFadedImg;
     weeklyImg =
       this.props.use === constants.weekly ? weeklySelectedImg : weeklyFadedImg;
+
+    imgRowStyle = this.props.validated
+      ? styles.selectableImgRow
+      : styles.unvalidatedSelectableImgRow;
+
     return (
-      <View style={styles.selectableImgRow}>
+      <View style={imgRowStyle}>
         <TouchableHighlight
           style={styles.imgWrapper}
           onPress={() => this.props.handleUseChange(constants.daily)}
