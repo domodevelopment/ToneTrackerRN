@@ -13,12 +13,15 @@ import styles from "../styles/editStyles";
 import LinearGradient from "react-native-linear-gradient";
 import InstrumentType from "./InstrumentType";
 import InstrumentUse from "./InstrumentUse";
-import electricImg from "../images/electric_guitar.png";
+import electricGuitarImg from "../images/electric_guitar.png";
+import bassImg from "../images/bass_guitar.png";
+import acousticImg from "../images/acoustic_guitar.png";
 import { connect } from "react-redux";
 import { editGuitar } from "../actions/actions";
 import DatePicker from "react-native-datepicker";
 import Delete from "./Delete";
 import colors from "../colors";
+import constants from "../constants";
 
 function getGuitar(props) {
   return props.guitars.find(x => x.key === props.selectedForEditing);
@@ -100,6 +103,18 @@ class Edit extends Component {
     return today;
   };
 
+  instrumentImage = () => {
+    let { type } = this.state;
+    switch (type) {
+      case constants.electric:
+        return electricGuitarImg;
+      case constants.bass:
+        return bassImg;
+      case constants.acoustic:
+        return acousticImg;
+    }
+  };
+
   render() {
     return (
       <View style={styles.parent}>
@@ -107,7 +122,7 @@ class Edit extends Component {
           <Text style={styles.text}>{this.state.name}</Text>
         </View>
         <Image
-          source={electricImg}
+          source={this.instrumentImage()}
           style={styles.profileImg}
           resizeMode="contain"
         />
