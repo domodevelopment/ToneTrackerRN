@@ -49,6 +49,11 @@ const reducer = (state = getInitialState(), action) => {
         }
       }
       let AnotherConcatenatedArray = AnotherNewGuitarArr.concat(updatedArr);
+      //Persisting new guitar in AsyncStorage
+      AsyncStorage.setItem(
+        constants.persistedGuitars,
+        JSON.stringify(AnotherConcatenatedArray)
+      );
       return {
         ...state,
         guitars: AnotherConcatenatedArray
@@ -65,7 +70,6 @@ const reducer = (state = getInitialState(), action) => {
       const dummyArr = [];
       removedGuitarArr = removedGuitarArr.concat(dummyArr);
       //Removing item from AsyncStorage
-      // AsyncStorage.removeItem(action.payload.key);
       AsyncStorage.setItem(
         constants.persistedGuitars,
         JSON.stringify(removedGuitarArr)
