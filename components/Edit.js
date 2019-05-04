@@ -18,6 +18,7 @@ import { connect } from "react-redux";
 import { editGuitar } from "../actions/actions";
 import DatePicker from "react-native-datepicker";
 import Delete from "./Delete";
+import colors from "../colors";
 
 function getGuitar(props) {
   return props.guitars.find(x => x.key === props.selectedForEditing);
@@ -26,18 +27,26 @@ function getGuitar(props) {
 class Edit extends Component {
   static navigationOptions = ({ navigation }) => {
     return {
-      // //Heading/title of the header
-      // title: navigation.getParam("Title", "Popup Menu Example"),
-      // //Heading style
-      // headerStyle: {
-      //   backgroundColor: navigation.getParam("BackgroundColor", "red")
-      // },
-      // //Heading text color
-      // headerTintColor: navigation.getParam("HeaderTintColor", "#fff"),
-      //Heading Menu in Right Side
+      headerStyle: {
+        backgroundColor: colors.primary
+      },
       headerRight: <Delete navigation={navigation} />
     };
   };
+  // static navigationOptions = ({ navigation }) => {
+  //   return {
+  //     // //Heading/title of the header
+  //     // title: navigation.getParam("Title", "Popup Menu Example"),
+  //     // //Heading style
+  //     // headerStyle: {
+  //     //   backgroundColor: navigation.getParam("BackgroundColor", "red")
+  //     // },
+  //     // //Heading text color
+  //     // headerTintColor: navigation.getParam("HeaderTintColor", "#fff"),
+  //     //Heading Menu in Right Side
+  //     headerRight: <Delete navigation={navigation} />
+  //   };
+  // };
 
   constructor(props) {
     super(props);
@@ -108,6 +117,7 @@ class Edit extends Component {
         <InstrumentType
           type={this.state.type}
           handleTypeChange={this.handleTypeChange}
+          validated={true}
         />
         <View style={styles.questionRow}>
           <Text style={styles.text}>How often do you play this guitar?</Text>
@@ -115,6 +125,7 @@ class Edit extends Component {
         <InstrumentUse
           use={this.state.use}
           handleUseChange={this.handleUseChange}
+          validated={true}
         />
         <View style={styles.lastChanged}>
           <Text style={styles.text}>Strings last changed</Text>

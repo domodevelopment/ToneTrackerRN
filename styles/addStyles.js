@@ -21,36 +21,12 @@ export default {
     marginRight: 10,
     fontSize: 20
   },
-  typeQuestionRow: {
+  questionRow: {
     height: "7.5%",
     justifyContent: "center",
     marginLeft: 10,
     marginRight: 10
   },
-  // unvalidatedTypeQuestionRow: {
-  //   height: "7.5%",
-  //   justifyContent: "center",
-  //   borderColor: "red",
-  //   borderStyle: "solid",
-  //   borderWidth: 1,
-  //   marginLeft: 10,
-  //   marginRight: 10
-  // },
-  useQuestionRow: {
-    height: "7.5%",
-    justifyContent: "center",
-    marginLeft: 10,
-    marginRight: 10
-  },
-  // unvalidatedUseQuestionRow: {
-  //   height: "7.5%",
-  //   justifyContent: "center",
-  //   borderColor: "red",
-  //   borderStyle: "solid",
-  //   borderWidth: 1,
-  //   marginLeft: 10,
-  //   marginRight: 10
-  // },
   lastChanged: {
     height: "15%",
     flexDirection: "row",
@@ -58,23 +34,12 @@ export default {
     marginLeft: 10,
     marginRight: 10
   },
-  // unvalidatedLastChanged: {
-  //   height: "15%",
-  //   flexDirection: "row",
-  //   borderColor: "red",
-  //   borderStyle: "solid",
-  //   borderWidth: 1,
-  //   alignItems: "center",
-  //   marginLeft: 10,
-  //   marginRight: 10
-  // },
   datePickerBtn: {
     flex: 1,
     marginLeft: 10,
     marginRight: 10,
     height: "80%",
-    justifyContent: "center",
-    borderStyle: "solid"
+    justifyContent: "center"
   },
   unvalidatedDatePickerBtn: {
     flex: 1,

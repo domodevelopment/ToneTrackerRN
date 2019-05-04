@@ -123,18 +123,6 @@ class Add extends Component {
       ? styles.nameInput
       : styles.nameUnvalidatedInput;
 
-    // typeStyle = this.state.typeValidated
-    //   ? styles.typeQuestionRow
-    //   : styles.unvalidatedTypeQuestionRow;
-
-    // useStyle = this.state.useValidated
-    //   ? styles.useQuestionRow
-    //   : styles.unvalidatedUseQuestionRow;
-
-    // stampStyle = this.state.stampValidated
-    //   ? styles.lastChanged
-    //   : styles.unvalidatedLastChanged;
-
     stampStyle = this.state.stampValidated
       ? styles.datePickerBtn
       : styles.unvalidatedDatePickerBtn;
@@ -150,7 +138,7 @@ class Add extends Component {
             maxLength={15}
           />
         </View>
-        <View style={styles.typeQuestionRow}>
+        <View style={styles.questionRow}>
           <Text style={styles.text}>What type of guitar is this?</Text>
         </View>
         <InstrumentType
@@ -158,7 +146,7 @@ class Add extends Component {
           handleTypeChange={this.handleTypeChange}
           validated={this.state.typeValidated}
         />
-        <View style={styles.useQuestionRow}>
+        <View style={styles.questionRow}>
           <Text style={styles.text}>How often do you play this guitar?</Text>
         </View>
         <InstrumentUse
