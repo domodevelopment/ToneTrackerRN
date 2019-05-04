@@ -29,7 +29,7 @@ const reducer = (state = getInitialState(), action) => {
     case constants.addGuitar:
       let newGuitarArr = [action.payload];
       let concatenatedArray = newGuitarArr.concat(state.guitars);
-      //Persisting new notifications state in AsyncStorage
+      //Persisting new guitar in AsyncStorage
       AsyncStorage.setItem(
         constants.persistedGuitars,
         JSON.stringify(concatenatedArray)
@@ -64,6 +64,12 @@ const reducer = (state = getInitialState(), action) => {
       }
       const dummyArr = [];
       removedGuitarArr = removedGuitarArr.concat(dummyArr);
+      //Removing item from AsyncStorage
+      // AsyncStorage.removeItem(action.payload.key);
+      AsyncStorage.setItem(
+        constants.persistedGuitars,
+        JSON.stringify(removedGuitarArr)
+      );
       return {
         ...state,
         guitars: removedGuitarArr
