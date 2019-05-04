@@ -14,18 +14,20 @@ import ListItem from "./ListItem";
 import AsyncStorage from "@react-native-community/async-storage";
 import constants from "../constants";
 import { showNotifications, initializeGuitars } from "../actions/actions";
+import colors from "../colors";
 
 class Home extends Component {
   static navigationOptions = ({ navigation }) => {
     return {
-      // //Heading/title of the header
+      //Heading/title of the header
       // title: navigation.getParam("Title", "Popup Menu Example"),
-      // //Heading style
-      // headerStyle: {
-      //   backgroundColor: navigation.getParam("BackgroundColor", "red")
-      // },
+      //Heading style
+      headerStyle: {
+        // backgroundColor: navigation.getParam("BackgroundColor", "red")
+        backgroundColor: colors.primary
+      },
       // //Heading text color
-      // headerTintColor: navigation.getParam("HeaderTintColor", "#fff"),
+      // headerTintColor: navigation.getParam("HeaderTintColor", "#000"),
       //Heading Menu in Right Side
       headerRight: <Options navigation={navigation} />
     };

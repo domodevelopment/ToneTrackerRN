@@ -17,6 +17,9 @@ import acousticImg from "../images/acoustic_guitar.png";
 import coatedImg from "../images/coated_icon.png";
 import constants from "../constants";
 import { AnimatedCircularProgress } from "react-native-circular-progress";
+import LinearGradient from "react-native-linear-gradient";
+import Icon from "react-native-vector-icons/AntDesign";
+import colors from "../colors";
 
 class ListItem extends Component {
   instrumentImage = () => {
@@ -113,21 +116,23 @@ class ListItem extends Component {
   render() {
     return (
       <View style={styles.parent}>
-        <Image
-          source={this.instrumentImage()}
-          style={styles.image}
-          resizeMode="contain"
-        />
-        <AnimatedCircularProgress
-          style={styles.progressCircle}
-          size={85} //TODO create a dynamic value instead of this hard coded one
-          width={5}
-          backgroundWidth={3}
-          fill={this.getProgress()}
-          tintColor={this.getCondition()}
-          onAnimationComplete={() => console.log("onAnimationComplete")}
-          backgroundColor="#3d5875"
-        />
+        <View style={styles.imageWrapper}>
+          <Image
+            source={this.instrumentImage()}
+            style={styles.image}
+            resizeMode="contain"
+          />
+          <AnimatedCircularProgress
+            style={styles.progressCircle}
+            size={80} //TODO create a dynamic value instead of this hard coded one
+            width={5}
+            backgroundWidth={3}
+            fill={this.getProgress()}
+            tintColor={this.getCondition()}
+            onAnimationComplete={() => console.log("onAnimationComplete")}
+            backgroundColor="#3d5875"
+          />
+        </View>
         {this.isCoated()}
         <View style={styles.detailsWrapper}>
           <View style={styles.detailsRowOne}>
@@ -137,15 +142,25 @@ class ListItem extends Component {
                 this.props.selectedGuitar(this.props.item.key);
                 this.props.navigation.navigate("Edit");
               }}
-              style={styles.editButton}
             >
-              <Text style={styles.text}>Edit</Text>
+              <LinearGradient
+                colors={[colors.light, colors.primary, colors.dark]}
+                style={styles.editButton}
+              >
+                {/* <Text style={styles.btnText}>Edit</Text> */}
+                <Icon name="edit" color={"#fff"} size={20} />
+              </LinearGradient>
             </TouchableHighlight>
           </View>
           <View style={styles.detailsRowTwo}>
             <Text style={styles.text}>{this.getDaysElapsed()} days ago</Text>
-            <TouchableHighlight style={styles.restringButton}>
-              <Text style={styles.text}>Restring</Text>
+            <TouchableHighlight>
+              <LinearGradient
+                colors={["#4c669f", "#3b5998", "#192f6a"]}
+                style={styles.restringButton}
+              >
+                <Text style={styles.btnText}>Restring</Text>
+              </LinearGradient>
             </TouchableHighlight>
           </View>
         </View>

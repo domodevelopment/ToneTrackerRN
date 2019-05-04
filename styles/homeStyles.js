@@ -1,6 +1,9 @@
+import colors from "../colors";
+
 export default {
   parent: {
-    height: "100%"
+    height: "100%",
+    backgroundColor: colors.light
   },
   fab: {
     position: "absolute",

@@ -13,6 +13,7 @@ import {
   MenuOption,
   MenuTrigger
 } from "react-native-popup-menu";
+import colors from "./colors";
 
 const store = createStore(reducer);
 
@@ -22,7 +23,7 @@ const MyStatusBar = ({ backgroundColor, ...props }) => (
       height: Platform.OS === "ios" ? 0 : StatusBar.currentHeight
     }}
   >
-    <StatusBar translucent backgroundColor="pink" {...props} />
+    <StatusBar translucent backgroundColor={colors.dark} {...props} />
   </View>
 );
 

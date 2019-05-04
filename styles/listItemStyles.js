@@ -1,9 +1,14 @@
+import colors from "../colors";
+
 export default {
   parent: {
-    borderStyle: "solid",
-    borderColor: "black",
-    borderWidth: 1,
-    flexDirection: "row"
+    borderBottomStyle: "solid",
+    borderBottomColor: "black",
+    borderBottomWidth: 1,
+    flexDirection: "row",
+    backgroundColor: colors.light,
+    padding: 10,
+    height: 100
   },
   imageWrapper: {
     height: "100%",
@@ -11,13 +16,10 @@ export default {
   },
   image: {
     height: "100%",
-    width: "20%"
-    // backgroundColor: "#f00"
+    width: "100%"
   },
   progressCircle: {
     position: "absolute"
-    // height: 50,
-    // backgroundColor: "#0ff"
   },
   coatedImg: {
     position: "absolute",
@@ -27,33 +29,37 @@ export default {
   },
   detailsWrapper: {
     width: "80%",
-    padding: 10
+    justifyContent: "space-between",
+    paddingLeft: 10
   },
   detailsRowOne: {
     flexDirection: "row",
     justifyContent: "space-between",
-    alignItems: "center",
-    borderStyle: "solid",
-    borderColor: "black",
-    borderWidth: 1
+    alignItems: "center"
   },
   detailsRowTwo: {
     flexDirection: "row",
     justifyContent: "space-between",
-    borderStyle: "solid",
-    borderColor: "black",
-    borderWidth: 1
+    alignItems: "flex-end"
   },
   editButton: {
-    backgroundColor: "#0ff"
+    padding: 5,
+    borderRadius: 6
   },
   restringButton: {
-    backgroundColor: "#0ff"
+    padding: 5,
+    borderRadius: 6
   },
   nameText: {
-    fontSize: 30
+    fontSize: 30,
+    color: "#000"
+  },
+  btnText: {
+    fontSize: 17,
+    color: "#fff"
   },
   text: {
-    fontSize: 17
+    fontSize: 17,
+    color: "#000"
   }
 };
