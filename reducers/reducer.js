@@ -7,7 +7,8 @@ getInitialState = () => {
   return {
     guitars: [],
     notifications: null,
-    selectedForEditing: null
+    selectedForEditing: null,
+    changeAge: null
   };
 };
 
@@ -24,6 +25,12 @@ const reducer = (state = getInitialState(), action) => {
       return {
         ...state,
         selectedForEditing: action.payload
+      };
+    //Determine if datepicker needs to be automatically displayed
+    case constants.changeAge:
+      return {
+        ...state,
+        changeAge: action.payload
       };
     //Pushing newly created guitar to the guitars list
     case constants.addGuitar:

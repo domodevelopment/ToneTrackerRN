@@ -18,13 +18,17 @@ import { addGuitar } from "../actions/actions";
 import uuidv1 from "uuid";
 import DatePicker from "react-native-datepicker";
 import colors from "../colors";
+import { HeaderBackButton } from "react-navigation";
+import Dialog from "react-native-dialog";
 
 class Add extends Component {
   static navigationOptions = ({ navigation }) => {
+    const { params = {} } = navigation.state;
     return {
       headerStyle: {
         backgroundColor: colors.primary
-      }
+      },
+      headerLeft: <HeaderBackButton onPress={() => params.handleBack()} />
     };
   };
 
@@ -40,7 +44,8 @@ class Add extends Component {
       nameValidated: true,
       typeValidated: true,
       useValidated: true,
-      stampValidated: true
+      stampValidated: true,
+      warningPopup: false
     };
   }
 
@@ -123,6 +128,32 @@ class Add extends Component {
     return today;
   };
 
+  // showWarning() {
+  //   this.setState({
+  //     warningPopup: true
+  //   });
+  // }
+
+  componentDidMount() {
+    this.props.navigation.setParams({
+      // handleBack: this.showWarning
+      handleBack: () => {
+        if (
+          this.state.name !== null ||
+          this.state.type !== null ||
+          this.state.use !== null ||
+          this.state.timestamp !== null ||
+          this.state.coated
+        ) {
+          this.setState({ warningPopup: true });
+        } else {
+          this.props.navigation.navigate("Home");
+        }
+        // Alert.alert(String(this.state.warningPopup));
+      }
+    });
+  }
+
   render() {
     nameStyle = this.state.nameValidated
       ? styles.nameInput
@@ -200,6 +231,32 @@ class Add extends Component {
             <Text style={styles.text}>Submit</Text>
           </LinearGradient>
         </TouchableHighlight>
+        <View>
+          <Dialog.Container visible={this.state.warningPopup}>
+            <Dialog.Title>Warning</Dialog.Title>
+            <Dialog.Description>
+              You have unsaved changes. Are you sure you want to leave?
+            </Dialog.Description>
+            <Dialog.Button
+              label="Leave"
+              onPress={() => {
+                // this.setState({ restringPopup: false });
+                // this.props.item.timestamp = new Date().getTime();
+                // this.props.editGuitar(this.props.item);
+                this.setState({ warningPopup: false });
+                this.props.navigation.navigate("Home");
+              }}
+            />
+            <Dialog.Button
+              label="Stay Here"
+              onPress={() => {
+                // this.props.selectedGuitar(this.props.item.key);
+                // this.props.showDatePicker(true);
+                this.setState({ warningPopup: false });
+              }}
+            />
+          </Dialog.Container>
+        </View>
       </View>
     );
   }

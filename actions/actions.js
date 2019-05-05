@@ -14,6 +14,13 @@ export function selectedGuitar(key) {
   };
 }
 
+export function showDatePicker(val) {
+  return {
+    type: constants.changeAge,
+    payload: val
+  };
+}
+
 export function addGuitar(guitar) {
   return {
     type: constants.addGuitar,

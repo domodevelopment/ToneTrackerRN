@@ -17,7 +17,7 @@ import electricGuitarImg from "../images/electric_guitar.png";
 import bassImg from "../images/bass_guitar.png";
 import acousticImg from "../images/acoustic_guitar.png";
 import { connect } from "react-redux";
-import { editGuitar } from "../actions/actions";
+import { editGuitar, showDatePicker } from "../actions/actions";
 import DatePicker from "react-native-datepicker";
 import Delete from "./Delete";
 import colors from "../colors";
@@ -123,6 +123,13 @@ class Edit extends Component {
     );
   };
 
+  componentDidMount() {
+    if (this.props.changeAge) {
+      this.datePicker.onPressDate();
+      this.props.showDatePicker(false);
+    }
+  }
+
   render() {
     return (
       <View style={styles.parent}>
@@ -153,6 +160,9 @@ class Edit extends Component {
         <View style={styles.lastChanged}>
           <Text style={styles.text}>Strings last changed</Text>
           <DatePicker
+            ref={picker => {
+              this.datePicker = picker;
+            }}
             style={styles.datePickerBtn}
             date={this.getFormattedDate()}
             mode="date"
@@ -198,7 +208,8 @@ class Edit extends Component {
 const mapStateToProps = state => {
   return {
     guitars: state.guitars,
-    selectedForEditing: state.selectedForEditing
+    selectedForEditing: state.selectedForEditing,
+    changeAge: state.changeAge
   };
 };
 
@@ -206,6 +217,9 @@ const mapDispatchToProps = dispatch => {
   return {
     editGuitar: guitar => {
       dispatch(editGuitar(guitar));
+    },
+    showDatePicker: val => {
+      dispatch(showDatePicker(val));
     }
   };
 };

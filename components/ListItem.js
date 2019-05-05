@@ -8,7 +8,7 @@ import {
   Image,
   Alert
 } from "react-native";
-import { selectedGuitar, editGuitar } from "../actions/actions";
+import { selectedGuitar, editGuitar, showDatePicker } from "../actions/actions";
 import { connect } from "react-redux";
 import styles from "../styles/listItemStyles";
 import electricGuitarImg from "../images/electric_guitar.png";
@@ -198,6 +198,9 @@ class ListItem extends Component {
               label="Some other day"
               onPress={() => {
                 this.setState({ restringPopup: false });
+                this.props.selectedGuitar(this.props.item.key);
+                this.props.showDatePicker(true);
+                this.props.navigation.navigate("Edit");
               }}
             />
             <Dialog.Button
@@ -217,6 +220,9 @@ const mapDispatchToProps = dispatch => {
   return {
     selectedGuitar: key => {
       dispatch(selectedGuitar(key));
+    },
+    showDatePicker: val => {
+      dispatch(showDatePicker(val));
     },
     editGuitar: guitar => {
       dispatch(editGuitar(guitar));
