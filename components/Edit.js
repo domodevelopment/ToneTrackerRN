@@ -22,6 +22,8 @@ import DatePicker from "react-native-datepicker";
 import Delete from "./Delete";
 import colors from "../colors";
 import constants from "../constants";
+import { HeaderBackButton } from "react-navigation";
+import Dialog from "react-native-dialog";
 
 function getGuitar(props) {
   return props.guitars.find(x => x.key === props.selectedForEditing);
@@ -29,11 +31,13 @@ function getGuitar(props) {
 
 class Edit extends Component {
   static navigationOptions = ({ navigation }) => {
+    const { params = {} } = navigation.state;
     return {
       headerStyle: {
         backgroundColor: colors.primary
       },
-      headerRight: <Delete navigation={navigation} />
+      headerRight: <Delete navigation={navigation} />,
+      headerLeft: <HeaderBackButton onPress={() => params.handleBack()} />
     };
   };
 
@@ -41,13 +45,15 @@ class Edit extends Component {
     super(props);
     const guitarToEdit = getGuitar(this.props);
     this.state = {
+      guitarToEdit,
       key: guitarToEdit.key,
       name: guitarToEdit.name,
       type: guitarToEdit.type,
       use: guitarToEdit.use,
       timestamp: guitarToEdit.timestamp,
       coated: guitarToEdit.coated,
-      editingName: false
+      editingName: false,
+      warningPopup: false
     };
   }
 
@@ -128,6 +134,21 @@ class Edit extends Component {
       this.datePicker.onPressDate();
       this.props.showDatePicker(false);
     }
+    this.props.navigation.setParams({
+      handleBack: () => {
+        if (
+          this.state.name !== this.state.guitarToEdit.name ||
+          this.state.type !== this.state.guitarToEdit.type ||
+          this.state.use !== this.state.guitarToEdit.use ||
+          this.state.timestamp !== this.state.guitarToEdit.timestamp ||
+          this.state.coated !== this.state.guitarToEdit.coated
+        ) {
+          this.setState({ warningPopup: true });
+        } else {
+          this.props.navigation.navigate("Home");
+        }
+      }
+    });
   }
 
   render() {
@@ -200,6 +221,27 @@ class Edit extends Component {
             <Text style={styles.text}>Update</Text>
           </LinearGradient>
         </TouchableHighlight>
+        <View>
+          <Dialog.Container visible={this.state.warningPopup}>
+            <Dialog.Title>Warning</Dialog.Title>
+            <Dialog.Description>
+              You have unsaved changes. Are you sure you want to leave?
+            </Dialog.Description>
+            <Dialog.Button
+              label="Leave"
+              onPress={() => {
+                this.setState({ warningPopup: false });
+                this.props.navigation.navigate("Home");
+              }}
+            />
+            <Dialog.Button
+              label="Stay Here"
+              onPress={() => {
+                this.setState({ warningPopup: false });
+              }}
+            />
+          </Dialog.Container>
+        </View>
       </View>
     );
   }

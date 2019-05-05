@@ -240,9 +240,6 @@ class Add extends Component {
             <Dialog.Button
               label="Leave"
               onPress={() => {
-                // this.setState({ restringPopup: false });
-                // this.props.item.timestamp = new Date().getTime();
-                // this.props.editGuitar(this.props.item);
                 this.setState({ warningPopup: false });
                 this.props.navigation.navigate("Home");
               }}
@@ -250,8 +247,6 @@ class Add extends Component {
             <Dialog.Button
               label="Stay Here"
               onPress={() => {
-                // this.props.selectedGuitar(this.props.item.key);
-                // this.props.showDatePicker(true);
                 this.setState({ warningPopup: false });
               }}
             />
