@@ -47,15 +47,29 @@ const reducer = (state = getInitialState(), action) => {
       };
     //Updating value(s) of an existing guitar
     case constants.editGuitar:
-      let AnotherNewGuitarArr = [action.payload];
+      //////////////////////////////////////
+      // let AnotherNewGuitarArr = [action.payload];
+      // let updatedArr = state.guitars;
+      // for (let i in updatedArr) {
+      //   if (updatedArr[i].key === action.payload.key) {
+      //     updatedArr.splice(i, 1);
+      //     break;
+      //   }
+      // }
+      // let AnotherConcatenatedArray = AnotherNewGuitarArr.concat(updatedArr);
+      //////////////////////////////////////
+      // let AnotherNewGuitarArr = action.payload;
       let updatedArr = state.guitars;
       for (let i in updatedArr) {
         if (updatedArr[i].key === action.payload.key) {
-          updatedArr.splice(i, 1);
+          // updatedArr.splice(i, 1);
+          updatedArr[i] = action.payload;
           break;
         }
       }
-      let AnotherConcatenatedArray = AnotherNewGuitarArr.concat(updatedArr);
+      let dummy = [];
+      let AnotherConcatenatedArray = dummy.concat(updatedArr);
+      //////////////////////////////////////
       //Persisting new guitar in AsyncStorage
       AsyncStorage.setItem(
         constants.persistedGuitars,
