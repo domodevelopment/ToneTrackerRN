@@ -37,7 +37,8 @@ class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      initialized: false
+      initialized: false,
+      hideFab: false
     };
   }
 
@@ -70,6 +71,17 @@ class Home extends Component {
     this.props.initializeGuitars(JSON.parse(guitars));
   };
 
+  fab = scrolling => {
+    return scrolling ? null : (
+      <TouchableHighlight
+        onPress={() => this.props.navigation.navigate("Add")}
+        style={styles.fab}
+      >
+        <Icon name="add" color={"#fff"} size={45} />
+      </TouchableHighlight>
+    );
+  };
+
   render() {
     return (
       <View style={styles.parent}>
@@ -79,14 +91,16 @@ class Home extends Component {
           renderItem={({ item }) => (
             <ListItem item={item} navigation={this.props.navigation} />
           )}
+          onScrollBeginDrag={() => {
+            this.setState({ hideFab: true });
+          }}
+          onScrollEndDrag={() => {
+            setTimeout(() => {
+              this.setState({ hideFab: false });
+            }, 1000);
+          }}
         />
-        <TouchableHighlight
-          onPress={() => this.props.navigation.navigate("Add")}
-          style={styles.fab}
-        >
-          {/* <Text style={{ color: "white" }}>Add</Text> */}
-          <Icon name="add" color={"#fff"} size={45} />
-        </TouchableHighlight>
+        {this.fab(this.state.hideFab)}
       </View>
     );
   }
