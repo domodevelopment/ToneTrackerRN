@@ -9,7 +9,7 @@ export default {
     position: "absolute",
     width: 75,
     height: 75,
-    backgroundColor: "#f00",
+    backgroundColor: colors.primary,
     justifyContent: "center",
     alignItems: "center",
     bottom: 30,

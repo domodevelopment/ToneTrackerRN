@@ -8,20 +8,26 @@ export default {
   nameInputWrapper: {
     height: "15%",
     justifyContent: "center",
-    backgroundColor: "#00f"
+    backgroundColor: colors.dark
   },
-  nameInput: {
-    backgroundColor: "#ccc",
-    marginLeft: 10,
-    marginRight: 10,
-    fontSize: 20
+  // nameInput: {
+  //   backgroundColor: "#ccc",
+  //   marginLeft: 10,
+  //   marginRight: 10,
+  //   fontSize: 20
+  // },
+  nameText: {
+    fontSize: 25,
+    color: "white",
+    width: "70%",
+    marginLeft: 20
   },
-  nameUnvalidatedInput: {
-    backgroundColor: "red",
-    marginLeft: 10,
-    marginRight: 10,
-    fontSize: 20
-  },
+  // nameUnvalidatedInput: {
+  //   backgroundColor: "red",
+  //   marginLeft: 10,
+  //   marginRight: 10,
+  //   fontSize: 20
+  // },
   profileImg: {
     position: "absolute",
     top: 20,
@@ -33,7 +39,8 @@ export default {
     height: "7.5%",
     justifyContent: "center",
     marginLeft: 10,
-    marginRight: 10
+    marginRight: 10,
+    paddingTop: 5
   },
   lastChanged: {
     height: "15%",
@@ -49,17 +56,17 @@ export default {
     height: "80%",
     justifyContent: "center"
   },
-  unvalidatedDatePickerBtn: {
-    flex: 1,
-    marginLeft: 10,
-    marginRight: 10,
-    height: "80%",
-    justifyContent: "center",
-    alignItems: "center",
-    borderColor: "red",
-    borderWidth: 3,
-    borderStyle: "solid"
-  },
+  // unvalidatedDatePickerBtn: {
+  //   flex: 1,
+  //   marginLeft: 10,
+  //   marginRight: 10,
+  //   height: "80%",
+  //   justifyContent: "center",
+  //   alignItems: "center",
+  //   borderColor: "red",
+  //   borderWidth: 3,
+  //   borderStyle: "solid"
+  // },
   coated: {
     height: "10%",
     flexDirection: "row",

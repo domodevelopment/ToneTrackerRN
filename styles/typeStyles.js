@@ -3,7 +3,7 @@ export default {
     height: "15%",
     flexDirection: "row",
     justifyContent: "space-around",
-    padding: 5
+    paddingBottom: 5
   },
   unvalidatedSelectableImgRow: {
     height: "15%",

@@ -36,20 +36,6 @@ class Edit extends Component {
       headerRight: <Delete navigation={navigation} />
     };
   };
-  // static navigationOptions = ({ navigation }) => {
-  //   return {
-  //     // //Heading/title of the header
-  //     // title: navigation.getParam("Title", "Popup Menu Example"),
-  //     // //Heading style
-  //     // headerStyle: {
-  //     //   backgroundColor: navigation.getParam("BackgroundColor", "red")
-  //     // },
-  //     // //Heading text color
-  //     // headerTintColor: navigation.getParam("HeaderTintColor", "#fff"),
-  //     //Heading Menu in Right Side
-  //     headerRight: <Delete navigation={navigation} />
-  //   };
-  // };
 
   constructor(props) {
     super(props);
@@ -119,7 +105,7 @@ class Edit extends Component {
     return (
       <View style={styles.parent}>
         <View style={styles.nameInputWrapper}>
-          <Text style={styles.text}>{this.state.name}</Text>
+          <Text style={styles.nameText}>{this.state.name}</Text>
         </View>
         <Image
           source={this.instrumentImage()}
