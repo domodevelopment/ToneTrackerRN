@@ -36,7 +36,7 @@ class Add extends Component {
     super(props);
     this.state = {
       key: uuidv1(),
-      name: null,
+      name: "",
       type: null,
       use: null,
       timestamp: null,
@@ -62,37 +62,34 @@ class Add extends Component {
   };
 
   handleSubmit = () => {
+    const regex = "[a-z|0-9]";
+    const { name, type, use, timestamp } = this.state;
     //check that no details are missing
     if (
-      this.state.name !== null &&
-      this.state.type !== null &&
-      this.state.use !== null &&
-      this.state.timestamp !== null
+      name.match(regex) &&
+      type !== null &&
+      use !== null &&
+      timestamp !== null
     ) {
       this.props.addGuitar(this.state);
       this.props.navigation.navigate("Home");
     } else {
-      if (
-        //TODO replace with regex
-        this.state.name === null ||
-        this.state.name === "" ||
-        this.state.name === " "
-      ) {
+      if (!name.match(regex)) {
         this.setState({ nameValidated: false });
       } else {
         this.setState({ nameValidated: true });
       }
-      if (this.state.type === null) {
+      if (type === null) {
         this.setState({ typeValidated: false });
       } else {
         this.setState({ typeValidated: true });
       }
-      if (this.state.use === null) {
+      if (use === null) {
         this.setState({ useValidated: false });
       } else {
         this.setState({ useValidated: true });
       }
-      if (this.state.timestamp === null) {
+      if (timestamp === null) {
         this.setState({ stampValidated: false });
       } else {
         this.setState({ stampValidated: true });
@@ -111,8 +108,6 @@ class Add extends Component {
       const day = date.getDate();
       let month = date.getMonth();
       let year = date.getYear();
-      // const displayDate = day + "/" + ++month + "/" + (year - 100);
-      // return displayDate;
       return day + "/" + ++month + "/" + (year - 100);
     } else {
       return null;
@@ -128,15 +123,8 @@ class Add extends Component {
     return today;
   };
 
-  // showWarning() {
-  //   this.setState({
-  //     warningPopup: true
-  //   });
-  // }
-
   componentDidMount() {
     this.props.navigation.setParams({
-      // handleBack: this.showWarning
       handleBack: () => {
         if (
           this.state.name !== null ||
@@ -149,7 +137,6 @@ class Add extends Component {
         } else {
           this.props.navigation.navigate("Home");
         }
-        // Alert.alert(String(this.state.warningPopup));
       }
     });
   }

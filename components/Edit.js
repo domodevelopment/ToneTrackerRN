@@ -53,7 +53,8 @@ class Edit extends Component {
       timestamp: guitarToEdit.timestamp,
       coated: guitarToEdit.coated,
       editingName: false,
-      warningPopup: false
+      warningPopup: false,
+      nameValidated: true
     };
   }
 
@@ -111,11 +112,19 @@ class Edit extends Component {
   name = editing => {
     return editing ? (
       <TextInput
-        style={styles.nameInput}
+        style={nameStyle}
         value={this.state.name}
         onChangeText={this.handleNameChange}
         maxLength={15}
         autoFocus={true}
+        onBlur={() => {
+          const regex = "[a-z|0-9]";
+          if (this.state.name.match(regex)) {
+            this.setState({ editingName: false });
+          } else {
+            this.setState({ nameValidated: false });
+          }
+        }}
       />
     ) : (
       <Text
@@ -152,6 +161,10 @@ class Edit extends Component {
   }
 
   render() {
+    nameStyle = this.state.nameValidated
+      ? styles.nameInput
+      : styles.nameUnvalidatedInput;
+
     return (
       <View style={styles.parent}>
         <View style={styles.nameInputWrapper}>
@@ -210,8 +223,13 @@ class Edit extends Component {
         <TouchableHighlight
           style={styles.submit}
           onPress={() => {
-            this.props.editGuitar(this.state);
-            this.props.navigation.navigate("Home");
+            const regex = "[a-z|0-9]";
+            if (this.state.name.match(regex)) {
+              this.props.editGuitar(this.state);
+              this.props.navigation.navigate("Home");
+            } else {
+              this.setState({ nameValidated: false });
+            }
           }}
         >
           <LinearGradient

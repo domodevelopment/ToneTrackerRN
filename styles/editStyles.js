@@ -16,18 +16,18 @@ export default {
     fontSize: 20,
     width: "70%"
   },
+  nameUnvalidatedInput: {
+    backgroundColor: "red",
+    marginLeft: 20,
+    fontSize: 20,
+    width: "70%"
+  },
   nameText: {
     fontSize: 25,
     color: "white",
     width: "70%",
     marginLeft: 20
   },
-  // nameUnvalidatedInput: {
-  //   backgroundColor: "red",
-  //   marginLeft: 10,
-  //   marginRight: 10,
-  //   fontSize: 20
-  // },
   profileImg: {
     position: "absolute",
     top: 20,
