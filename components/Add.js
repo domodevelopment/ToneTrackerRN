@@ -20,6 +20,7 @@ import DatePicker from "react-native-datepicker";
 import colors from "../colors";
 import { HeaderBackButton } from "react-navigation";
 import Dialog from "react-native-dialog";
+import Toast, { DURATION } from "react-native-easy-toast";
 
 class Add extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -74,6 +75,7 @@ class Add extends Component {
       this.props.addGuitar(this.state);
       this.props.navigation.navigate("Home");
     } else {
+      this.refs.toast.show("Fill in all details");
       if (!name.match(regex)) {
         this.setState({ nameValidated: false });
       } else {
@@ -239,6 +241,7 @@ class Add extends Component {
             />
           </Dialog.Container>
         </View>
+        <Toast ref="toast" />
       </View>
     );
   }

@@ -24,6 +24,7 @@ import colors from "../colors";
 import constants from "../constants";
 import { HeaderBackButton } from "react-navigation";
 import Dialog from "react-native-dialog";
+import Toast, { DURATION } from "react-native-easy-toast";
 
 function getGuitar(props) {
   return props.guitars.find(x => x.key === props.selectedForEditing);
@@ -123,6 +124,7 @@ class Edit extends Component {
             this.setState({ editingName: false });
           } else {
             this.setState({ nameValidated: false });
+            this.refs.toast.show("Name cannot be empty.");
           }
         }}
       />
@@ -229,6 +231,7 @@ class Edit extends Component {
               this.props.navigation.navigate("Home");
             } else {
               this.setState({ nameValidated: false });
+              this.refs.toast.show("Name cannot be empty.");
             }
           }}
         >
@@ -260,6 +263,7 @@ class Edit extends Component {
             />
           </Dialog.Container>
         </View>
+        <Toast ref="toast" />
       </View>
     );
   }
