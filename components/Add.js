@@ -67,7 +67,12 @@ class Add extends Component {
       this.props.addGuitar(this.state);
       this.props.navigation.navigate("Home");
     } else {
-      if (this.state.name === null) {
+      if (
+        //TODO replace with regex
+        this.state.name === null ||
+        this.state.name === "" ||
+        this.state.name === " "
+      ) {
         this.setState({ nameValidated: false });
       } else {
         this.setState({ nameValidated: true });

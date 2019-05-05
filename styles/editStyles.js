@@ -10,12 +10,12 @@ export default {
     justifyContent: "center",
     backgroundColor: colors.dark
   },
-  // nameInput: {
-  //   backgroundColor: "#ccc",
-  //   marginLeft: 10,
-  //   marginRight: 10,
-  //   fontSize: 20
-  // },
+  nameInput: {
+    backgroundColor: "#ccc",
+    marginLeft: 20,
+    fontSize: 20,
+    width: "70%"
+  },
   nameText: {
     fontSize: 25,
     color: "white",

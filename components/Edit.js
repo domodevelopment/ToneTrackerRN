@@ -46,7 +46,8 @@ class Edit extends Component {
       type: guitarToEdit.type,
       use: guitarToEdit.use,
       timestamp: guitarToEdit.timestamp,
-      coated: guitarToEdit.coated
+      coated: guitarToEdit.coated,
+      editingName: false
     };
   }
 
@@ -101,11 +102,32 @@ class Edit extends Component {
     }
   };
 
+  name = editing => {
+    return editing ? (
+      <TextInput
+        style={styles.nameInput}
+        value={this.state.name}
+        onChangeText={this.handleNameChange}
+        maxLength={15}
+        autoFocus={true}
+      />
+    ) : (
+      <Text
+        style={styles.nameText}
+        onPress={() => {
+          this.setState({ editingName: true });
+        }}
+      >
+        {this.state.name}
+      </Text>
+    );
+  };
+
   render() {
     return (
       <View style={styles.parent}>
         <View style={styles.nameInputWrapper}>
-          <Text style={styles.nameText}>{this.state.name}</Text>
+          {this.name(this.state.editingName)}
         </View>
         <Image
           source={this.instrumentImage()}
