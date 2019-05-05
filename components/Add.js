@@ -141,6 +141,7 @@ class Add extends Component {
             value={this.state.name}
             onChangeText={this.handleNameChange}
             maxLength={15}
+            autoFocus={true}
           />
         </View>
         <View style={styles.questionRow}>

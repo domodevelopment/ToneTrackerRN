@@ -8,7 +8,7 @@ import {
   Image,
   Alert
 } from "react-native";
-import { selectedGuitar } from "../actions/actions";
+import { selectedGuitar, editGuitar } from "../actions/actions";
 import { connect } from "react-redux";
 import styles from "../styles/listItemStyles";
 import electricGuitarImg from "../images/electric_guitar.png";
@@ -20,8 +20,16 @@ import { AnimatedCircularProgress } from "react-native-circular-progress";
 import LinearGradient from "react-native-linear-gradient";
 import Icon from "react-native-vector-icons/AntDesign";
 import colors from "../colors";
+import Dialog from "react-native-dialog";
 
 class ListItem extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      restringPopup: false
+    };
+  }
+
   instrumentImage = () => {
     let { type } = this.props.item;
     switch (type) {
@@ -148,7 +156,6 @@ class ListItem extends Component {
                 colors={[colors.primary, colors.primary, colors.dark]}
                 style={styles.editButton}
               >
-                {/* <Text style={styles.btnText}>Edit</Text> */}
                 <Icon name="edit" color={"#fff"} size={20} />
               </LinearGradient>
             </TouchableHighlight>
@@ -159,7 +166,11 @@ class ListItem extends Component {
                 {this.getDaysElapsed()} days ago
               </Text>
             </View>
-            <TouchableHighlight>
+            <TouchableHighlight
+              onPress={() => {
+                this.setState({ restringPopup: true });
+              }}
+            >
               <LinearGradient
                 colors={["#4c669f", "#3b5998", "#192f6a"]}
                 style={styles.restringButton}
@@ -168,6 +179,34 @@ class ListItem extends Component {
               </LinearGradient>
             </TouchableHighlight>
           </View>
+        </View>
+        <View>
+          <Dialog.Container visible={this.state.restringPopup}>
+            <Dialog.Title>Restring Guitar</Dialog.Title>
+            <Dialog.Description>
+              When did you restring this guitar?
+            </Dialog.Description>
+            <Dialog.Button
+              label="Today"
+              onPress={() => {
+                this.setState({ restringPopup: false });
+                this.props.item.timestamp = new Date().getTime();
+                this.props.editGuitar(this.props.item);
+              }}
+            />
+            <Dialog.Button
+              label="Some other day"
+              onPress={() => {
+                this.setState({ restringPopup: false });
+              }}
+            />
+            <Dialog.Button
+              label="Cancel"
+              onPress={() => {
+                this.setState({ restringPopup: false });
+              }}
+            />
+          </Dialog.Container>
         </View>
       </View>
     );
@@ -178,6 +217,9 @@ const mapDispatchToProps = dispatch => {
   return {
     selectedGuitar: key => {
       dispatch(selectedGuitar(key));
+    },
+    editGuitar: guitar => {
+      dispatch(editGuitar(guitar));
     }
   };
 };
