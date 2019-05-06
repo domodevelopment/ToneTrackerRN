@@ -104,9 +104,7 @@ class Edit extends Component {
     const newPhoto = this.props.navigation.state.params.photo;
     //Checking if new photo has been taken but not yet saved to redux store
     if (newPhoto !== null && photo !== newPhoto) {
-      Alert.alert("Setting photo");
       this.setState({ photo: newPhoto, photoUpdated: true });
-      this.blah = true;
       return { uri: newPhoto };
     }
     //No photo exists. Use a  default image
@@ -195,7 +193,13 @@ class Edit extends Component {
           }}
         >
           <Image
-            style={{ width: "100%", height: "100%" }}
+            style={{
+              width: "100%",
+              height: "100%",
+              transform: [
+                { rotate: this.state.photo === null ? "0deg" : "90deg" }
+              ]
+            }}
             source={this.instrumentImage()}
             resizeMode="contain"
           />

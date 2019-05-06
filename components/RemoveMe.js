@@ -45,10 +45,13 @@ export default class Camera extends Component {
 
   takePicture = async function() {
     if (this.camera) {
-      const options = { quality: 0.5, base64: true };
+      const options = {
+        quality: 0.5,
+        base64: true
+        // exif: true
+      };
       const data = await this.camera.takePictureAsync(options);
       this.props.navigation.navigate("Edit", { photo: data.uri });
-      // console.log(data.uri);
     }
   };
 }
