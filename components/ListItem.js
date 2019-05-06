@@ -132,7 +132,13 @@ class ListItem extends Component {
         <View style={styles.imageWrapper}>
           <Image
             source={this.instrumentImage()}
-            style={styles.image}
+            style={{
+              width: "100%",
+              height: "100%",
+              transform: [
+                { rotate: this.props.item.photo === null ? "0deg" : "90deg" }
+              ]
+            }}
             resizeMode="contain"
           />
           <AnimatedCircularProgress

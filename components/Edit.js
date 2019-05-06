@@ -56,6 +56,7 @@ class Edit extends Component {
       coated: guitarToEdit.coated,
       editingName: false,
       warningPopup: false,
+      photoPopup: false,
       nameValidated: true
     };
   }
@@ -189,7 +190,11 @@ class Edit extends Component {
         <TouchableHighlight
           style={styles.profileImg}
           onPress={() => {
-            this.props.navigation.navigate("RemoveMe");
+            if (this.state.photo === null) {
+              this.props.navigation.navigate("RemoveMe");
+            } else {
+              this.setState({ photoPopup: true });
+            }
           }}
         >
           <Image
@@ -286,6 +291,33 @@ class Edit extends Component {
               label="Stay Here"
               onPress={() => {
                 this.setState({ warningPopup: false });
+              }}
+            />
+          </Dialog.Container>
+        </View>
+        <View>
+          <Dialog.Container visible={this.state.photoPopup}>
+            <Dialog.Title>Edit Photo</Dialog.Title>
+            <Dialog.Description>
+              What do you want to do with the photo?
+            </Dialog.Description>
+            <Dialog.Button
+              label="Change"
+              onPress={() => {
+                this.setState({ photoPopup: false });
+                this.props.navigation.navigate("RemoveMe");
+              }}
+            />
+            <Dialog.Button
+              label="Remove"
+              onPress={() => {
+                this.setState({ photo: null, photoPopup: false });
+              }}
+            />
+            <Dialog.Button
+              label="Cancel"
+              onPress={() => {
+                this.setState({ photoPopup: false });
               }}
             />
           </Dialog.Container>

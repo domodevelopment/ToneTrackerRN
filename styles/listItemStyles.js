@@ -13,10 +13,10 @@ export default {
     height: 100,
     width: 100
   },
-  image: {
-    height: "100%",
-    width: "100%"
-  },
+  // image: {
+  //   height: "100%",
+  //   width: "100%"
+  // },
   progressCircle: {
     position: "absolute"
   },
