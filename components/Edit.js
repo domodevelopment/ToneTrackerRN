@@ -103,8 +103,9 @@ class Edit extends Component {
     let { type, photo } = this.state;
     const newPhoto = this.props.navigation.state.params.photo;
     //Checking if new photo has been taken but not yet saved to redux store
-    if (newPhoto !== null && photo === null) {
-      this.setState({ photo: newPhoto });
+    if (newPhoto !== null && photo !== newPhoto) {
+      Alert.alert("Setting photo");
+      this.setState({ photo: newPhoto, photoUpdated: true });
       this.blah = true;
       return { uri: newPhoto };
     }
@@ -153,10 +154,6 @@ class Edit extends Component {
     );
   };
 
-  // checkForPhoto = () => {
-  // this.setState({ photo: this.props.navigation.state.params.photo });
-  // };
-
   componentDidMount() {
     if (this.props.changeAge) {
       this.datePicker.onPressDate();
@@ -169,7 +166,8 @@ class Edit extends Component {
           this.state.type !== this.state.guitarToEdit.type ||
           this.state.use !== this.state.guitarToEdit.use ||
           this.state.timestamp !== this.state.guitarToEdit.timestamp ||
-          this.state.coated !== this.state.guitarToEdit.coated
+          this.state.coated !== this.state.guitarToEdit.coated ||
+          this.state.photo !== this.state.guitarToEdit.photo
         ) {
           this.setState({ warningPopup: true });
         } else {
@@ -259,9 +257,6 @@ class Edit extends Component {
               this.refs.toast.show("Name cannot be empty.");
             }
           }}
-          // onPress={() => {
-          //   this.props.navigation.navigate("RemoveMe");
-          // }}
         >
           <LinearGradient
             colors={["#4c669f", "#3b5998", "#192f6a"]}

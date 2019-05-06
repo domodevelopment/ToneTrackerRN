@@ -31,15 +31,20 @@ class ListItem extends Component {
   }
 
   instrumentImage = () => {
-    let { type } = this.props.item;
-    switch (type) {
-      case constants.electric:
-        return electricGuitarImg;
-      case constants.bass:
-        return bassImg;
-      case constants.acoustic:
-        return acousticImg;
+    let { type, photo } = this.props.item;
+    //No photo exists. Use a  default image
+    if (photo === null) {
+      switch (type) {
+        case constants.electric:
+          return electricGuitarImg;
+        case constants.bass:
+          return bassImg;
+        case constants.acoustic:
+          return acousticImg;
+      }
     }
+    //Return the photo
+    return { uri: photo };
   };
 
   getProgress = () => {
