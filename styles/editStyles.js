@@ -1,4 +1,5 @@
 import colors from "../colors";
+import { Dimensions } from "react-native";
 
 export default {
   parent: {
@@ -30,10 +31,10 @@ export default {
   },
   profileImg: {
     position: "absolute",
-    top: 20,
+    top: "5%",
     right: 5,
-    height: "20%",
-    width: "20%"
+    height: Dimensions.get("window").width * 0.2,
+    width: Dimensions.get("window").width * 0.2
   },
   questionRow: {
     height: "7.5%",

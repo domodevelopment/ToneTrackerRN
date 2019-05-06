@@ -201,12 +201,13 @@ class Edit extends Component {
             style={{
               width: "100%",
               height: "100%",
+              borderRadius: 50,
               transform: [
                 { rotate: this.state.photo === null ? "0deg" : "90deg" }
               ]
             }}
             source={this.instrumentImage()}
-            resizeMode="contain"
+            resizeMode="cover"
           />
         </TouchableHighlight>
         <View style={styles.questionRow}>

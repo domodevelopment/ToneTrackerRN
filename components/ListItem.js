@@ -135,11 +135,12 @@ class ListItem extends Component {
             style={{
               width: "100%",
               height: "100%",
+              borderRadius: 50,
               transform: [
                 { rotate: this.props.item.photo === null ? "0deg" : "90deg" }
               ]
             }}
-            resizeMode="contain"
+            resizeMode="cover"
           />
           <AnimatedCircularProgress
             style={styles.progressCircle}
