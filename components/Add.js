@@ -42,6 +42,7 @@ class Add extends Component {
       use: null,
       timestamp: null,
       coated: false,
+      photo: null,
       nameValidated: true,
       typeValidated: true,
       useValidated: true,

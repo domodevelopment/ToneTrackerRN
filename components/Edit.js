@@ -52,6 +52,7 @@ class Edit extends Component {
       type: guitarToEdit.type,
       use: guitarToEdit.use,
       timestamp: guitarToEdit.timestamp,
+      photo: guitarToEdit.photo,
       coated: guitarToEdit.coated,
       editingName: false,
       warningPopup: false,
@@ -99,15 +100,27 @@ class Edit extends Component {
   };
 
   instrumentImage = () => {
-    let { type } = this.state;
-    switch (type) {
-      case constants.electric:
-        return electricGuitarImg;
-      case constants.bass:
-        return bassImg;
-      case constants.acoustic:
-        return acousticImg;
+    let { type, photo } = this.state;
+    const newPhoto = this.props.navigation.state.params.photo;
+    //Checking if new photo has been taken but not yet saved to redux store
+    if (newPhoto !== null && photo === null) {
+      this.setState({ photo: newPhoto });
+      this.blah = true;
+      return { uri: newPhoto };
     }
+    //No photo exists. Use a  default image
+    if (photo === null) {
+      switch (type) {
+        case constants.electric:
+          return electricGuitarImg;
+        case constants.bass:
+          return bassImg;
+        case constants.acoustic:
+          return acousticImg;
+      }
+    }
+    //Return the photo
+    return { uri: photo };
   };
 
   name = editing => {
@@ -140,6 +153,10 @@ class Edit extends Component {
     );
   };
 
+  // checkForPhoto = () => {
+  // this.setState({ photo: this.props.navigation.state.params.photo });
+  // };
+
   componentDidMount() {
     if (this.props.changeAge) {
       this.datePicker.onPressDate();
@@ -163,6 +180,7 @@ class Edit extends Component {
   }
 
   render() {
+    // this.checkForPhoto();
     nameStyle = this.state.nameValidated
       ? styles.nameInput
       : styles.nameUnvalidatedInput;
@@ -172,11 +190,18 @@ class Edit extends Component {
         <View style={styles.nameInputWrapper}>
           {this.name(this.state.editingName)}
         </View>
-        <Image
-          source={this.instrumentImage()}
+        <TouchableHighlight
           style={styles.profileImg}
-          resizeMode="contain"
-        />
+          onPress={() => {
+            this.props.navigation.navigate("RemoveMe");
+          }}
+        >
+          <Image
+            style={{ width: "100%", height: "100%" }}
+            source={this.instrumentImage()}
+            resizeMode="contain"
+          />
+        </TouchableHighlight>
         <View style={styles.questionRow}>
           <Text style={styles.text}>What type of guitar is this?</Text>
         </View>
@@ -234,6 +259,9 @@ class Edit extends Component {
               this.refs.toast.show("Name cannot be empty.");
             }
           }}
+          // onPress={() => {
+          //   this.props.navigation.navigate("RemoveMe");
+          // }}
         >
           <LinearGradient
             colors={["#4c669f", "#3b5998", "#192f6a"]}

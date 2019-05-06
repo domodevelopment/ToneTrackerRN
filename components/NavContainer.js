@@ -6,6 +6,7 @@ import Add from "./Add";
 import Edit from "./Edit";
 import Settings from "./Settings";
 import Options from "./Options";
+import RemoveMe from "./RemoveMe";
 
 const Navigator = createStackNavigator({
   Home: {
@@ -29,6 +30,9 @@ const Navigator = createStackNavigator({
   },
   Settings: {
     screen: Settings
+  },
+  RemoveMe: {
+    screen: RemoveMe
   }
 });
 

@@ -148,7 +148,7 @@ class ListItem extends Component {
             <TouchableHighlight
               onPress={() => {
                 this.props.selectedGuitar(this.props.item.key);
-                this.props.navigation.navigate("Edit");
+                this.props.navigation.navigate("Edit", { photo: null });
               }}
               style={styles.editBtnWrapper}
             >

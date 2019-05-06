@@ -87,7 +87,6 @@ class Home extends Component {
       <View style={styles.parent}>
         <FlatList
           data={this.props.guitars}
-          // renderItem={({ item }) => <Text>{item.name}</Text>}
           renderItem={({ item }) => (
             <ListItem item={item} navigation={this.props.navigation} />
           )}
