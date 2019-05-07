@@ -25,10 +25,19 @@ import constants from "../constants";
 import { HeaderBackButton } from "react-navigation";
 import Dialog from "react-native-dialog";
 import Toast, { DURATION } from "react-native-easy-toast";
+import ImagePicker from "react-native-image-picker";
 
 function getGuitar(props) {
   return props.guitars.find(x => x.key === props.selectedForEditing);
 }
+
+const options = {
+  customButtons: [{ name: "delete", title: "Remove photo..." }],
+  storageOptions: {
+    skipBackup: true,
+    path: "images"
+  }
+};
 
 class Edit extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -102,12 +111,6 @@ class Edit extends Component {
 
   instrumentImage = () => {
     let { type, photo } = this.state;
-    const newPhoto = this.props.navigation.state.params.photo;
-    //Checking if new photo has been taken but not yet saved to redux store
-    if (newPhoto !== null && photo !== newPhoto) {
-      this.setState({ photo: newPhoto, photoUpdated: true });
-      return { uri: newPhoto };
-    }
     //No photo exists. Use a  default image
     if (photo === null) {
       switch (type) {
@@ -190,11 +193,16 @@ class Edit extends Component {
         <TouchableHighlight
           style={styles.profileImg}
           onPress={() => {
-            if (this.state.photo === null) {
-              this.props.navigation.navigate("RemoveMe");
-            } else {
-              this.setState({ photoPopup: true });
-            }
+            const optionToRemove = this.state.photo === null ? null : options;
+            ImagePicker.showImagePicker(optionToRemove, response => {
+              if (response.customButton) {
+                this.setState({ photo: null });
+              } else {
+                this.setState({
+                  photo: response.uri
+                });
+              }
+            });
           }}
         >
           <Image
@@ -296,7 +304,7 @@ class Edit extends Component {
             />
           </Dialog.Container>
         </View>
-        <View>
+        {/* <View>
           <Dialog.Container visible={this.state.photoPopup}>
             <Dialog.Title>Edit Photo</Dialog.Title>
             <Dialog.Description>
@@ -322,7 +330,7 @@ class Edit extends Component {
               }}
             />
           </Dialog.Container>
-        </View>
+        </View> */}
         <Toast ref="toast" />
       </View>
     );
