@@ -64,6 +64,17 @@ class ListItem extends Component {
     return Math.floor(diffStamp);
   };
 
+  getDisplayAge = () => {
+    const age = this.getDaysElapsed();
+    if (age === 0) {
+      return "Restrung today";
+    } else if (age === 1) {
+      return `${age} day ago`;
+    } else {
+      return `${age} days ago`;
+    }
+  };
+
   getCondition = () => {
     const { item } = this.props;
     //setting string quality to good as default
@@ -175,7 +186,8 @@ class ListItem extends Component {
           <View style={styles.detailsRowTwo}>
             <View style={styles.ageTextWrapper}>
               <Text style={styles.ageText}>
-                {this.getDaysElapsed()} days ago
+                {/* {this.getDaysElapsed()} days ago */}
+                {this.getDisplayAge()}
               </Text>
             </View>
             <TouchableHighlight
