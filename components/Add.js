@@ -512,19 +512,22 @@ class Add extends Component {
             onValueChange={() => this.onSwitchChanged()}
           />
         </View>
-        <TouchableHighlight
-          style={styles.submit}
-          onPress={() => {
-            this.handleSubmit();
-          }}
-        >
-          <LinearGradient
-            colors={[colors.light, colors.primary, colors.dark]}
-            style={styles.gradient}
+        <View style={styles.submitWrapper}>
+          <TouchableHighlight
+            style={styles.submit}
+            onPress={() => {
+              this.handleSubmit();
+            }}
+            underlayColor={colors.light}
           >
-            <Text style={styles.btnText}>Submit</Text>
-          </LinearGradient>
-        </TouchableHighlight>
+            <LinearGradient
+              colors={[colors.light, colors.primary, colors.dark]}
+              style={styles.gradient}
+            >
+              <Text style={styles.btnText}>Submit</Text>
+            </LinearGradient>
+          </TouchableHighlight>
+        </View>
         <View>
           <Dialog.Container visible={this.state.warningPopup}>
             <Dialog.Title>Warning</Dialog.Title>

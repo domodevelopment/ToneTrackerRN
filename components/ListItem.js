@@ -185,10 +185,7 @@ class ListItem extends Component {
           </View>
           <View style={styles.detailsRowTwo}>
             <View style={styles.ageTextWrapper}>
-              <Text style={styles.ageText}>
-                {/* {this.getDaysElapsed()} days ago */}
-                {this.getDisplayAge()}
-              </Text>
+              <Text style={styles.ageText}>{this.getDisplayAge()}</Text>
             </View>
             <TouchableHighlight
               onPress={() => {

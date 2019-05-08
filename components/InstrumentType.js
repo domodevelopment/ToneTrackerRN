@@ -8,6 +8,7 @@ import acousticFadedImg from "../images/acoustic_faded.png";
 import acousticSelectedImg from "../images/acoustic_selected.png";
 import styles from "../styles/typeStyles";
 import constants from "../constants";
+import colors from "../colors";
 
 class InstrumentType extends Component {
   render() {
@@ -31,18 +32,21 @@ class InstrumentType extends Component {
         <TouchableHighlight
           style={styles.imgWrapper}
           onPress={() => this.props.handleTypeChange(constants.electric)}
+          underlayColor={colors.light}
         >
           <Image source={electricImg} style={styles.img} resizeMode="contain" />
         </TouchableHighlight>
         <TouchableHighlight
           style={styles.imgWrapper}
           onPress={() => this.props.handleTypeChange(constants.bass)}
+          underlayColor={colors.light}
         >
           <Image source={bassImg} style={styles.img} resizeMode="contain" />
         </TouchableHighlight>
         <TouchableHighlight
           style={styles.imgWrapper}
           onPress={() => this.props.handleTypeChange(constants.acoustic)}
+          underlayColor={colors.light}
         >
           <Image source={acousticImg} style={styles.img} resizeMode="contain" />
         </TouchableHighlight>

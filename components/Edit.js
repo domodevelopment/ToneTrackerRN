@@ -665,44 +665,47 @@ class Edit extends Component {
             onValueChange={() => this.onSwitchChanged()}
           />
         </View>
-        <TouchableHighlight
-          style={styles.submit}
-          onPress={() => {
-            const regex = "[a-z|0-9]";
-            if (this.state.editedGuitar.name.match(regex)) {
-              if (
-                this.state.originalGuitar.name ===
-                  this.state.editedGuitar.name &&
-                this.state.originalGuitar.type ===
-                  this.state.editedGuitar.type &&
-                this.state.originalGuitar.use === this.state.editedGuitar.use &&
-                this.state.originalGuitar.timestamp ===
-                  this.state.editedGuitar.timestamp &&
-                this.state.originalGuitar.coated ===
-                  this.state.editedGuitar.coated &&
-                this.state.originalGuitar.photo ===
-                  this.state.editedGuitar.photo
-              ) {
-                this.props.navigation.navigate("Home");
-                this.refs.toast.show("No changes made");
+        <View style={styles.submitWrapper}>
+          <TouchableHighlight
+            style={styles.submit}
+            onPress={() => {
+              const regex = "[a-z|0-9]";
+              if (this.state.editedGuitar.name.match(regex)) {
+                if (
+                  this.state.originalGuitar.name ===
+                    this.state.editedGuitar.name &&
+                  this.state.originalGuitar.type ===
+                    this.state.editedGuitar.type &&
+                  this.state.originalGuitar.use ===
+                    this.state.editedGuitar.use &&
+                  this.state.originalGuitar.timestamp ===
+                    this.state.editedGuitar.timestamp &&
+                  this.state.originalGuitar.coated ===
+                    this.state.editedGuitar.coated &&
+                  this.state.originalGuitar.photo ===
+                    this.state.editedGuitar.photo
+                ) {
+                  this.props.navigation.navigate("Home");
+                  this.refs.toast.show("No changes made");
+                } else {
+                  this.props.editGuitar(this.state.editedGuitar);
+                  this.props.navigation.navigate("Home");
+                  this.refs.toast.show("Changes saved");
+                }
               } else {
-                this.props.editGuitar(this.state.editedGuitar);
-                this.props.navigation.navigate("Home");
-                this.refs.toast.show("Changes saved");
+                this.setState({ ...this.state, nameValidated: false });
+                this.refs.toast.show("Name cannot be empty");
               }
-            } else {
-              this.setState({ ...this.state, nameValidated: false });
-              this.refs.toast.show("Name cannot be empty");
-            }
-          }}
-        >
-          <LinearGradient
-            colors={[colors.light, colors.primary, colors.dark]}
-            style={styles.gradient}
+            }}
           >
-            <Text style={styles.btnText}>Update</Text>
-          </LinearGradient>
-        </TouchableHighlight>
+            <LinearGradient
+              colors={[colors.light, colors.primary, colors.dark]}
+              style={styles.gradient}
+            >
+              <Text style={styles.btnText}>Update</Text>
+            </LinearGradient>
+          </TouchableHighlight>
+        </View>
         <View>
           <Dialog.Container visible={this.state.warningPopup}>
             <Dialog.Title>Warning</Dialog.Title>

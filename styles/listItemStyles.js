@@ -37,6 +37,9 @@ export default {
     flexDirection: "row",
     justifyContent: "space-between"
   },
+  editBtnWrapper: {
+    borderRadius: 6
+  },
   editButton: {
     padding: 5,
     borderRadius: 6,

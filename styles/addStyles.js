@@ -60,14 +60,21 @@ export default {
     marginLeft: 10,
     marginRight: 10
   },
-  submit: {
+  submitWrapper: {
     height: "15%",
     justifyContent: "center",
     alignItems: "center"
   },
-  gradient: {
+  submit: {
     height: "75%",
     width: "90%",
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 15
+  },
+  gradient: {
+    height: "100%",
+    width: "100%",
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 15

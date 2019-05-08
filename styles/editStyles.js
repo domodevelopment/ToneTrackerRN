@@ -34,7 +34,8 @@ export default {
     top: "5%",
     right: 5,
     height: Dimensions.get("window").width * 0.2,
-    width: Dimensions.get("window").width * 0.2
+    width: Dimensions.get("window").width * 0.2,
+    borderRadius: 50
   },
   questionRow: {
     height: "7.5%",
@@ -65,14 +66,21 @@ export default {
     marginLeft: 10,
     marginRight: 10
   },
-  submit: {
+  submitWrapper: {
     height: "15%",
     justifyContent: "center",
     alignItems: "center"
   },
-  gradient: {
+  submit: {
     height: "75%",
     width: "90%",
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 15
+  },
+  gradient: {
+    height: "100%",
+    width: "100%",
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 15

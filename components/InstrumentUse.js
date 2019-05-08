@@ -8,6 +8,7 @@ import weeklyFadedImg from "../images/calendar_weekly_faded.png";
 import weeklySelectedImg from "../images/calendar_weekly_selected.png";
 import styles from "../styles/typeStyles";
 import constants from "../constants";
+import colors from "../colors";
 
 class InstrumentUse extends Component {
   render() {
@@ -29,18 +30,21 @@ class InstrumentUse extends Component {
         <TouchableHighlight
           style={styles.imgWrapper}
           onPress={() => this.props.handleUseChange(constants.daily)}
+          underlayColor={colors.light}
         >
           <Image source={dailyImg} style={styles.img} resizeMode="contain" />
         </TouchableHighlight>
         <TouchableHighlight
           style={styles.imgWrapper}
           onPress={() => this.props.handleUseChange(constants.somedays)}
+          underlayColor={colors.light}
         >
           <Image source={somedaysImg} style={styles.img} resizeMode="contain" />
         </TouchableHighlight>
         <TouchableHighlight
           style={styles.imgWrapper}
           onPress={() => this.props.handleUseChange(constants.weekly)}
+          underlayColor={colors.light}
         >
           <Image source={weeklyImg} style={styles.img} resizeMode="contain" />
         </TouchableHighlight>
