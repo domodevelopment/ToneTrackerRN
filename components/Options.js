@@ -9,6 +9,7 @@ import {
   MenuTrigger
 } from "react-native-popup-menu";
 import Share, { ShareSheet, Button } from "react-native-share";
+import colors from "../colors";
 
 const EMAIL = "violenthoboenterprises@gmail.com";
 
@@ -30,7 +31,7 @@ class Options extends Component {
     return (
       <Menu>
         <MenuTrigger>
-          <Icon name="options-vertical" size={20} />
+          <Icon name="options-vertical" color={colors.white} size={20} />
         </MenuTrigger>
         <MenuOptions>
           <MenuOption onSelect={() => Share.open(shareOptions)} text="Share" />

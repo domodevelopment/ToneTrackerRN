@@ -18,8 +18,8 @@ export default {
   },
   coatedImg: {
     position: "absolute",
-    bottom: 3,
-    left: "10%",
+    bottom: 8,
+    left: 65,
     height: "30%"
   },
   detailsWrapper: {

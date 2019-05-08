@@ -419,7 +419,12 @@ class Edit extends Component {
         backgroundColor: colors.primary
       },
       headerRight: <Delete navigation={navigation} />,
-      headerLeft: <HeaderBackButton onPress={() => params.handleBack()} />
+      headerLeft: (
+        <HeaderBackButton
+          tintColor={colors.white}
+          onPress={() => params.handleBack()}
+        />
+      )
     };
   };
 

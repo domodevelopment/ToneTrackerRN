@@ -10,7 +10,8 @@ class Settings extends Component {
     return {
       headerStyle: {
         backgroundColor: colors.primary
-      }
+      },
+      headerTintColor: colors.white
     };
   };
   onSwitchChanged = () => {

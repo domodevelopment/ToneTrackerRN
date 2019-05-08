@@ -323,7 +323,12 @@ class Add extends Component {
       headerStyle: {
         backgroundColor: colors.primary
       },
-      headerLeft: <HeaderBackButton onPress={() => params.handleBack()} />
+      headerLeft: (
+        <HeaderBackButton
+          tintColor={colors.white}
+          onPress={() => params.handleBack()}
+        />
+      )
     };
   };
 

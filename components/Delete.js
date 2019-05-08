@@ -9,6 +9,7 @@ import {
 } from "react-native-popup-menu";
 import { connect } from "react-redux";
 import { deleteGuitar } from "../actions/actions";
+import colors from "../colors";
 
 class Delete extends Component {
   //   removeGuitar = () => {
@@ -18,7 +19,7 @@ class Delete extends Component {
     return (
       <Menu>
         <MenuTrigger>
-          <Icon name="options-vertical" size={20} />
+          <Icon color={colors.white} name="options-vertical" size={20} />
         </MenuTrigger>
         <MenuOptions>
           <MenuOption
