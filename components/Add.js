@@ -36,13 +36,15 @@ class Add extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      key: uuidv1(),
-      name: "",
-      type: null,
-      use: null,
-      timestamp: null,
-      coated: false,
-      photo: null,
+      newGuitar: {
+        key: uuidv1(),
+        name: "",
+        type: null,
+        use: null,
+        timestamp: null,
+        coated: false,
+        photo: null
+      },
       nameValidated: true,
       typeValidated: true,
       useValidated: true,
@@ -52,20 +54,20 @@ class Add extends Component {
   }
 
   handleNameChange = event => {
-    this.setState({ name: event });
+    this.setState({ newGuitar: { ...this.state.newGuitar, name: event } });
   };
 
   handleTypeChange = newType => {
-    this.setState({ type: newType });
+    this.setState({ newGuitar: { ...this.state.newGuitar, type: newType } });
   };
 
   handleUseChange = newUse => {
-    this.setState({ use: newUse });
+    this.setState({ newGuitar: { ...this.state.newGuitar, use: newUse } });
   };
 
   handleSubmit = () => {
     const regex = "[a-z|0-9]";
-    const { name, type, use, timestamp } = this.state;
+    const { name, type, use, timestamp } = this.state.newGuitar;
     //check that no details are missing
     if (
       name.match(regex) &&
@@ -73,7 +75,7 @@ class Add extends Component {
       use !== null &&
       timestamp !== null
     ) {
-      this.props.addGuitar(this.state);
+      this.props.addGuitar(this.state.newGuitar);
       this.props.navigation.navigate("Home");
     } else {
       this.refs.toast.show("Fill in all details");
@@ -101,13 +103,18 @@ class Add extends Component {
   };
 
   onSwitchChanged = () => {
-    this.setState({ coated: !this.state.coated });
+    this.setState({
+      newGuitar: {
+        ...this.state.newGuitar,
+        coated: !this.state.newGuitar.coated
+      }
+    });
   };
 
   getFormattedDate = () => {
-    const { timestamp } = this.state;
+    const { timestamp } = this.state.newGuitar;
     if (timestamp !== null) {
-      const date = new Date(this.state.timestamp);
+      const date = new Date(timestamp);
       const day = date.getDate();
       let month = date.getMonth();
       let year = date.getYear();
@@ -130,11 +137,11 @@ class Add extends Component {
     this.props.navigation.setParams({
       handleBack: () => {
         if (
-          this.state.name !== null ||
-          this.state.type !== null ||
-          this.state.use !== null ||
-          this.state.timestamp !== null ||
-          this.state.coated
+          this.state.newGuitar.name !== null ||
+          this.state.newGuitar.type !== null ||
+          this.state.newGuitar.use !== null ||
+          this.state.newGuitar.timestamp !== null ||
+          this.state.newGuitar.coated
         ) {
           this.setState({ warningPopup: true });
         } else {
@@ -159,7 +166,7 @@ class Add extends Component {
           <TextInput
             placeholder="Name (eg. Stratocaster)"
             style={nameStyle}
-            value={this.state.name}
+            value={this.state.newGuitar.name}
             onChangeText={this.handleNameChange}
             maxLength={15}
             autoFocus={true}
@@ -169,7 +176,7 @@ class Add extends Component {
           <Text style={styles.text}>What type of guitar is this?</Text>
         </View>
         <InstrumentType
-          type={this.state.type}
+          type={this.state.newGuitar.type}
           handleTypeChange={this.handleTypeChange}
           validated={this.state.typeValidated}
         />
@@ -177,7 +184,7 @@ class Add extends Component {
           <Text style={styles.text}>How often do you play this guitar?</Text>
         </View>
         <InstrumentUse
-          use={this.state.use}
+          use={this.state.newGuitar.use}
           handleUseChange={this.handleUseChange}
           validated={this.state.useValidated}
         />
@@ -197,14 +204,16 @@ class Add extends Component {
               date = date.split("-");
               let timestamp = date[1] + "/" + date[0] + "/" + date[2];
               timestamp = new Date(timestamp).getTime();
-              this.setState({ timestamp });
+              this.setState({
+                newGuitar: { ...this.state.newGuitar, timestamp }
+              });
             }}
           />
         </View>
         <View style={styles.coated}>
           <Text style={styles.text}>This guitar has coated strings</Text>
           <Switch
-            value={this.state.coated}
+            value={this.state.newGuitar.coated}
             onValueChange={() => this.onSwitchChanged()}
           />
         </View>
@@ -215,10 +224,10 @@ class Add extends Component {
           }}
         >
           <LinearGradient
-            colors={["#4c669f", "#3b5998", "#192f6a"]}
+            colors={[colors.light, colors.primary, colors.dark]}
             style={styles.gradient}
           >
-            <Text style={styles.text}>Submit</Text>
+            <Text style={styles.btnText}>Submit</Text>
           </LinearGradient>
         </TouchableHighlight>
         <View>

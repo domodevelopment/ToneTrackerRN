@@ -165,10 +165,10 @@ class ListItem extends Component {
               style={styles.editBtnWrapper}
             >
               <LinearGradient
-                colors={[colors.primary, colors.primary, colors.dark]}
+                colors={[colors.white, colors.lessWhite, colors.evenLessWhite]}
                 style={styles.editButton}
               >
-                <Icon name="edit" color={"#fff"} size={20} />
+                <Icon name="edit" color={colors.dark} size={20} />
               </LinearGradient>
             </TouchableHighlight>
           </View>
@@ -184,7 +184,7 @@ class ListItem extends Component {
               }}
             >
               <LinearGradient
-                colors={["#4c669f", "#3b5998", "#192f6a"]}
+                colors={[colors.light, colors.primary, colors.dark]}
                 style={styles.restringButton}
               >
                 <Text style={styles.btnText}>Restring</Text>

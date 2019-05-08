@@ -53,43 +53,52 @@ class Edit extends Component {
 
   constructor(props) {
     super(props);
-    const guitarToEdit = getGuitar(this.props);
+    const originalGuitar = getGuitar(this.props);
     this.state = {
-      guitarToEdit,
-      key: guitarToEdit.key,
-      name: guitarToEdit.name,
-      type: guitarToEdit.type,
-      use: guitarToEdit.use,
-      timestamp: guitarToEdit.timestamp,
-      photo: guitarToEdit.photo,
-      coated: guitarToEdit.coated,
+      originalGuitar,
+      editedGuitar: {
+        key: originalGuitar.key,
+        name: originalGuitar.name,
+        type: originalGuitar.type,
+        use: originalGuitar.use,
+        timestamp: originalGuitar.timestamp,
+        coated: originalGuitar.coated,
+        photo: originalGuitar.photo
+      },
       editingName: false,
       warningPopup: false,
-      photoPopup: false,
       nameValidated: true
     };
   }
 
   handleNameChange = event => {
-    this.setState({ name: event });
+    this.setState({
+      editedGuitar: { ...this.state.editedGuitar, name: event }
+    });
   };
 
   handleTypeChange = newType => {
-    this.setState({ type: newType });
+    this.setState({
+      editedGuitar: { ...this.state.editedGuitar, type: newType }
+    });
   };
 
   handleUseChange = newUse => {
-    this.setState({ use: newUse });
+    this.setState({
+      editedGuitar: { ...this.state.editedGuitar, use: newUse }
+    });
   };
 
   onSwitchChanged = () => {
-    this.setState({ coated: !this.state.coated });
+    this.setState({
+      editedGuitar: { ...this.state.editedGuitar, coated: !this.state.coated }
+    });
   };
 
   getFormattedDate = () => {
-    const { timestamp } = this.state;
+    const { timestamp } = this.state.editedGuitar;
     if (timestamp !== null) {
-      const date = new Date(this.state.timestamp);
+      const date = new Date(timestamp);
       const day = date.getDate();
       let month = date.getMonth();
       let year = date.getYear();
@@ -110,7 +119,7 @@ class Edit extends Component {
   };
 
   instrumentImage = () => {
-    let { type, photo } = this.state;
+    let { type, photo } = this.state.editedGuitar;
     //No photo exists. Use a  default image
     if (photo === null) {
       switch (type) {
@@ -130,17 +139,17 @@ class Edit extends Component {
     return editing ? (
       <TextInput
         style={nameStyle}
-        value={this.state.name}
+        value={this.state.editedGuitar.name}
         onChangeText={this.handleNameChange}
         maxLength={15}
         autoFocus={true}
         onBlur={() => {
           const regex = "[a-z|0-9]";
-          if (this.state.name.match(regex)) {
+          if (this.state.editedGuitar.name.match(regex)) {
             this.setState({ editingName: false });
           } else {
             this.setState({ nameValidated: false });
-            this.refs.toast.show("Name cannot be empty.");
+            this.refs.toast.show("Name cannot be empty");
           }
         }}
       />
@@ -151,7 +160,7 @@ class Edit extends Component {
           this.setState({ editingName: true });
         }}
       >
-        {this.state.name}
+        {this.state.editedGuitar.name}
       </Text>
     );
   };
@@ -164,12 +173,13 @@ class Edit extends Component {
     this.props.navigation.setParams({
       handleBack: () => {
         if (
-          this.state.name !== this.state.guitarToEdit.name ||
-          this.state.type !== this.state.guitarToEdit.type ||
-          this.state.use !== this.state.guitarToEdit.use ||
-          this.state.timestamp !== this.state.guitarToEdit.timestamp ||
-          this.state.coated !== this.state.guitarToEdit.coated ||
-          this.state.photo !== this.state.guitarToEdit.photo
+          this.state.editedGuitar.name !== this.state.originalGuitar.name ||
+          this.state.editedGuitar.type !== this.state.originalGuitar.type ||
+          this.state.editedGuitar.use !== this.state.originalGuitar.use ||
+          this.state.editedGuitar.timestamp !==
+            this.state.originalGuitar.timestamp ||
+          this.state.editedGuitar.coated !== this.state.originalGuitar.coated ||
+          this.state.editedGuitar.photo !== this.state.originalGuitar.photo //<-TODO reduce all this. Just compare old guitar to new guitar
         ) {
           this.setState({ warningPopup: true });
         } else {
@@ -180,7 +190,6 @@ class Edit extends Component {
   }
 
   render() {
-    // this.checkForPhoto();
     nameStyle = this.state.nameValidated
       ? styles.nameInput
       : styles.nameUnvalidatedInput;
@@ -193,13 +202,19 @@ class Edit extends Component {
         <TouchableHighlight
           style={styles.profileImg}
           onPress={() => {
-            const optionToRemove = this.state.photo === null ? null : options;
+            const optionToRemove =
+              this.state.editedGuitar.photo === null ? null : options;
             ImagePicker.showImagePicker(optionToRemove, response => {
               if (response.customButton) {
-                this.setState({ photo: null });
-              } else {
                 this.setState({
-                  photo: response.uri
+                  editedGuitar: { ...this.state.editedGuitar, photo: null }
+                });
+              } else if (!response.didCancel) {
+                this.setState({
+                  editedGuitar: {
+                    ...this.state.editedGuitar,
+                    photo: response.uri
+                  }
                 });
               }
             });
@@ -211,7 +226,10 @@ class Edit extends Component {
               height: "100%",
               borderRadius: 50,
               transform: [
-                { rotate: this.state.photo === null ? "0deg" : "90deg" }
+                {
+                  rotate:
+                    this.state.editedGuitar.photo === null ? "0deg" : "90deg"
+                }
               ]
             }}
             source={this.instrumentImage()}
@@ -222,7 +240,7 @@ class Edit extends Component {
           <Text style={styles.text}>What type of guitar is this?</Text>
         </View>
         <InstrumentType
-          type={this.state.type}
+          type={this.state.editedGuitar.type}
           handleTypeChange={this.handleTypeChange}
           validated={true}
         />
@@ -230,7 +248,7 @@ class Edit extends Component {
           <Text style={styles.text}>How often do you play this guitar?</Text>
         </View>
         <InstrumentUse
-          use={this.state.use}
+          use={this.state.editedGuitar.use}
           handleUseChange={this.handleUseChange}
           validated={true}
         />
@@ -252,14 +270,16 @@ class Edit extends Component {
               date = date.split("-");
               let timestamp = date[1] + "/" + date[0] + "/" + date[2];
               timestamp = new Date(timestamp).getTime();
-              this.setState({ timestamp });
+              this.setState({
+                editedGuitar: { ...this.state.editedGuitar, timestamp }
+              });
             }}
           />
         </View>
         <View style={styles.coated}>
           <Text style={styles.text}>This guitar has coated strings</Text>
           <Switch
-            value={this.state.coated}
+            value={this.state.editedGuitar.coated}
             onValueChange={() => this.onSwitchChanged()}
           />
         </View>
@@ -267,20 +287,41 @@ class Edit extends Component {
           style={styles.submit}
           onPress={() => {
             const regex = "[a-z|0-9]";
-            if (this.state.name.match(regex)) {
-              this.props.editGuitar(this.state);
-              this.props.navigation.navigate("Home");
+            if (this.state.editedGuitar.name.match(regex)) {
+              if (
+                this.state.originalGuitar.name ===
+                  this.state.editedGuitar.name &&
+                this.state.originalGuitar.type ===
+                  this.state.editedGuitar.type &&
+                this.state.originalGuitar.use === this.state.editedGuitar.use &&
+                this.state.originalGuitar.timestamp ===
+                  this.state.editedGuitar.timestamp &&
+                this.state.originalGuitar.coated ===
+                  this.state.editedGuitar.coated &&
+                this.state.originalGuitar.photo ===
+                  this.state.editedGuitar.photo
+              ) {
+                this.props.navigation.navigate("Home");
+                this.refs.toast.show("No changes made");
+              } else {
+                this.props.editGuitar(this.state.editedGuitar);
+                this.props.navigation.navigate("Home");
+                this.refs.toast.show("Changes saved");
+              }
+              // this.props.editGuitar(this.state);//<-TODO filter out the unneeded stuff
+              // this.props.navigation.navigate("Home");
+              // this.refs.toast.show("Changes saved");
             } else {
               this.setState({ nameValidated: false });
-              this.refs.toast.show("Name cannot be empty.");
+              this.refs.toast.show("Name cannot be empty");
             }
           }}
         >
           <LinearGradient
-            colors={["#4c669f", "#3b5998", "#192f6a"]}
+            colors={[colors.light, colors.primary, colors.dark]}
             style={styles.gradient}
           >
-            <Text style={styles.text}>Update</Text>
+            <Text style={styles.btnText}>Update</Text>
           </LinearGradient>
         </TouchableHighlight>
         <View>

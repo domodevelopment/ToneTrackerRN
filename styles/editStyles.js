@@ -4,15 +4,15 @@ import { Dimensions } from "react-native";
 export default {
   parent: {
     height: "100%",
-    backgroundColor: colors.light
+    backgroundColor: colors.lessWhite
   },
   nameInputWrapper: {
     height: "15%",
     justifyContent: "center",
-    backgroundColor: colors.dark
+    backgroundColor: colors.light
   },
   nameInput: {
-    backgroundColor: "#ccc",
+    backgroundColor: colors.evenLessWhite,
     marginLeft: 20,
     fontSize: 20,
     width: "70%"
@@ -57,17 +57,6 @@ export default {
     height: "80%",
     justifyContent: "center"
   },
-  // unvalidatedDatePickerBtn: {
-  //   flex: 1,
-  //   marginLeft: 10,
-  //   marginRight: 10,
-  //   height: "80%",
-  //   justifyContent: "center",
-  //   alignItems: "center",
-  //   borderColor: "red",
-  //   borderWidth: 3,
-  //   borderStyle: "solid"
-  // },
   coated: {
     height: "10%",
     flexDirection: "row",
@@ -89,7 +78,11 @@ export default {
     borderRadius: 15
   },
   text: {
-    color: "white",
+    color: colors.dark,
     fontSize: 17
+  },
+  btnText: {
+    color: colors.white,
+    fontSize: 21
   }
 };

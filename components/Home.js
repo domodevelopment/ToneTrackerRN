@@ -17,15 +17,21 @@ import { showNotifications, initializeGuitars } from "../actions/actions";
 import colors from "../colors";
 import Icon from "react-native-vector-icons/MaterialIcons";
 
+/**
+ * Having huge issues when trying to implement notifications. Try again when developing on OSX
+ * https://www.npmjs.com/package/react-native-push-notification
+ */
+
 class Home extends Component {
   static navigationOptions = ({ navigation }) => {
     return {
       //Heading/title of the header
-      // title: navigation.getParam("Title", "Popup Menu Example"),
+      title: navigation.getParam("Title", "Tone Tracker"),
       //Heading style
       headerStyle: {
         // backgroundColor: navigation.getParam("BackgroundColor", "red")
-        backgroundColor: colors.primary
+        backgroundColor: colors.primary,
+        textColor: colors.white
       },
       // //Heading text color
       // headerTintColor: navigation.getParam("HeaderTintColor", "#000"),

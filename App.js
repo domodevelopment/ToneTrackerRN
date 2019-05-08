@@ -5,8 +5,6 @@ import reducer from "./reducers/reducer";
 import NavContainer from "./components/NavContainer";
 import { Platform, StatusBar, View, Text } from "react-native";
 import { MenuProvider } from "react-native-popup-menu";
-// import OptionsMenu from "react-native-options-menu";
-// import overflow from "./images/overflow.png";
 import {
   Menu,
   MenuOptions,

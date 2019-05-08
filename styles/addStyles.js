@@ -3,7 +3,7 @@ import colors from "../colors";
 export default {
   parent: {
     height: "100%",
-    backgroundColor: colors.light
+    backgroundColor: colors.lessWhite
   },
   nameInputWrapper: {
     height: "15%",
@@ -73,7 +73,11 @@ export default {
     borderRadius: 15
   },
   text: {
-    color: "white",
+    color: colors.dark,
     fontSize: 17
+  },
+  btnText: {
+    color: colors.white,
+    fontSize: 21
   }
 };

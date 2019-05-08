@@ -3,7 +3,7 @@ import colors from "../colors";
 export default {
   parent: {
     height: "100%",
-    backgroundColor: colors.light
+    backgroundColor: colors.lessWhite
   },
   fab: {
     position: "absolute",

@@ -3,20 +3,16 @@ import colors from "../colors";
 export default {
   parent: {
     borderBottomStyle: "solid",
-    borderBottomColor: "black",
+    borderBottomColor: colors.light,
     borderBottomWidth: 1,
     flexDirection: "row",
-    backgroundColor: colors.light,
+    backgroundColor: colors.white,
     padding: 10
   },
   imageWrapper: {
     height: 100,
     width: 100
   },
-  // image: {
-  //   height: "100%",
-  //   width: "100%"
-  // },
   progressCircle: {
     position: "absolute"
   },
@@ -41,10 +37,12 @@ export default {
     flexDirection: "row",
     justifyContent: "space-between"
   },
-  editBtnWrapper: {},
   editButton: {
     padding: 5,
-    borderRadius: 6
+    borderRadius: 6,
+    borderWidth: 1,
+    borderColor: colors.light,
+    borderStyle: "solid"
   },
   restringButton: {
     padding: 5,

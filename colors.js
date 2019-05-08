@@ -1,5 +1,8 @@
 export default {
-  primary: "#444",
-  light: "#666",
-  dark: "#333"
+  primary: "#424242",
+  light: "#6d6d6d",
+  dark: "#1b1b1b",
+  white: "#fff",
+  lessWhite: "#eee",
+  evenLessWhite: "#ccc"
 };
