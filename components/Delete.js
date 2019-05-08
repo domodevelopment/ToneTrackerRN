@@ -12,9 +12,6 @@ import { deleteGuitar } from "../actions/actions";
 import colors from "../colors";
 
 class Delete extends Component {
-  //   removeGuitar = () => {
-  //     Alert.alert("Delete this guitar");
-  //   };
   render() {
     return (
       <Menu>
@@ -24,7 +21,6 @@ class Delete extends Component {
         <MenuOptions>
           <MenuOption
             onSelect={() => {
-              //   this.removeGuitar();
               this.props.deleteGuitar(this.props.selectedForEditing);
               this.props.navigation.navigate(`Home`);
             }}
