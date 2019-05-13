@@ -1,4 +1,7 @@
 import colors from "../colors";
+import { Dimensions } from "react-native";
+
+const width = Dimensions.get("window").width
 
 export default {
   parent: {
@@ -7,30 +10,28 @@ export default {
     borderBottomWidth: 1,
     flexDirection: "row",
     backgroundColor: colors.white,
-    padding: 10
   },
   imageWrapper: {
-    height: 100,
-    width: 100
+    height: width * 0.27,
+    width: width * 0.27
   },
   progressCircle: {
     position: "absolute"
   },
   coatedImg: {
     position: "absolute",
-    bottom: 8,
-    left: 65,
+    bottom: '2%',
+    left: '15%',
     height: "30%"
   },
   detailsWrapper: {
     flex: 1,
     justifyContent: "space-between",
-    paddingLeft: 10
+    padding: 10
   },
   detailsRowOne: {
     flexDirection: "row",
     justifyContent: "space-between",
-    alignItems: "center",
     flex: 1
   },
   detailsRowTwo: {
@@ -57,7 +58,9 @@ export default {
   nameText: {
     fontSize: 22,
     color: "#000",
-    flex: 1
+    flex: 1,
+    paddingTop: 5,
+    paddingLeft: 5
   },
   btnText: {
     fontSize: 17,

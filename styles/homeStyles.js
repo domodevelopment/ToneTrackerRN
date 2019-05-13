@@ -1,4 +1,7 @@
 import colors from "../colors";
+import { Dimensions } from "react-native";
+
+const width = Dimensions.get("window").width
 
 export default {
   parent: {
@@ -7,13 +10,13 @@ export default {
   },
   fab: {
     position: "absolute",
-    width: 75,
-    height: 75,
+    width: width * 0.2,
+    height: width * 0.2,
     backgroundColor: colors.primary,
     justifyContent: "center",
     alignItems: "center",
-    bottom: 30,
-    right: 30,
+    bottom: "6%",
+    right: "7%",
     borderRadius: 50,
     elevation: 10
   }

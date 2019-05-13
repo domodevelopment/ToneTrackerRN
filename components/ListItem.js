@@ -21,6 +21,9 @@ import LinearGradient from "react-native-linear-gradient";
 import Icon from "react-native-vector-icons/AntDesign";
 import colors from "../colors";
 import Dialog from "react-native-dialog";
+import { Dimensions } from "react-native";
+
+const width = Dimensions.get("window").width
 
 class ListItem extends Component {
   constructor(props) {
@@ -155,7 +158,7 @@ class ListItem extends Component {
           />
           <AnimatedCircularProgress
             style={styles.progressCircle}
-            size={100} //TODO create a dynamic value instead of this hard coded one
+            size={width * 0.27}
             width={5}
             backgroundWidth={3}
             fill={this.getProgress()}
