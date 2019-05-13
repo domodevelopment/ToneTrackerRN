@@ -21,7 +21,7 @@ const MyStatusBar = ({ backgroundColor, ...props }) => (
       height: Platform.OS === "ios" ? 0 : StatusBar.currentHeight
     }}
   >
-    <StatusBar translucent backgroundColor={colors.dark} {...props} />
+    <StatusBar barStyle="light-content" translucent backgroundColor={colors.dark} {...props} />
   </View>
 );
 

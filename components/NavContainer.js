@@ -5,6 +5,8 @@ import Home from "./Home";
 import Add from "./Add";
 import Edit from "./Edit";
 import Settings from "./Settings";
+import PrivacyPolicy from "./PrivacyPolicy"
+import colors from "../colors";
 
 const Navigator = createStackNavigator({
   Home: {
@@ -18,6 +20,15 @@ const Navigator = createStackNavigator({
   },
   Settings: {
     screen: Settings
+  },
+  PrivacyPolicy: {
+    screen: PrivacyPolicy,
+    navigationOptions: {
+      headerStyle: {
+        backgroundColor: colors.primary
+      },
+      headerTintColor: colors.white
+    }
   }
 });
 

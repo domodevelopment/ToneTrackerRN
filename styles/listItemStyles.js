@@ -47,6 +47,9 @@ export default {
     borderColor: colors.light,
     borderStyle: "solid"
   },
+  restringBtnWrapper: {
+    borderRadius: 5
+  },
   restringButton: {
     padding: 5,
     borderRadius: 6

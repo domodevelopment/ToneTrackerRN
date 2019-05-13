@@ -160,7 +160,6 @@ class ListItem extends Component {
             backgroundWidth={3}
             fill={this.getProgress()}
             tintColor={this.getCondition()}
-            onAnimationComplete={() => console.log("onAnimationComplete")}
             backgroundColor="#3d5875"
           />
         </View>
@@ -191,6 +190,7 @@ class ListItem extends Component {
               onPress={() => {
                 this.setState({ restringPopup: true });
               }}
+              style={styles.restringBtnWrapper}
             >
               <LinearGradient
                 colors={[colors.light, colors.primary, colors.dark]}

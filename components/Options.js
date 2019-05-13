@@ -34,12 +34,24 @@ class Options extends Component {
           <Icon name="options-vertical" color={colors.white} size={20} />
         </MenuTrigger>
         <MenuOptions>
-          <MenuOption onSelect={() => Share.open(shareOptions)} text="Share" />
-          <MenuOption onSelect={() => this.handleEmail()} text="Contact" />
           <MenuOption
+            style={{padding: 12}}
+            onSelect={() => Share.open(shareOptions)}
+            text="Share" />
+          <MenuOption
+            style={{padding: 12}}
+            onSelect={() => this.handleEmail()}
+            text="Contact" />
+          <MenuOption
+            style={{padding: 12}}
             onSelect={() => this.props.navigation.navigate(`Settings`)}
             text="Settings"
           />
+          <MenuOption
+            style={{padding: 12}}
+            onSelect={() => this.props.navigation.navigate(`PrivacyPolicy`)}
+            text="Privacy Policy"
+           />
         </MenuOptions>
       </Menu>
     );
