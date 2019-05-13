@@ -7,76 +7,78 @@ export default {
     backgroundColor: colors.lessWhite
   },
   nameInputWrapper: {
-    height: "15%",
+    height: "12%",
     justifyContent: "center",
     backgroundColor: colors.light
   },
   nameInput: {
-    backgroundColor: colors.evenLessWhite,
-    marginLeft: 20,
-    fontSize: 20,
-    width: "70%"
+    backgroundColor: "#ccc",
+    height: "60%",
+    width: "70%",
+    marginLeft: '5%',
+    paddingLeft: "3%",
+    fontSize: 20
   },
   nameUnvalidatedInput: {
     backgroundColor: "red",
-    marginLeft: 20,
-    fontSize: 20,
-    width: "70%"
+    height: "60%",
+    width: "70%",
+    marginLeft: '5%',
+    paddingLeft: "3%",
+    fontSize: 20
   },
   nameText: {
     fontSize: 25,
     color: "white",
     width: "70%",
-    marginLeft: 20
+    marginLeft: "10%"
   },
   profileImg: {
     position: "absolute",
     top: "5%",
-    right: 5,
-    height: Dimensions.get("window").width * 0.2,
-    width: Dimensions.get("window").width * 0.2,
+    right: "3%",
+    height: Dimensions.get("window").width * 0.25,
+    width: Dimensions.get("window").width * 0.25,
     borderRadius: 50
   },
   questionRow: {
-    height: "7.5%",
-    justifyContent: "center",
-    marginLeft: 10,
-    marginRight: 10,
-    paddingTop: 5
+    height: "5%",
+    justifyContent: "flex-end",
+    width: '95%',
+    marginLeft: "3%"
   },
   lastChanged: {
-    height: "15%",
+    height: "10%",
+    width: '95%',
     flexDirection: "row",
     alignItems: "center",
-    marginLeft: 10,
-    marginRight: 10
+    marginLeft: "3%",
   },
   datePickerBtn: {
     flex: 1,
-    marginLeft: 10,
-    marginRight: 10,
+    marginLeft: '3%',
     height: "80%",
     justifyContent: "center"
   },
   coated: {
     height: "10%",
+    width: '95%',
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    marginLeft: 10,
-    marginRight: 10
+    marginLeft: '3%',
   },
   submitWrapper: {
-    height: "15%",
-    justifyContent: "center",
+    height: "18%",
     alignItems: "center"
   },
   submit: {
-    height: "75%",
+    height: "55%",
     width: "90%",
     justifyContent: "center",
     alignItems: "center",
-    borderRadius: 15
+    borderRadius: 15,
+    marginTop: "3%"
   },
   gradient: {
     height: "100%",

@@ -2,16 +2,20 @@ import { Dimensions } from "react-native";
 
 export default {
   selectableImgRow: {
-    height: "15%",
+    height: "20%",
+    width: '95%',
     flexDirection: "row",
-    justifyContent: "space-around",
-    paddingBottom: 5
+    justifyContent: "space-between",
+    paddingTop: '6%',
+    marginLeft: '2%'
   },
   unvalidatedSelectableImgRow: {
-    height: "15%",
+    height: "20%",
+    width: '95%',
     flexDirection: "row",
-    justifyContent: "space-around",
-    padding: 5,
+    justifyContent: "space-between",
+    paddingTop: '6%',
+    marginLeft: '2%',
     borderColor: "red",
     borderWidth: 3,
     borderStyle: "solid"

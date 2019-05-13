@@ -20,6 +20,7 @@ class Delete extends Component {
         </MenuTrigger>
         <MenuOptions>
           <MenuOption
+          style={{padding: 15}}
             onSelect={() => {
               this.props.deleteGuitar(this.props.selectedForEditing);
               this.props.navigation.navigate(`Home`);
