@@ -50,9 +50,9 @@ export default class NotifService {
 //     });
 //   }
 
-  scheduleNotif() {
+  scheduleNotif(details) {
     this.lastId++;
-    const guitar = "Strat"
+    const guitar = details.name
     PushNotification.localNotificationSchedule({
       date: new Date(Date.now() + (10 * 1000)), // in 30 secs
 

@@ -97,7 +97,7 @@ class Add extends Component {
   };
 
   handleSubmit = () => {
-    const regex = "[a-z|0-9]";
+    const regex = "[a-z|A-Z|0-9]";
     const { name, type, use, timestamp } = this.state.newGuitar;
     //check that no details are missing
     if (
@@ -108,6 +108,7 @@ class Add extends Component {
     ) {
       this.props.addGuitar(this.state.newGuitar);
       this.props.navigation.navigate("Home");
+      this.notif.scheduleNotif(this.state.newGuitar)
     } else {
       this.refs.toast.show("Fill in all details");
       if (!name.match(regex)) {
@@ -266,7 +267,6 @@ class Add extends Component {
             style={styles.submit}
             onPress={() => {
               this.handleSubmit();
-              this.notif.scheduleNotif()
             }}
             underlayColor={colors.light}
           >

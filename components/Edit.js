@@ -40,6 +40,8 @@ const options = {
   }
 };
 
+const regex = "[a-z|A-Z|0-9]";
+
 // iOS:
 // const locale = NativeModules.SettingsManager.settings.AppleLocale // "fr_FR"
 
@@ -169,7 +171,6 @@ class Edit extends Component {
         maxLength={15}
         autoFocus={true}
         onBlur={() => {
-          const regex = "[a-z|0-9]";
           if (this.state.editedGuitar.name.match(regex)) {
             this.setState({ ...this.state, editingName: false });
           } else {
@@ -322,7 +323,6 @@ class Edit extends Component {
           <TouchableHighlight
             style={styles.submit}
             onPress={() => {
-              const regex = "[a-z|0-9]";
               if (this.state.editedGuitar.name.match(regex)) {
                 if (
                   this.state.originalGuitar.name ===
