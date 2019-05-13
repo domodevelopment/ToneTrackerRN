@@ -54,7 +54,8 @@ export default class NotifService {
     this.lastId++;
     const guitar = details.name
     PushNotification.localNotificationSchedule({
-      date: new Date(Date.now() + (10 * 1000)), // in 30 secs
+      userInfo: {id: details.key},
+      date: new Date(Date.now() + (30 * 1000)), // in 30 secs
 
     //   alertAction: 'view', // (optional) default: view
     //   category: null, // (optional) default: null
@@ -70,7 +71,7 @@ export default class NotifService {
     return PushNotification.checkPermissions(cbk);
   }
 
-  cancelNotif() {
-    PushNotification.cancelLocalNotifications({id: ''+this.lastId});
+  cancelNotif(key) {
+    PushNotification.cancelLocalNotifications({id: /*''+this.lastId*/key});
   }
 }

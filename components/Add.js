@@ -80,10 +80,6 @@ class Add extends Component {
     Alert.alert(notif.title, notif.message);
   }
 
-  handlePerm(perms) {
-    Alert.alert("Permissions", JSON.stringify(perms));
-  }
-
   handleNameChange = event => {
     this.setState({ newGuitar: { ...this.state.newGuitar, name: event } });
   };
