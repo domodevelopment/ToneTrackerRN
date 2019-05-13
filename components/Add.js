@@ -270,12 +270,14 @@ class Add extends Component {
                 this.setState({ warningPopup: false });
                 this.props.navigation.navigate("Home");
               }}
+              color={colors.dark}
             />
             <Dialog.Button
               label="Stay Here"
               onPress={() => {
                 this.setState({ warningPopup: false });
               }}
+              color={colors.dark}
             />
           </Dialog.Container>
         </View>

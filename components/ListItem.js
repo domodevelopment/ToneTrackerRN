@@ -217,6 +217,7 @@ class ListItem extends Component {
                 this.props.item.timestamp = new Date().getTime();
                 this.props.editGuitar(this.props.item);
               }}
+              color={colors.dark}
             />
             <Dialog.Button
               label="Some other day"
@@ -224,14 +225,16 @@ class ListItem extends Component {
                 this.setState({ restringPopup: false });
                 this.props.selectedGuitar(this.props.item.key);
                 this.props.showDatePicker(true);
-                this.props.navigation.navigate("Edit");
+                this.props.navigation.navigate("Edit", { photo: null });
               }}
+              color={colors.dark}
             />
             <Dialog.Button
               label="Cancel"
               onPress={() => {
                 this.setState({ restringPopup: false });
               }}
+              color={colors.dark}
             />
           </Dialog.Container>
         </View>

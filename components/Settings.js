@@ -6,14 +6,14 @@ import styles from "../styles/settingsStyles";
 import colors from "../colors";
 
 class Settings extends Component {
-  static navigationOptions = ({ navigation }) => {
-    return {
-      headerStyle: {
-        backgroundColor: colors.primary
-      },
-      headerTintColor: colors.white
-    };
-  };
+  // static navigationOptions = ({ navigation }) => {
+  //   return {
+  //     headerStyle: {
+  //       backgroundColor: colors.primary
+  //     },
+  //     headerTintColor: colors.white
+  //   };
+  // };
   onSwitchChanged = () => {
     this.props.showNotifications(!this.props.notifications);
   };

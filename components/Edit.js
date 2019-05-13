@@ -109,7 +109,7 @@ class Edit extends Component {
       ...this.state,
       editedGuitar: {
         ...this.state.editedGuitar,
-        coated: (this.state.coated = this.state.coated ? false : true)
+        coated: !this.state.editedGuitar.coated
       }
     });
   };
@@ -190,11 +190,15 @@ class Edit extends Component {
     );
   };
 
-  componentDidMount() {
-    if (this.props.changeAge) {
-      this.datePicker.onPressDate();
+  componentDidUpdate(){
+    // Alert.alert(String(this.props.changeAge))
+    if(this.props.changeAge){
+      this.datePicker.onPressDate()
       this.props.showDatePicker(false);
     }
+  }
+
+  componentDidMount() {
     this.props.navigation.setParams({
       handleBack: () => {
         if (
@@ -212,9 +216,16 @@ class Edit extends Component {
         }
       }
     });
+    // Alert.alert(String(this.props.changeAge))
+    // this.datePicker.onPressDate()
+    // if (this.props.changeAge) {
+        // this.datePicker.onPressDate();
+        // this.props.showDatePicker(false);
+    // }
   }
 
   render() {
+
     nameStyle = this.state.nameValidated
       ? styles.nameInput
       : styles.nameUnvalidatedInput;
@@ -365,12 +376,14 @@ class Edit extends Component {
                 this.setState({ ...this.state, warningPopup: false });
                 this.props.navigation.navigate("Home");
               }}
+              color={colors.dark}
             />
             <Dialog.Button
               label="Stay Here"
               onPress={() => {
                 this.setState({ ...this.state, warningPopup: false });
               }}
+              color={colors.dark}
             />
           </Dialog.Container>
         </View>

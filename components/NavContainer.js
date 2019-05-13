@@ -10,7 +10,10 @@ import colors from "../colors";
 
 const Navigator = createStackNavigator({
   Home: {
-    screen: Home
+    screen: Home,
+    navigationOptions: {
+      headerBackTitle: 'Back'
+    }
   },
   Add: {
     screen: Add
@@ -19,7 +22,13 @@ const Navigator = createStackNavigator({
     screen: Edit
   },
   Settings: {
-    screen: Settings
+    screen: Settings,
+    navigationOptions: {
+      headerStyle: {
+        backgroundColor: colors.primary
+      },
+      headerTintColor: colors.white
+    }
   },
   PrivacyPolicy: {
     screen: PrivacyPolicy,
