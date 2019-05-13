@@ -191,7 +191,6 @@ class Edit extends Component {
   };
 
   componentDidUpdate(){
-    // Alert.alert(String(this.props.changeAge))
     if(this.props.changeAge){
       this.datePicker.onPressDate()
       this.props.showDatePicker(false);
@@ -216,12 +215,6 @@ class Edit extends Component {
         }
       }
     });
-    // Alert.alert(String(this.props.changeAge))
-    // this.datePicker.onPressDate()
-    // if (this.props.changeAge) {
-        // this.datePicker.onPressDate();
-        // this.props.showDatePicker(false);
-    // }
   }
 
   render() {

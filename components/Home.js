@@ -16,6 +16,9 @@ import constants from "../constants";
 import { showNotifications, initializeGuitars } from "../actions/actions";
 import colors from "../colors";
 import Icon from "react-native-vector-icons/MaterialIcons";
+// import {PushNotification} from 'react-native-push-notification'
+import appConfig from '../app.json';
+import NotifService from '../utilities/NotifService';
 
 /**
  * Having huge issues when trying to implement notifications. Try again when developing on OSX
@@ -46,8 +49,26 @@ class Home extends Component {
     super(props);
     this.state = {
       initialized: false,
-      hideFab: false
+      hideFab: false,
+      senderId: appConfig.senderID
     };
+
+    this.notif = new NotifService(this.onRegister.bind(this), this.onNotif.bind(this));
+  }
+
+  onRegister(token) {
+    Alert.alert("Registered !", JSON.stringify(token));
+    console.log(token);
+    this.setState({ registerToken: token.token, gcmRegistered: true });
+  }
+
+  onNotif(notif) {
+    console.log(notif);
+    Alert.alert(notif.title, notif.message);
+  }
+
+  handlePerm(perms) {
+    Alert.alert("Permissions", JSON.stringify(perms));
   }
 
   componentWillMount() {

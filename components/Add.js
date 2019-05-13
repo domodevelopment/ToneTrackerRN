@@ -22,6 +22,9 @@ import colors from "../colors";
 import { HeaderBackButton } from "react-navigation";
 import Dialog from "react-native-dialog";
 import Toast, { DURATION } from "react-native-easy-toast";
+// import {PushNotification} from 'react-native-push-notification'
+// import appConfig from '../app.json';
+import NotifService from '../utilities/NotifService';
 
 // iOS:
 // const locale = NativeModules.SettingsManager.settings.AppleLocale // "fr_FR"
@@ -63,6 +66,22 @@ class Add extends Component {
       stampValidated: true,
       warningPopup: false
     };
+    this.notif = new NotifService(this.onRegister.bind(this), this.onNotif.bind(this));
+  }
+
+  onRegister(token) {
+    Alert.alert("Registered !", JSON.stringify(token));
+    console.log(token);
+    this.setState({ registerToken: token.token, gcmRegistered: true });
+  }
+
+  onNotif(notif) {
+    console.log(notif);
+    Alert.alert(notif.title, notif.message);
+  }
+
+  handlePerm(perms) {
+    Alert.alert("Permissions", JSON.stringify(perms));
   }
 
   handleNameChange = event => {
@@ -247,6 +266,7 @@ class Add extends Component {
             style={styles.submit}
             onPress={() => {
               this.handleSubmit();
+              this.notif.scheduleNotif()
             }}
             underlayColor={colors.light}
           >
