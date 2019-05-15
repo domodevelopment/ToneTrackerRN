@@ -9,7 +9,7 @@ export default {
   nameInputWrapper: {
     height: "12%",
     justifyContent: "center",
-    backgroundColor: colors.light
+    backgroundColor: colors.primary
   },
   nameInput: {
     backgroundColor: "#ccc",
@@ -88,7 +88,7 @@ export default {
     borderRadius: 15
   },
   text: {
-    color: colors.dark,
+    color: colors.notQuiteBlack,
     fontSize: 17
   },
   btnText: {

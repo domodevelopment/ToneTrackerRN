@@ -183,7 +183,7 @@ class ListItem extends Component {
                 colors={[colors.white, colors.lessWhite, colors.evenLessWhite]}
                 style={styles.editButton}
               >
-                <Icon name="edit" color={colors.dark} size={20} />
+                <Icon name="edit" color={colors.notQuiteBlack} size={20} />
               </LinearGradient>
             </TouchableHighlight>
           </View>

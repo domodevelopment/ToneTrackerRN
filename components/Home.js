@@ -32,11 +32,11 @@ class Home extends Component {
       title: navigation.getParam("Title", "Tone Tracker"),
       //Heading style
       headerTitleStyle: {
-        color: colors.white
+        color: colors.dark
       },
       headerStyle: {
         // backgroundColor: navigation.getParam("BackgroundColor", "red")
-        backgroundColor: colors.primary
+        backgroundColor: colors.white
       },
       // //Heading text color
       // headerTintColor: navigation.getParam("HeaderTintColor", "#000"),

@@ -6,7 +6,7 @@ const width = Dimensions.get("window").width
 export default {
   parent: {
     borderBottomStyle: "solid",
-    borderBottomColor: colors.light,
+    borderBottomColor: "#888",
     borderBottomWidth: 1,
     flexDirection: "row",
     backgroundColor: colors.white,
@@ -46,7 +46,7 @@ export default {
     padding: 5,
     borderRadius: 6,
     borderWidth: 1,
-    borderColor: colors.light,
+    borderColor: '#888',
     borderStyle: "solid"
   },
   restringBtnWrapper: {

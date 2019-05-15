@@ -13,7 +13,7 @@ export default {
   },
   text: {
     fontSize: 20,
-    color: colors.dark,
+    color: colors.notQuiteBlack,
     padding: 10
   },
   switchWrapper: {

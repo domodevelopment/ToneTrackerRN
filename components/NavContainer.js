@@ -25,18 +25,18 @@ const Navigator = createStackNavigator({
     screen: Settings,
     navigationOptions: {
       headerStyle: {
-        backgroundColor: colors.primary
+        backgroundColor: colors.white
       },
-      headerTintColor: colors.white
+      headerTintColor: colors.dark
     }
   },
   PrivacyPolicy: {
     screen: PrivacyPolicy,
     navigationOptions: {
       headerStyle: {
-        backgroundColor: colors.primary
+        backgroundColor: colors.white
       },
-      headerTintColor: colors.white
+      headerTintColor: colors.dark
     }
   }
 });

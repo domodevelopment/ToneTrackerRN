@@ -54,12 +54,12 @@ class Edit extends Component {
     const { params = {} } = navigation.state;
     return {
       headerStyle: {
-        backgroundColor: colors.primary
+        backgroundColor: colors.white
       },
       headerRight: <Delete navigation={navigation} />,
       headerLeft: (
         <HeaderBackButton
-          tintColor={colors.white}
+          tintColor={colors.datePickerBtn}
           onPress={() => params.handleBack()}
         />
       )
@@ -342,6 +342,11 @@ class Edit extends Component {
                 ...this.state,
                 editedGuitar: { ...this.state.editedGuitar, timestamp }
               });
+            }}
+            customStyles={{
+              btnTextConfirm: {
+                color: colors.dark
+              }
             }}
           />
         </View>

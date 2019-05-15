@@ -15,7 +15,8 @@ export default {
     height: "60%",
     width: "95%",
     paddingLeft: "3%",
-    fontSize: 20
+    fontSize: 20,
+    color: colors.dark
   },
   nameUnvalidatedInput: {
     backgroundColor: "red",
@@ -81,7 +82,7 @@ export default {
     borderRadius: 15
   },
   text: {
-    color: colors.dark,
+    color: colors.notQuiteBlack,
     fontSize: 17
   },
   btnText: {

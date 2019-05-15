@@ -35,11 +35,11 @@ class Add extends Component {
     const { params = {} } = navigation.state;
     return {
       headerStyle: {
-        backgroundColor: colors.primary
+        backgroundColor: colors.white
       },
       headerLeft: (
         <HeaderBackButton
-          tintColor={colors.white}
+          tintColor={colors.dark}
           onPress={() => params.handleBack()}
         />
       )

@@ -22,7 +22,7 @@ class Delete extends Component {
     return (
       <Menu>
         <MenuTrigger>
-          <Icon color={colors.white} name="options-vertical" size={20} />
+          <Icon color={colors.dark} name="options-vertical" size={20} />
         </MenuTrigger>
         <MenuOptions>
           <MenuOption
