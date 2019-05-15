@@ -83,7 +83,7 @@ class ListItem extends Component {
   getCondition = () => {
     const { item } = this.props;
     //setting string quality to good as default
-    let stringCondition = "#0f0";
+    let stringCondition = colors.good;
     let age = this.getDaysElapsed();
     if (item.type === constants.bass) {
       age /= 2;
@@ -106,7 +106,7 @@ class ListItem extends Component {
         item.use === constants.somedays) ||
       (150 < age && age < 300 && item.coated && item.use === constants.weekly)
     ) {
-      stringCondition = "#ff0";
+      stringCondition = colors.dull;
     }
     //conditions for strings being rusty
     if (
@@ -117,7 +117,7 @@ class ListItem extends Component {
       (age >= 187 && item.coated && item.use === constants.somedays) ||
       (age >= 300 && item.coated && item.use === constants.weekly)
     ) {
-      stringCondition = "#f00";
+      stringCondition = colors.rusty;
     }
     return stringCondition;
   };
@@ -165,7 +165,7 @@ class ListItem extends Component {
             backgroundWidth={3}
             fill={this.getProgress()}
             tintColor={this.getCondition()}
-            backgroundColor="#3d5875"
+            backgroundColor={colors.notQuiteBlack}
           />
         </View>
         {this.isCoated()}

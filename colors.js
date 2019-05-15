@@ -6,4 +6,7 @@ export default {
   lessWhite: "#eee",
   evenLessWhite: "#ccc",
   notQuiteBlack: "#111",
+  good: "#32CD32",
+  dull: "#ffa500",
+  rusty: "#DC143C"
 };
