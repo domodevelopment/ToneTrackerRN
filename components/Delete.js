@@ -15,19 +15,19 @@ import NotifService from '../utilities/NotifService';
 class Delete extends Component {
   constructor(props){
     super(props)
-    this.notif = new NotifService(this.onRegister.bind(this), this.onNotif.bind(this));
+    this.notif = new NotifService(/*this.onRegister.bind(this), this.onNotif.bind(this)*/);
   }
 
-  onNotif(notif) {
-    console.log(notif);
-    Alert.alert(notif.title, notif.message);
-  }
+  // onNotif(notif) {
+  //   console.log(notif);
+  //   Alert.alert(notif.title, notif.message);
+  // }
 
-  onRegister(token) {
-    Alert.alert("Registered !", JSON.stringify(token));
-    console.log(token);
-    this.setState({ registerToken: token.token, gcmRegistered: true });
-  }
+  // onRegister(token) {
+  //   Alert.alert("Registered !", JSON.stringify(token));
+  //   console.log(token);
+  //   this.setState({ registerToken: token.token, gcmRegistered: true });
+  // }
 
   render() {
     return (

@@ -27,6 +27,7 @@ import { HeaderBackButton } from "react-navigation";
 import Dialog from "react-native-dialog";
 import Toast, { DURATION } from "react-native-easy-toast";
 import ImagePicker from "react-native-image-picker";
+import NotifService from '../utilities/NotifService';
 
 function getGuitar(props) {
   return props.guitars.find(x => x.key === props.selectedForEditing);
@@ -83,7 +84,19 @@ class Edit extends Component {
       warningPopup: false,
       nameValidated: true
     };
+    this.notif = new NotifService(/*this.onRegister.bind(this), this.onNotif.bind(this)*/);
   }
+
+  // onNotif(notif) {
+  //   console.log(notif);
+  //   Alert.alert(notif.title, notif.message);
+  // }
+
+  // onRegister(token) {
+  //   Alert.alert("Registered !", JSON.stringify(token));
+  //   console.log(token);
+  //   this.setState({ registerToken: token.token, gcmRegistered: true });
+  // }
 
   handleNameChange = event => {
     this.setState({
@@ -323,6 +336,7 @@ class Edit extends Component {
           <TouchableHighlight
             style={styles.submit}
             onPress={() => {
+              //TODO move this to new function
               if (this.state.editedGuitar.name.match(regex)) {
                 if (
                   this.state.originalGuitar.name ===
@@ -341,6 +355,10 @@ class Edit extends Component {
                   this.props.navigation.navigate("Home");
                 } else {
                   this.props.editGuitar(this.state.editedGuitar);
+                  if(this.state.originalGuitar.timestamp !== this.state.editedGuitar.timestamp){
+                    this.notif.cancelNotif(this.state.originalGuitar.key)
+                    this.notif.scheduleNotif(this.state.editedGuitar)
+                  }
                   this.props.navigation.navigate("Home");
                 }
               } else {

@@ -22,6 +22,7 @@ import Icon from "react-native-vector-icons/AntDesign";
 import colors from "../colors";
 import Dialog from "react-native-dialog";
 import { Dimensions } from "react-native";
+import NotifService from '../utilities/NotifService';
 
 const width = Dimensions.get("window").width
 
@@ -31,7 +32,19 @@ class ListItem extends Component {
     this.state = {
       restringPopup: false
     };
+    this.notif = new NotifService(/*this.onRegister.bind(this), this.onNotif.bind(this)*/);
   }
+
+  // onNotif(notif) {
+  //   console.log(notif);
+  //   Alert.alert(notif.title, notif.message);
+  // }
+
+  // onRegister(token) {
+  //   Alert.alert("Registered !", JSON.stringify(token));
+  //   console.log(token);
+  //   this.setState({ registerToken: token.token, gcmRegistered: true });
+  // }
 
   instrumentImage = () => {
     let { type, photo } = this.props.item;
@@ -216,6 +229,8 @@ class ListItem extends Component {
                 this.setState({ restringPopup: false });
                 this.props.item.timestamp = new Date().getTime();
                 this.props.editGuitar(this.props.item);
+                this.notif.cancelNotif(this.props.item.key)
+                this.notif.scheduleNotif(this.props.item)
               }}
               color={colors.dark}
             />

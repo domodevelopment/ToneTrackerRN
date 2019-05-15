@@ -53,19 +53,19 @@ class Home extends Component {
       senderId: appConfig.senderID
     };
 
-    this.notif = new NotifService(this.onRegister.bind(this), this.onNotif.bind(this));
+    this.notif = new NotifService(/*this.onRegister.bind(this), this.onNotif.bind(this)*/);
   }
 
-  onRegister(token) {
-    Alert.alert("Registered !", JSON.stringify(token));
-    console.log(token);
-    this.setState({ registerToken: token.token, gcmRegistered: true });
-  }
+  // onRegister(token) {
+  //   Alert.alert("Registered !", JSON.stringify(token));
+  //   console.log(token);
+  //   this.setState({ registerToken: token.token, gcmRegistered: true });
+  // }
 
-  onNotif(notif) {
-    console.log(notif);
-    Alert.alert(notif.title, notif.message);
-  }
+  // onNotif(notif) {
+  //   console.log(notif);
+  //   Alert.alert(notif.title, notif.message);
+  // }
 
   handlePerm(perms) {
     Alert.alert("Permissions", JSON.stringify(perms));

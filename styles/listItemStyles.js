@@ -39,6 +39,7 @@ export default {
     justifyContent: "space-between"
   },
   editBtnWrapper: {
+    height: '70%',
     borderRadius: 6
   },
   editButton: {
