@@ -84,19 +84,8 @@ class Edit extends Component {
       warningPopup: false,
       nameValidated: true
     };
-    this.notif = new NotifService(/*this.onRegister.bind(this), this.onNotif.bind(this)*/);
+    this.notif = new NotifService();
   }
-
-  // onNotif(notif) {
-  //   console.log(notif);
-  //   Alert.alert(notif.title, notif.message);
-  // }
-
-  // onRegister(token) {
-  //   Alert.alert("Registered !", JSON.stringify(token));
-  //   console.log(token);
-  //   this.setState({ registerToken: token.token, gcmRegistered: true });
-  // }
 
   handleNameChange = event => {
     this.setState({
@@ -128,6 +117,37 @@ class Edit extends Component {
       }
     });
   };
+
+  handleSubmit = () => {
+    if (this.state.editedGuitar.name.match(regex)) {
+      if (
+        this.state.originalGuitar.name ===
+          this.state.editedGuitar.name &&
+        this.state.originalGuitar.type ===
+          this.state.editedGuitar.type &&
+        this.state.originalGuitar.use ===
+          this.state.editedGuitar.use &&
+        this.state.originalGuitar.timestamp ===
+          this.state.editedGuitar.timestamp &&
+        this.state.originalGuitar.coated ===
+          this.state.editedGuitar.coated &&
+        this.state.originalGuitar.photo ===
+          this.state.editedGuitar.photo
+      ) {
+        this.props.navigation.navigate("Home");
+      } else {
+        this.props.editGuitar(this.state.editedGuitar);
+        if(this.state.originalGuitar.timestamp !== this.state.editedGuitar.timestamp){
+          this.notif.cancelNotif(this.state.originalGuitar.key)
+          this.notif.scheduleNotif(this.state.editedGuitar)
+        }
+        this.props.navigation.navigate("Home");
+      }
+    } else {
+      this.setState({ ...this.state, nameValidated: false });
+      this.refs.toast.show("Name cannot be empty");
+    }
+  }
 
   getFormattedDate = () => {
     const { timestamp } = this.state.editedGuitar;
@@ -336,35 +356,7 @@ class Edit extends Component {
           <TouchableHighlight
             style={styles.submit}
             onPress={() => {
-              //TODO move this to new function
-              if (this.state.editedGuitar.name.match(regex)) {
-                if (
-                  this.state.originalGuitar.name ===
-                    this.state.editedGuitar.name &&
-                  this.state.originalGuitar.type ===
-                    this.state.editedGuitar.type &&
-                  this.state.originalGuitar.use ===
-                    this.state.editedGuitar.use &&
-                  this.state.originalGuitar.timestamp ===
-                    this.state.editedGuitar.timestamp &&
-                  this.state.originalGuitar.coated ===
-                    this.state.editedGuitar.coated &&
-                  this.state.originalGuitar.photo ===
-                    this.state.editedGuitar.photo
-                ) {
-                  this.props.navigation.navigate("Home");
-                } else {
-                  this.props.editGuitar(this.state.editedGuitar);
-                  if(this.state.originalGuitar.timestamp !== this.state.editedGuitar.timestamp){
-                    this.notif.cancelNotif(this.state.originalGuitar.key)
-                    this.notif.scheduleNotif(this.state.editedGuitar)
-                  }
-                  this.props.navigation.navigate("Home");
-                }
-              } else {
-                this.setState({ ...this.state, nameValidated: false });
-                this.refs.toast.show("Name cannot be empty");
-              }
+              this.handleSubmit()
             }}
           >
             <LinearGradient

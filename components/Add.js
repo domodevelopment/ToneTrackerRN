@@ -22,8 +22,6 @@ import colors from "../colors";
 import { HeaderBackButton } from "react-navigation";
 import Dialog from "react-native-dialog";
 import Toast, { DURATION } from "react-native-easy-toast";
-// import {PushNotification} from 'react-native-push-notification'
-// import appConfig from '../app.json';
 import NotifService from '../utilities/NotifService';
 
 // iOS:
@@ -66,19 +64,8 @@ class Add extends Component {
       stampValidated: true,
       warningPopup: false
     };
-    this.notif = new NotifService(/*this.onRegister.bind(this), this.onNotif.bind(this)*/);
+    this.notif = new NotifService();
   }
-
-  // onRegister(token) {
-  //   Alert.alert("Registered !", JSON.stringify(token));
-  //   console.log(token);
-  //   this.setState({ registerToken: token.token, gcmRegistered: true });
-  // }
-
-  // onNotif(notif) {
-  //   console.log(notif);
-  //   Alert.alert(notif.title, notif.message);
-  // }
 
   handleNameChange = event => {
     this.setState({ newGuitar: { ...this.state.newGuitar, name: event } });
