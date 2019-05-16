@@ -219,7 +219,9 @@ class ListItem extends Component {
                 this.props.item.timestamp = new Date().getTime();
                 this.props.editGuitar(this.props.item);
                 this.notif.cancelNotif(this.props.item.key)
-                this.notif.scheduleNotif(this.props.item)
+                if(this.props.notifications){
+                  this.notif.scheduleNotif(this.props.item)
+                }
               }}
               color={colors.dark}
             />
@@ -247,6 +249,12 @@ class ListItem extends Component {
   }
 }
 
+const mapStateToProps = state => {
+  return {
+    notifications: state.notifications
+  };
+};
+
 const mapDispatchToProps = dispatch => {
   return {
     selectedGuitar: key => {
@@ -262,6 +270,6 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(ListItem);

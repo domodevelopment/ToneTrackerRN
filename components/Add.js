@@ -91,7 +91,9 @@ class Add extends Component {
     ) {
       this.props.addGuitar(this.state.newGuitar);
       this.props.navigation.navigate("Home");
-      this.notif.scheduleNotif(this.state.newGuitar)
+      if(this.props.notifications){
+        this.notif.scheduleNotif(this.state.newGuitar)
+      }
     } else {
       this.refs.toast.show("Fill in all details");
       if (!name.match(regex)) {
@@ -236,6 +238,11 @@ class Add extends Component {
                 newGuitar: { ...this.state.newGuitar, timestamp }
               });
             }}
+            customStyles={{
+              btnTextConfirm: {
+                color: colors.dark
+              }
+            }}
           />
         </View>
         <View style={styles.coated}>
@@ -290,6 +297,12 @@ class Add extends Component {
   }
 }
 
+const mapStateToProps = state => {
+  return {
+    notifications: state.notifications
+  };
+};
+
 const mapDispatchToProps = dispatch => {
   return {
     addGuitar: guitar => {
@@ -299,6 +312,6 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(Add);

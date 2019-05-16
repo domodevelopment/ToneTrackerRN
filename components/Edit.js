@@ -136,8 +136,9 @@ class Edit extends Component {
       ) {
         this.props.navigation.navigate("Home");
       } else {
-        this.props.editGuitar(this.state.editedGuitar);
-        if(this.state.originalGuitar.timestamp !== this.state.editedGuitar.timestamp){
+        this.props.editGuitar(this.state.editedGuitar)
+        if(this.state.originalGuitar.timestamp !== this.state.editedGuitar.timestamp
+          && this.props.notifications){
           this.notif.cancelNotif(this.state.originalGuitar.key)
           this.notif.scheduleNotif(this.state.editedGuitar)
         }
@@ -405,7 +406,8 @@ const mapStateToProps = state => {
   return {
     guitars: state.guitars,
     selectedForEditing: state.selectedForEditing,
-    changeAge: state.changeAge
+    changeAge: state.changeAge,
+    notifications: state.notifications
   };
 };
 
