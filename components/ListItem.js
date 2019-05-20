@@ -6,7 +6,8 @@ import {
   FlatList,
   TouchableHighlight,
   Image,
-  Alert
+  Alert,
+  Dimensions
 } from "react-native";
 import { selectedGuitar, editGuitar, showDatePicker } from "../actions/actions";
 import { connect } from "react-redux";
@@ -21,7 +22,6 @@ import LinearGradient from "react-native-linear-gradient";
 import Icon from "react-native-vector-icons/AntDesign";
 import colors from "../colors";
 import Dialog from "react-native-dialog";
-import { Dimensions } from "react-native";
 import NotifService from '../utilities/NotifService';
 
 const width = Dimensions.get("window").width
@@ -148,19 +148,12 @@ class ListItem extends Component {
         <View style={styles.imageWrapper}>
           <Image
             source={this.instrumentImage()}
-            style={{
-              width: "100%",
-              height: "100%",
-              borderRadius: 50,
-              transform: [
-                { rotate: this.props.item.photo === null ? "0deg" : "90deg" }
-              ]
-            }}
+            style={styles.instrumentImg}
             resizeMode="cover"
           />
           <AnimatedCircularProgress
             style={styles.progressCircle}
-            size={width * 0.27}
+            size={width * 0.27 * 0.9}
             width={5}
             backgroundWidth={3}
             fill={this.getProgress()}

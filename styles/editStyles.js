@@ -20,7 +20,7 @@ export default {
     fontSize: 20
   },
   nameUnvalidatedInput: {
-    backgroundColor: "red",
+    backgroundColor: colors.rusty,
     height: "60%",
     width: "70%",
     marginLeft: '5%',

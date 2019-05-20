@@ -19,7 +19,7 @@ export default {
     color: colors.dark
   },
   nameUnvalidatedInput: {
-    backgroundColor: "red",
+    backgroundColor: colors.rusty,
     marginTop: "5%",
     height: "60%",
     width: "95%",
@@ -50,7 +50,7 @@ export default {
     height: "80%",
     justifyContent: "center",
     marginLeft: '3%',
-    borderColor: "red",
+    borderColor: colors.rusty,
     borderWidth: 3,
     borderStyle: "solid"
   },

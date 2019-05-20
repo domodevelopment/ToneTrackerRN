@@ -1,4 +1,5 @@
 import { Dimensions } from "react-native";
+import colors from "../colors"
 
 export default {
   selectableImgRow: {
@@ -16,7 +17,7 @@ export default {
     justifyContent: "space-between",
     paddingTop: '6%',
     marginLeft: '2%',
-    borderColor: "red",
+    borderColor: colors.rusty,
     borderWidth: 3,
     borderStyle: "solid"
   },

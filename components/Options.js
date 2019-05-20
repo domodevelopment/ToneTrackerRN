@@ -31,13 +31,16 @@ class Options extends Component {
     return (
       <Menu>
         <MenuTrigger>
-          <Icon name="options-vertical" color={colors.dark} size={20} />
+          <Icon name="options-vertical"
+            color={colors.dark}
+            size={20} 
+            style={{ margin: 10 }}/>
         </MenuTrigger>
         <MenuOptions>
-          <MenuOption
+          {/* <MenuOption
             style={{padding: 12}}
             onSelect={() => Share.open(shareOptions)}
-            text="Share" />
+            text="Share" /> */}
           <MenuOption
             style={{padding: 12}}
             onSelect={() => this.handleEmail()}

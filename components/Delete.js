@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Text, Alert } from "react-native";
+import { Text, Alert, Platform } from "react-native";
 import Icon from "react-native-vector-icons/SimpleLineIcons";
 import {
   Menu,
@@ -12,6 +12,8 @@ import { deleteGuitar } from "../actions/actions";
 import colors from "../colors";
 import NotifService from '../utilities/NotifService';
 
+const iconColor = Platform.OS === "ios" ? colors.dark : colors.white;
+
 class Delete extends Component {
   constructor(props){
     super(props)
@@ -22,7 +24,11 @@ class Delete extends Component {
     return (
       <Menu>
         <MenuTrigger>
-          <Icon color={colors.dark} name="options-vertical" size={20} />
+          <Icon
+            color={iconColor}
+            name="options-vertical"
+            size={20}
+            style={{margin: 10}}/>
         </MenuTrigger>
         <MenuOptions>
           <MenuOption

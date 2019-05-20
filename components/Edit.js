@@ -8,7 +8,8 @@ import {
   Image,
   Alert,
   Button,
-  NativeModules
+  NativeModules,
+  Platform
 } from "react-native";
 import styles from "../styles/editStyles";
 import LinearGradient from "react-native-linear-gradient";
@@ -25,7 +26,7 @@ import colors from "../colors";
 import constants from "../constants";
 import { HeaderBackButton } from "react-navigation";
 import Dialog from "react-native-dialog";
-import Toast, { DURATION } from "react-native-easy-toast";
+import Toast from "react-native-easy-toast";
 import ImagePicker from "react-native-image-picker";
 import NotifService from '../utilities/NotifService';
 
@@ -47,24 +48,44 @@ const regex = "[a-z|A-Z|0-9]";
 // const locale = NativeModules.SettingsManager.settings.AppleLocale // "fr_FR"
 
 // Android:
-const locale = NativeModules.I18nManager.localeIdentifier; // "fr_FR"
+// const locale = NativeModules.I18nManager.localeIdentifier; // "fr_FR"
+
+const locale = Platform.OS === "ios" ? NativeModules.SettingsManager.settings.AppleLocale : NativeModules.I18nManager.localeIdentifier
 
 class Edit extends Component {
-  static navigationOptions = ({ navigation }) => {
-    const { params = {} } = navigation.state;
-    return {
-      headerStyle: {
-        backgroundColor: colors.white
-      },
-      headerRight: <Delete navigation={navigation} />,
-      headerLeft: (
-        <HeaderBackButton
-          tintColor={colors.datePickerBtn}
-          onPress={() => params.handleBack()}
-        />
-      )
-    };
-  };
+  static navigationOptions =
+    Platform.OS === "ios"
+      ? ({ navigation }) => {
+          const { params = {} } = navigation.state;
+          return {
+            headerStyle: {
+              backgroundColor: colors.white
+            },
+            headerRight: <Delete navigation={navigation} />,
+            headerLeft: (
+              <HeaderBackButton
+                tintColor={colors.datePickerBtn}
+                onPress={() => params.handleBack()}
+              />
+            )
+          };
+        }
+      : null;
+  // static navigationOptions = ({ navigation }) => {
+  //   const { params = {} } = navigation.state;
+  //   return {
+  //     headerStyle: {
+  //       backgroundColor: colors.white
+  //     },
+  //     headerRight: <Delete navigation={navigation} />,
+  //     headerLeft: (
+  //       <HeaderBackButton
+  //         tintColor={colors.datePickerBtn}
+  //         onPress={() => params.handleBack()}
+  //       />
+  //     )
+  //   };
+  // };
 
   constructor(props) {
     super(props);
@@ -225,6 +246,12 @@ class Edit extends Component {
     );
   };
 
+  options = () => {
+    return Platform.OS === "android" ? (
+      <Delete navigation={this.props.navigation} />
+    ) : null;
+  };
+
   componentDidUpdate(){
     if(this.props.changeAge){
       this.datePicker.onPressDate()
@@ -253,7 +280,7 @@ class Edit extends Component {
   }
 
   render() {
-
+    
     nameStyle = this.state.nameValidated
       ? styles.nameInput
       : styles.nameUnvalidatedInput;
@@ -263,6 +290,7 @@ class Edit extends Component {
         <View style={styles.nameInputWrapper}>
           {this.name(this.state.editingName)}
         </View>
+        <View style={styles.optionsWrapper}>{this.options()}</View>
         <TouchableHighlight
           style={styles.profileImg}
           onPress={() => {
@@ -290,13 +318,7 @@ class Edit extends Component {
             style={{
               width: "100%",
               height: "100%",
-              borderRadius: 50,
-              transform: [
-                {
-                  rotate:
-                    this.state.editedGuitar.photo === null ? "0deg" : "90deg"
-                }
-              ]
+              borderRadius: 50
             }}
             source={this.instrumentImage()}
             resizeMode="cover"

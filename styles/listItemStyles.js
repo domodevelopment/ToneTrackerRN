@@ -13,7 +13,14 @@ export default {
   },
   imageWrapper: {
     height: width * 0.27,
-    width: width * 0.27
+    width: width * 0.27,
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  instrumentImg: {
+    width: "90%",
+    height: "90%",
+    borderRadius: 50
   },
   progressCircle: {
     position: "absolute"
