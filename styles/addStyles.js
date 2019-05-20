@@ -24,7 +24,8 @@ export default {
     height: "60%",
     width: "95%",
     paddingLeft: "3%",    
-    fontSize: 20
+    fontSize: 20,
+    color: colors.notQuiteBlack
   },
   questionRow: {
     height: "5%",

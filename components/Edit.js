@@ -9,7 +9,8 @@ import {
   Alert,
   Button,
   NativeModules,
-  Platform
+  Platform,
+  BackHandler
 } from "react-native";
 import styles from "../styles/editStyles";
 import LinearGradient from "react-native-linear-gradient";
@@ -259,24 +260,44 @@ class Edit extends Component {
     }
   }
 
+  handleBackPressed = () => {
+    if (
+      this.state.editedGuitar.name !== this.state.originalGuitar.name ||
+      this.state.editedGuitar.type !== this.state.originalGuitar.type ||
+      this.state.editedGuitar.use !== this.state.originalGuitar.use ||
+      this.state.editedGuitar.timestamp !==
+        this.state.originalGuitar.timestamp ||
+      this.state.editedGuitar.coated !== this.state.originalGuitar.coated ||
+      this.state.editedGuitar.photo !== this.state.originalGuitar.photo
+    ) {
+      this.setState({ ...this.state, warningPopup: true });
+    } else {
+      this.props.navigation.navigate("Home");
+    }
+    return true;
+  };
+
+  componentDidUpdate() {
+    if (this.props.changeAge) {
+      this.datePicker.onPressDate();
+      this.props.showDatePicker(false);
+    }
+  }
+
   componentDidMount() {
     this.props.navigation.setParams({
       handleBack: () => {
-        if (
-          this.state.editedGuitar.name !== this.state.originalGuitar.name ||
-          this.state.editedGuitar.type !== this.state.originalGuitar.type ||
-          this.state.editedGuitar.use !== this.state.originalGuitar.use ||
-          this.state.editedGuitar.timestamp !==
-            this.state.originalGuitar.timestamp ||
-          this.state.editedGuitar.coated !== this.state.originalGuitar.coated ||
-          this.state.editedGuitar.photo !== this.state.originalGuitar.photo
-        ) {
-          this.setState({ ...this.state, warningPopup: true });
-        } else {
-          this.props.navigation.navigate("Home");
-        }
+        this.handleBackPressed;
       }
     });
+    BackHandler.addEventListener("hardwareBackPress", this.handleBackPressed);
+  }
+
+  componentWillUnmount() {
+    BackHandler.removeEventListener(
+      "hardwareBackPress",
+      this.handleBackPressed
+    );
   }
 
   render() {

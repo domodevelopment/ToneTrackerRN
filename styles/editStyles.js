@@ -6,6 +6,11 @@ export default {
     height: "100%",
     backgroundColor: colors.lessWhite
   },
+  optionsWrapper: {
+    position: "absolute",
+    top: 0,
+    right: 0
+  },
   nameInputWrapper: {
     height: "12%",
     justifyContent: "center",

@@ -8,7 +8,9 @@ import {
   Image,
   Alert,
   Button,
-  NativeModules
+  NativeModules,
+  Platform,
+  BackHandler
 } from "react-native";
 import styles from "../styles/addStyles";
 import LinearGradient from "react-native-linear-gradient";
@@ -28,7 +30,9 @@ import NotifService from '../utilities/NotifService';
 // const locale = NativeModules.SettingsManager.settings.AppleLocale // "fr_FR"
 
 // Android:
-const locale = NativeModules.I18nManager.localeIdentifier; // "fr_FR"
+// const locale = NativeModules.I18nManager.localeIdentifier; // "fr_FR"
+
+const locale = Platform.OS === "ios" ? NativeModules.SettingsManager.settings.AppleLocale : NativeModules.I18nManager.localeIdentifier
 
 class Add extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -159,23 +163,36 @@ class Add extends Component {
     return locale === "en_US" ? "MM-DD-YYYY" : "DD-MM-YYYY";
   };
 
+  handleBackPressed = () => {
+    const regex = "[a-z|A-Z|0-9]";
+    if (
+      this.state.newGuitar.name.match(regex) !== null ||
+      this.state.newGuitar.type !== null ||
+      this.state.newGuitar.use !== null ||
+      this.state.newGuitar.timestamp !== null ||
+      this.state.newGuitar.coated
+    ) {
+      this.setState({ warningPopup: true });
+    } else {
+      this.props.navigation.navigate("Home");
+    }
+    return true;
+  };
+
+  componentWillUnmount() {
+    BackHandler.removeEventListener(
+      "hardwareBackPress",
+      this.handleBackPressed
+    );
+  }
+
   componentDidMount() {
-    const regex = "[a-z|0-9]";
     this.props.navigation.setParams({
       handleBack: () => {
-        if (
-          this.state.newGuitar.name.match(regex) !== null ||
-          this.state.newGuitar.type !== null ||
-          this.state.newGuitar.use !== null ||
-          this.state.newGuitar.timestamp !== null ||
-          this.state.newGuitar.coated
-        ) {
-          this.setState({ warningPopup: true });
-        } else {
-          this.props.navigation.navigate("Home");
-        }
+        this.handleBackPressed;
       }
     });
+    BackHandler.addEventListener("hardwareBackPress", this.handleBackPressed);
   }
 
   render() {
