@@ -5,32 +5,34 @@ import Home from "./Home";
 import Add from "./Add";
 import Edit from "./Edit";
 import Settings from "./Settings";
-import PrivacyPolicy from "./PrivacyPolicy"
+import PrivacyPolicy from "./PrivacyPolicy";
 import colors from "../colors";
 
 const ios = Platform.OS === "ios" ? true : false;
 
 getNavigationOptions = () => {
-  return ios ? {
-      headerStyle: {
-        backgroundColor: colors.white
-      },
-      headerTintColor: colors.dark,
-      // header: showHeader
-    } : {
+  return ios
+    ? {
+        headerStyle: {
+          backgroundColor: colors.white
+        },
+        headerTintColor: colors.dark
+        // header: showHeader
+      }
+    : {
         headerStyle: {
           backgroundColor: colors.white
         },
         headerTintColor: colors.dark,
         header: null
-      }
-}
+      };
+};
 
 const Navigator = createStackNavigator({
   Home: {
     screen: Home,
     navigationOptions: {
-      headerBackTitle: 'Back'
+      headerBackTitle: "Back"
     }
   },
   Add: {
@@ -43,7 +45,7 @@ const Navigator = createStackNavigator({
   Edit: {
     screen: Edit,
     // navigationOptions: {
-    //   // header: showHeader
+    // header: showHeader
     // }
     navigationOptions: this.getNavigationOptions()
   },

@@ -1,7 +1,7 @@
 import colors from "../colors";
 import { Dimensions } from "react-native";
 
-const width = Dimensions.get("window").width
+const width = Dimensions.get("window").width;
 
 export default {
   parent: {
@@ -17,7 +17,7 @@ export default {
     alignItems: "center",
     bottom: "6%",
     right: "7%",
-    borderRadius: 50,
+    borderRadius: (width * 0.2) / 2,
     elevation: 10
   }
 };

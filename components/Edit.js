@@ -10,7 +10,8 @@ import {
   Button,
   NativeModules,
   Platform,
-  BackHandler
+  BackHandler,
+  Dimensions
 } from "react-native";
 import styles from "../styles/editStyles";
 import LinearGradient from "react-native-linear-gradient";
@@ -29,7 +30,7 @@ import { HeaderBackButton } from "react-navigation";
 import Dialog from "react-native-dialog";
 import Toast from "react-native-easy-toast";
 import ImagePicker from "react-native-image-picker";
-import NotifService from '../utilities/NotifService';
+import NotifService from "../utilities/NotifService";
 
 function getGuitar(props) {
   return props.guitars.find(x => x.key === props.selectedForEditing);
@@ -51,7 +52,10 @@ const regex = "[a-z|A-Z|0-9]";
 // Android:
 // const locale = NativeModules.I18nManager.localeIdentifier; // "fr_FR"
 
-const locale = Platform.OS === "ios" ? NativeModules.SettingsManager.settings.AppleLocale : NativeModules.I18nManager.localeIdentifier
+const locale =
+  Platform.OS === "ios"
+    ? NativeModules.SettingsManager.settings.AppleLocale
+    : NativeModules.I18nManager.localeIdentifier;
 
 class Edit extends Component {
   static navigationOptions =
@@ -143,26 +147,24 @@ class Edit extends Component {
   handleSubmit = () => {
     if (this.state.editedGuitar.name.match(regex)) {
       if (
-        this.state.originalGuitar.name ===
-          this.state.editedGuitar.name &&
-        this.state.originalGuitar.type ===
-          this.state.editedGuitar.type &&
-        this.state.originalGuitar.use ===
-          this.state.editedGuitar.use &&
+        this.state.originalGuitar.name === this.state.editedGuitar.name &&
+        this.state.originalGuitar.type === this.state.editedGuitar.type &&
+        this.state.originalGuitar.use === this.state.editedGuitar.use &&
         this.state.originalGuitar.timestamp ===
           this.state.editedGuitar.timestamp &&
-        this.state.originalGuitar.coated ===
-          this.state.editedGuitar.coated &&
-        this.state.originalGuitar.photo ===
-          this.state.editedGuitar.photo
+        this.state.originalGuitar.coated === this.state.editedGuitar.coated &&
+        this.state.originalGuitar.photo === this.state.editedGuitar.photo
       ) {
         this.props.navigation.navigate("Home");
       } else {
-        this.props.editGuitar(this.state.editedGuitar)
-        if(this.state.originalGuitar.timestamp !== this.state.editedGuitar.timestamp
-          && this.props.notifications){
-          this.notif.cancelNotif(this.state.originalGuitar.key)
-          this.notif.scheduleNotif(this.state.editedGuitar)
+        this.props.editGuitar(this.state.editedGuitar);
+        if (
+          this.state.originalGuitar.timestamp !==
+            this.state.editedGuitar.timestamp &&
+          this.props.notifications
+        ) {
+          this.notif.cancelNotif(this.state.originalGuitar.key);
+          this.notif.scheduleNotif(this.state.editedGuitar);
         }
         this.props.navigation.navigate("Home");
       }
@@ -170,7 +172,7 @@ class Edit extends Component {
       this.setState({ ...this.state, nameValidated: false });
       this.refs.toast.show("Name cannot be empty");
     }
-  }
+  };
 
   getFormattedDate = () => {
     const { timestamp } = this.state.editedGuitar;
@@ -253,9 +255,9 @@ class Edit extends Component {
     ) : null;
   };
 
-  componentDidUpdate(){
-    if(this.props.changeAge){
-      this.datePicker.onPressDate()
+  componentDidUpdate() {
+    if (this.props.changeAge) {
+      this.datePicker.onPressDate();
       this.props.showDatePicker(false);
     }
   }
@@ -286,9 +288,7 @@ class Edit extends Component {
 
   componentDidMount() {
     this.props.navigation.setParams({
-      handleBack: () => {
-        this.handleBackPressed;
-      }
+      handleBack: () => this.handleBackPressed()
     });
     BackHandler.addEventListener("hardwareBackPress", this.handleBackPressed);
   }
@@ -301,7 +301,6 @@ class Edit extends Component {
   }
 
   render() {
-    
     nameStyle = this.state.nameValidated
       ? styles.nameInput
       : styles.nameUnvalidatedInput;
@@ -336,11 +335,7 @@ class Edit extends Component {
           }}
         >
           <Image
-            style={{
-              width: "100%",
-              height: "100%",
-              borderRadius: 50
-            }}
+            style={styles.image}
             source={this.instrumentImage()}
             resizeMode="cover"
           />
@@ -405,7 +400,7 @@ class Edit extends Component {
           <TouchableHighlight
             style={styles.submit}
             onPress={() => {
-              this.handleSubmit()
+              this.handleSubmit();
             }}
           >
             <LinearGradient

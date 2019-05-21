@@ -22,9 +22,9 @@ import LinearGradient from "react-native-linear-gradient";
 import Icon from "react-native-vector-icons/AntDesign";
 import colors from "../colors";
 import Dialog from "react-native-dialog";
-import NotifService from '../utilities/NotifService';
+import NotifService from "../utilities/NotifService";
 
-const width = Dimensions.get("window").width
+const width = Dimensions.get("window").width;
 
 class ListItem extends Component {
   constructor(props) {
@@ -211,9 +211,9 @@ class ListItem extends Component {
                 this.setState({ restringPopup: false });
                 this.props.item.timestamp = new Date().getTime();
                 this.props.editGuitar(this.props.item);
-                this.notif.cancelNotif(this.props.item.key)
-                if(this.props.notifications){
-                  this.notif.scheduleNotif(this.props.item)
+                this.notif.cancelNotif(this.props.item.key);
+                if (this.props.notifications) {
+                  this.notif.scheduleNotif(this.props.item);
                 }
               }}
               color={colors.dark}

@@ -24,7 +24,7 @@ import colors from "../colors";
 import { HeaderBackButton } from "react-navigation";
 import Dialog from "react-native-dialog";
 import Toast, { DURATION } from "react-native-easy-toast";
-import NotifService from '../utilities/NotifService';
+import NotifService from "../utilities/NotifService";
 
 // iOS:
 // const locale = NativeModules.SettingsManager.settings.AppleLocale // "fr_FR"
@@ -32,7 +32,10 @@ import NotifService from '../utilities/NotifService';
 // Android:
 // const locale = NativeModules.I18nManager.localeIdentifier; // "fr_FR"
 
-const locale = Platform.OS === "ios" ? NativeModules.SettingsManager.settings.AppleLocale : NativeModules.I18nManager.localeIdentifier
+const locale =
+  Platform.OS === "ios"
+    ? NativeModules.SettingsManager.settings.AppleLocale
+    : NativeModules.I18nManager.localeIdentifier;
 
 class Add extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -95,8 +98,8 @@ class Add extends Component {
     ) {
       this.props.addGuitar(this.state.newGuitar);
       this.props.navigation.navigate("Home");
-      if(this.props.notifications){
-        this.notif.scheduleNotif(this.state.newGuitar)
+      if (this.props.notifications) {
+        this.notif.scheduleNotif(this.state.newGuitar);
       }
     } else {
       this.refs.toast.show("Fill in all details");
@@ -188,9 +191,7 @@ class Add extends Component {
 
   componentDidMount() {
     this.props.navigation.setParams({
-      handleBack: () => {
-        this.handleBackPressed;
-      }
+      handleBack: () => this.handleBackPressed()
     });
     BackHandler.addEventListener("hardwareBackPress", this.handleBackPressed);
   }

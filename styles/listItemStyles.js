@@ -1,7 +1,7 @@
 import colors from "../colors";
 import { Dimensions } from "react-native";
 
-const width = Dimensions.get("window").width
+const width = Dimensions.get("window").width;
 
 export default {
   parent: {
@@ -9,7 +9,7 @@ export default {
     borderBottomColor: "#888",
     borderBottomWidth: 1,
     flexDirection: "row",
-    backgroundColor: colors.white,
+    backgroundColor: colors.white
   },
   imageWrapper: {
     height: width * 0.27,
@@ -20,15 +20,15 @@ export default {
   instrumentImg: {
     width: "90%",
     height: "90%",
-    borderRadius: 50
+    borderRadius: (width * 0.27) / 2
   },
   progressCircle: {
     position: "absolute"
   },
   coatedImg: {
     position: "absolute",
-    bottom: '2%',
-    left: '15%',
+    bottom: "2%",
+    left: "15%",
     height: "30%"
   },
   detailsWrapper: {
@@ -46,14 +46,14 @@ export default {
     justifyContent: "space-between"
   },
   editBtnWrapper: {
-    height: '70%',
+    height: "70%",
     borderRadius: 6
   },
   editButton: {
     padding: 5,
     borderRadius: 6,
     borderWidth: 1,
-    borderColor: '#888',
+    borderColor: "#888",
     borderStyle: "solid"
   },
   restringBtnWrapper: {
