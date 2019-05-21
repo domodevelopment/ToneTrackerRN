@@ -1,9 +1,8 @@
-import PushNotification from 'react-native-push-notification';
-import {Alert} from 'react-native'
-import constants from "../constants"
+import PushNotification from "react-native-push-notification";
+import { Alert } from "react-native";
+import constants from "../constants";
 
 export default class NotifService {
-
   constructor(onRegister, onNotification) {
     this.configure(onRegister, onNotification);
     this.lastId = 0;
@@ -19,18 +18,20 @@ export default class NotifService {
         sound: true
       },
       popInitialNotification: true,
-      requestPermissions: true,
+      requestPermissions: true
     });
   }
 
   scheduleNotif(details) {
     this.lastId++;
-    const guitar = details.name
-    let due = new Date(details.timestamp + this.getLife(details));
+    const guitar = details.name;
+    const delayTo10am = 1000 * 60 * 60 * 10;
+    let due = new Date(details.timestamp + this.getLife(details) + delayTo10am);
+    // let due = new Date(Date.now() + 30000);
     PushNotification.localNotificationSchedule({
-      userInfo: {id: details.key},
+      userInfo: { id: details.key },
       date: due,
-      message: `Time to restring ${guitar}`, 
+      message: `Time to restring ${guitar}`
     });
   }
 
@@ -39,28 +40,28 @@ export default class NotifService {
   }
 
   cancelNotif(key) {
-    PushNotification.cancelLocalNotifications({id: key});
+    PushNotification.cancelLocalNotifications({ id: key });
   }
 
   getLife = item => {
-    const day = 86400000
-    let life = 0
+    const day = 86400000;
+    let life = 0;
     if (!item.coated && item.use === constants.daily) {
-      life = day * 30
+      life = day * 30;
     } else if (!item.coated && item.use === constants.somedays) {
-      life = day * 75
+      life = day * 75;
     } else if (!item.coated && item.use === constants.weekly) {
-      life = day * 120
+      life = day * 120;
     } else if (item.coated && item.use === constants.daily) {
-      life = day * 75
+      life = day * 75;
     } else if (item.coated && item.use === constants.somedays) {
-      life = day * 187
+      life = day * 187;
     } else if (item.coated && item.use === constants.weekly) {
-      life = day * 300
+      life = day * 300;
     }
     if (item.type === constants.bass) {
-      life * 2
+      life *= 2;
     }
-    return life
-  }
+    return life;
+  };
 }
