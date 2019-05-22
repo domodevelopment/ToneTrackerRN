@@ -13,11 +13,17 @@ import colors from "../colors";
 
 const EMAIL = "violenthoboenterprises@gmail.com";
 
+// const shareOptions = {
+//   title: "React Native",
+//   message: "Hola mundo",
+//   url:
+//     "https://itunes.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?id=1464663060&mt=8",
+//   subject: "Share Link"
+// };
+
 const shareOptions = {
-  title: "React Native",
-  message: "Hola mundo",
-  url: "http://facebook.github.io/react-native/",
-  subject: "Share Link" //  for email
+  url:
+    "https://itunes.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?id=1464663060&mt=8"
 };
 
 class Options extends Component {
@@ -31,30 +37,34 @@ class Options extends Component {
     return (
       <Menu>
         <MenuTrigger>
-          <Icon name="options-vertical"
+          <Icon
+            name="options-vertical"
             color={colors.dark}
-            size={20} 
-            style={{ margin: 10 }}/>
+            size={20}
+            style={{ margin: 10 }}
+          />
         </MenuTrigger>
         <MenuOptions>
-          {/* <MenuOption
-            style={{padding: 12}}
+          <MenuOption
+            style={{ padding: 12 }}
             onSelect={() => Share.open(shareOptions)}
-            text="Share" /> */}
+            text="Share"
+          />
           <MenuOption
-            style={{padding: 12}}
+            style={{ padding: 12 }}
             onSelect={() => this.handleEmail()}
-            text="Contact" />
+            text="Contact"
+          />
           <MenuOption
-            style={{padding: 12}}
+            style={{ padding: 12 }}
             onSelect={() => this.props.navigation.navigate(`Settings`)}
             text="Settings"
           />
           <MenuOption
-            style={{padding: 12}}
+            style={{ padding: 12 }}
             onSelect={() => this.props.navigation.navigate(`PrivacyPolicy`)}
             text="Privacy Policy"
-           />
+          />
         </MenuOptions>
       </Menu>
     );
