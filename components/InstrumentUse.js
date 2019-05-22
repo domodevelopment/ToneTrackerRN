@@ -25,7 +25,7 @@ class InstrumentUse extends Component {
     //invalid row should have a red border
     imgRowStyle = this.props.validated
       ? styles.selectableImgRow
-      : styles.unvalidatedSelectableImgRow;
+      : styles.invalidSelectableImgRow;
 
     return (
       <View style={imgRowStyle}>

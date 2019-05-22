@@ -87,7 +87,7 @@ class Edit extends Component {
       },
       editingName: false,
       warningPopup: false,
-      nameValidated: true
+      nameValid: true
     };
     this.notif = new NotifService();
   }
@@ -152,7 +152,7 @@ class Edit extends Component {
         this.props.navigation.navigate("Home");
       }
     } else {
-      this.setState({ ...this.state, nameValidated: false });
+      this.setState({ ...this.state, nameValid: false });
       this.refs.toast.show("Name cannot be empty");
     }
   };
@@ -216,9 +216,13 @@ class Edit extends Component {
         autoFocus={true}
         onBlur={() => {
           if (this.state.editedGuitar.name.match(regex)) {
-            this.setState({ ...this.state, editingName: false });
+            this.setState({
+              ...this.state,
+              editingName: false,
+              nameValid: true
+            });
           } else {
-            this.setState({ ...this.state, nameValidated: false });
+            this.setState({ ...this.state, nameValid: false });
             this.refs.toast.show("Name cannot be empty");
           }
         }}
@@ -284,7 +288,7 @@ class Edit extends Component {
 
   render() {
     //invalid name needs a red background
-    nameStyle = this.state.nameInvalid
+    nameStyle = this.state.nameValid
       ? styles.nameInput
       : styles.nameInvalidInput;
 
