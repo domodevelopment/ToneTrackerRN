@@ -6,12 +6,9 @@ import {
   TouchableHighlight,
   Switch,
   Image,
-  Alert,
-  Button,
   NativeModules,
   Platform,
-  BackHandler,
-  Dimensions
+  BackHandler
 } from "react-native";
 import styles from "../styles/editStyles";
 import LinearGradient from "react-native-linear-gradient";
@@ -44,20 +41,17 @@ const options = {
   }
 };
 
+//name cannot be simple whitespace
 const regex = "[a-z|A-Z|0-9]";
 
-// iOS:
-// const locale = NativeModules.SettingsManager.settings.AppleLocale // "fr_FR"
-
-// Android:
-// const locale = NativeModules.I18nManager.localeIdentifier; // "fr_FR"
-
+//need to know the locale for date formatting
 const locale =
   Platform.OS === "ios"
     ? NativeModules.SettingsManager.settings.AppleLocale
     : NativeModules.I18nManager.localeIdentifier;
 
 class Edit extends Component {
+  //need the navigation toolbar for ios only
   static navigationOptions =
     Platform.OS === "ios"
       ? ({ navigation }) => {
@@ -76,21 +70,6 @@ class Edit extends Component {
           };
         }
       : null;
-  // static navigationOptions = ({ navigation }) => {
-  //   const { params = {} } = navigation.state;
-  //   return {
-  //     headerStyle: {
-  //       backgroundColor: colors.white
-  //     },
-  //     headerRight: <Delete navigation={navigation} />,
-  //     headerLeft: (
-  //       <HeaderBackButton
-  //         tintColor={colors.datePickerBtn}
-  //         onPress={() => params.handleBack()}
-  //       />
-  //     )
-  //   };
-  // };
 
   constructor(props) {
     super(props);
@@ -145,7 +124,9 @@ class Edit extends Component {
   };
 
   handleSubmit = () => {
+    //cannot submit an empty name
     if (this.state.editedGuitar.name.match(regex)) {
+      //just go back if there are no changes
       if (
         this.state.originalGuitar.name === this.state.editedGuitar.name &&
         this.state.originalGuitar.type === this.state.editedGuitar.type &&
@@ -156,8 +137,10 @@ class Edit extends Component {
         this.state.originalGuitar.photo === this.state.editedGuitar.photo
       ) {
         this.props.navigation.navigate("Home");
+        //save changes
       } else {
         this.props.editGuitar(this.state.editedGuitar);
+        //determine if reminder needs to be scheduled
         if (
           this.state.originalGuitar.timestamp !==
             this.state.editedGuitar.timestamp &&
@@ -174,6 +157,7 @@ class Edit extends Component {
     }
   };
 
+  //getting selected restring date accounting for locale adjusted date format
   getFormattedDate = () => {
     const { timestamp } = this.state.editedGuitar;
     if (timestamp !== null) {
@@ -189,6 +173,7 @@ class Edit extends Component {
     }
   };
 
+  //getting current date accounting for locale adjusted date format
   getCurrentDate = () => {
     let today = new Date();
     const day = String(today.getDate()).padStart(2, "0");
@@ -220,6 +205,7 @@ class Edit extends Component {
     return { uri: photo };
   };
 
+  //show as plain text when not currently editing otherwise it should be a textinput
   name = editing => {
     return editing ? (
       <TextInput
@@ -249,20 +235,15 @@ class Edit extends Component {
     );
   };
 
+  //options menu isn't built into navigation toolbae on android
   options = () => {
     return Platform.OS === "android" ? (
       <Delete navigation={this.props.navigation} />
     ) : null;
   };
 
-  componentDidUpdate() {
-    if (this.props.changeAge) {
-      this.datePicker.onPressDate();
-      this.props.showDatePicker(false);
-    }
-  }
-
   handleBackPressed = () => {
+    //check for unsaved changes
     if (
       this.state.editedGuitar.name !== this.state.originalGuitar.name ||
       this.state.editedGuitar.type !== this.state.originalGuitar.type ||
@@ -280,6 +261,7 @@ class Edit extends Component {
   };
 
   componentDidUpdate() {
+    //if user selected restring button in list item then automatically show date picker
     if (this.props.changeAge) {
       this.datePicker.onPressDate();
       this.props.showDatePicker(false);
@@ -301,9 +283,10 @@ class Edit extends Component {
   }
 
   render() {
-    nameStyle = this.state.nameValidated
+    //invalid name needs a red background
+    nameStyle = this.state.nameInvalid
       ? styles.nameInput
-      : styles.nameUnvalidatedInput;
+      : styles.nameInvalidInput;
 
     return (
       <View style={styles.parent}>

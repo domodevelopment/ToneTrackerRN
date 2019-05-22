@@ -1,12 +1,5 @@
 import React, { Component } from "react";
-import {
-  View,
-  Text,
-  Button,
-  FlatList,
-  TouchableHighlight,
-  Alert
-} from "react-native";
+import { View, FlatList, TouchableHighlight, Alert } from "react-native";
 import Options from "./Options";
 import { connect } from "react-redux";
 import styles from "../styles/homeStyles";
@@ -16,31 +9,19 @@ import constants from "../constants";
 import { showNotifications, initializeGuitars } from "../actions/actions";
 import colors from "../colors";
 import Icon from "react-native-vector-icons/MaterialIcons";
-// import {PushNotification} from 'react-native-push-notification'
-import appConfig from '../app.json';
-import NotifService from '../utilities/NotifService';
-
-/**
- * Having huge issues when trying to implement notifications. Try again when developing on OSX
- * https://www.npmjs.com/package/react-native-push-notification
- */
+import appConfig from "../app.json";
+import NotifService from "../utilities/NotifService";
 
 class Home extends Component {
   static navigationOptions = ({ navigation }) => {
     return {
-      //Heading/title of the header
       title: navigation.getParam("Title", "Tone Tracker"),
-      //Heading style
       headerTitleStyle: {
         color: colors.dark
       },
       headerStyle: {
-        // backgroundColor: navigation.getParam("BackgroundColor", "red")
         backgroundColor: colors.white
       },
-      // //Heading text color
-      // headerTintColor: navigation.getParam("HeaderTintColor", "#000"),
-      //Heading Menu in Right Side
       headerRight: <Options navigation={navigation} />
     };
   };
@@ -68,9 +49,7 @@ class Home extends Component {
   }
 
   getPersistedData = async () => {
-    /**
-     * getting notification state from async storage
-     */
+    //getting notification state from async storage
     let notifications = await AsyncStorage.getItem(
       constants.persistedNotifications
     );
@@ -82,14 +61,14 @@ class Home extends Component {
     if (this.props.notifications !== notifications) {
       this.props.showNotifications(notifications);
     }
-    /**
-     * getting guitars from async storage
-     */
+    //getting guitars from async storage
     let guitars = await AsyncStorage.getItem(constants.persistedGuitars);
     this.props.initializeGuitars(JSON.parse(guitars));
   };
 
+  //the floating action button
   fab = scrolling => {
+    //momentarily hide the fab on scroll. this gives the user a chance to click on elements which may be hidden beneath it
     return scrolling ? null : (
       <TouchableHighlight
         onPress={() => this.props.navigation.navigate("Add")}

@@ -1,8 +1,7 @@
 import constants from "../constants";
-import uuidv1 from "uuid";
-import { Alert } from "react-native";
 import AsyncStorage from "@react-native-community/async-storage";
 
+//placeholder state
 getInitialState = () => {
   return {
     guitars: [],

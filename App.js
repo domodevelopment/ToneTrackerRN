@@ -3,18 +3,13 @@ import { Provider } from "react-redux";
 import { createStore } from "redux";
 import reducer from "./reducers/reducer";
 import NavContainer from "./components/NavContainer";
-import { Platform, StatusBar, View, Text } from "react-native";
+import { Platform, StatusBar, View } from "react-native";
 import { MenuProvider } from "react-native-popup-menu";
-import {
-  Menu,
-  MenuOptions,
-  MenuOption,
-  MenuTrigger
-} from "react-native-popup-menu";
 import colors from "./colors";
 
 const store = createStore(reducer);
 
+//configuring status bar appearance
 const MyStatusBar = ({ backgroundColor, ...props }) => (
   <View
     style={{

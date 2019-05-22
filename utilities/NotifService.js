@@ -1,7 +1,9 @@
 import PushNotification from "react-native-push-notification";
-import { Alert } from "react-native";
 import constants from "../constants";
 
+/**
+ * handling the notifications
+ */
 export default class NotifService {
   constructor(onRegister, onNotification) {
     this.configure(onRegister, onNotification);
@@ -22,12 +24,12 @@ export default class NotifService {
     });
   }
 
+  //notify user to restring at 10am of the day the strings are due to go rusty
   scheduleNotif(details) {
     this.lastId++;
     const guitar = details.name;
     const delayTo10am = 1000 * 60 * 60 * 10;
     let due = new Date(details.timestamp + this.getLife(details) + delayTo10am);
-    // let due = new Date(Date.now() + 30000);
     PushNotification.localNotificationSchedule({
       userInfo: { id: details.key },
       date: due,
@@ -43,6 +45,7 @@ export default class NotifService {
     PushNotification.cancelLocalNotifications({ id: key });
   }
 
+  //calculate when notification should fire
   getLife = item => {
     const day = 86400000;
     let life = 0;

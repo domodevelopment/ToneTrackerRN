@@ -12,6 +12,7 @@ import colors from "../colors";
 
 class InstrumentType extends Component {
   render() {
+    //show grayscale image if not selected, show colored image if selected
     electricImg =
       this.props.type === constants.electric
         ? electricSelectedImg
@@ -23,9 +24,10 @@ class InstrumentType extends Component {
     bassImg =
       this.props.type === constants.bass ? bassSelectedImg : bassFadedImg;
 
+    //invalid row should have a red border
     imgRowStyle = this.props.validated
       ? styles.selectableImgRow
-      : styles.unvalidatedSelectableImgRow;
+      : styles.invalidSelectableImgRow;
 
     return (
       <View style={imgRowStyle}>

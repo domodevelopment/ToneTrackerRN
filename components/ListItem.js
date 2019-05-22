@@ -2,11 +2,8 @@ import React, { Component } from "react";
 import {
   View,
   Text,
-  Button,
-  FlatList,
   TouchableHighlight,
   Image,
-  Alert,
   Dimensions
 } from "react-native";
 import { selectedGuitar, editGuitar, showDatePicker } from "../actions/actions";
@@ -52,6 +49,7 @@ class ListItem extends Component {
     return { uri: photo };
   };
 
+  //percentage of progress bar to fill
   getProgress = () => {
     let age = this.getDaysElapsed();
     return Math.floor(this.getAge(age));
@@ -69,6 +67,7 @@ class ListItem extends Component {
     return Math.floor(diffStamp);
   };
 
+  //easy to read age of strings
   getDisplayAge = () => {
     const age = this.getDaysElapsed();
     if (age === 0) {
@@ -80,6 +79,7 @@ class ListItem extends Component {
     }
   };
 
+  //getting color for progress indicator
   getCondition = () => {
     const { item } = this.props;
     //setting string quality to good as default
@@ -122,6 +122,7 @@ class ListItem extends Component {
     return stringCondition;
   };
 
+  //determining how close strings are to being rusty
   getAge = age => {
     const { item } = this.props;
     if (item.type === constants.bass) {

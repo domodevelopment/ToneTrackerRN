@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, TouchableHighlight, Image, Alert } from "react-native";
+import { View, TouchableHighlight, Image } from "react-native";
 import dailyFadedImg from "../images/calendar_daily_faded.png";
 import dailySelectedImg from "../images/calendar_daily_selected.png";
 import somedaysFadedImg from "../images/calendar_somedays_faded.png";
@@ -12,6 +12,7 @@ import colors from "../colors";
 
 class InstrumentUse extends Component {
   render() {
+    //show grayscale image if not selected, show colored image if selected
     dailyImg =
       this.props.use === constants.daily ? dailySelectedImg : dailyFadedImg;
     somedaysImg =
@@ -21,6 +22,7 @@ class InstrumentUse extends Component {
     weeklyImg =
       this.props.use === constants.weekly ? weeklySelectedImg : weeklyFadedImg;
 
+    //invalid row should have a red border
     imgRowStyle = this.props.validated
       ? styles.selectableImgRow
       : styles.unvalidatedSelectableImgRow;

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Text, Alert, Platform } from "react-native";
+import { Platform } from "react-native";
 import Icon from "react-native-vector-icons/SimpleLineIcons";
 import {
   Menu,
@@ -10,13 +10,16 @@ import {
 import { connect } from "react-redux";
 import { deleteGuitar } from "../actions/actions";
 import colors from "../colors";
-import NotifService from '../utilities/NotifService';
+import NotifService from "../utilities/NotifService";
 
 const iconColor = Platform.OS === "ios" ? colors.dark : colors.white;
 
+/**
+ * This options menu only has one option: delete
+ */
 class Delete extends Component {
-  constructor(props){
-    super(props)
+  constructor(props) {
+    super(props);
     this.notif = new NotifService();
   }
 
@@ -28,14 +31,15 @@ class Delete extends Component {
             color={iconColor}
             name="options-vertical"
             size={20}
-            style={{margin: 10}}/>
+            style={{ margin: 10 }}
+          />
         </MenuTrigger>
         <MenuOptions>
           <MenuOption
-          style={{padding: 15}}
+            style={{ padding: 15 }}
             onSelect={() => {
               this.props.deleteGuitar(this.props.selectedForEditing);
-              this.notif.cancelNotif(this.props.selectedForEditing)
+              this.notif.cancelNotif(this.props.selectedForEditing);
               this.props.navigation.navigate(`Home`);
             }}
             text="Delete"

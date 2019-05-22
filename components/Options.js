@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Text, Alert } from "react-native";
 import Icon from "react-native-vector-icons/SimpleLineIcons";
 import email from "react-native-email";
 import {
@@ -8,31 +7,26 @@ import {
   MenuOption,
   MenuTrigger
 } from "react-native-popup-menu";
-import Share, { ShareSheet, Button } from "react-native-share";
+import Share from "react-native-share";
 import colors from "../colors";
 
+//developer email
 const EMAIL = "violenthoboenterprises@gmail.com";
 
-// const shareOptions = {
-//   title: "React Native",
-//   message: "Hola mundo",
-//   url:
-//     "https://itunes.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?id=1464663060&mt=8",
-//   subject: "Share Link"
-// };
-
+//link to store listing
 const shareOptions = {
   url:
     "https://itunes.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?id=1464663060&mt=8"
 };
 
 class Options extends Component {
+  //open email app and populate 'to' field with developer email
   handleEmail = () => {
-    // inform user of error
     email(EMAIL, { subject: "RE: Tone Tracker" }).catch(err =>
       console.error("An error occured", err)
     );
   };
+
   render() {
     return (
       <Menu>
@@ -47,6 +41,7 @@ class Options extends Component {
         <MenuOptions>
           <MenuOption
             style={{ padding: 12 }}
+            //share this app
             onSelect={() => Share.open(shareOptions)}
             text="Share"
           />

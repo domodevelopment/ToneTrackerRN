@@ -24,7 +24,7 @@ export default {
     paddingLeft: "3%",
     fontSize: 20
   },
-  nameUnvalidatedInput: {
+  nameInvalidInput: {
     backgroundColor: colors.rusty,
     height: "60%",
     width: "70%",

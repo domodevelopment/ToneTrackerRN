@@ -5,9 +5,6 @@ import {
   TextInput,
   TouchableHighlight,
   Switch,
-  Image,
-  Alert,
-  Button,
   NativeModules,
   Platform,
   BackHandler
@@ -26,16 +23,14 @@ import Dialog from "react-native-dialog";
 import Toast, { DURATION } from "react-native-easy-toast";
 import NotifService from "../utilities/NotifService";
 
-// iOS:
-// const locale = NativeModules.SettingsManager.settings.AppleLocale // "fr_FR"
-
-// Android:
-// const locale = NativeModules.I18nManager.localeIdentifier; // "fr_FR"
-
+//need to know locale for date formatting
 const locale =
   Platform.OS === "ios"
     ? NativeModules.SettingsManager.settings.AppleLocale
     : NativeModules.I18nManager.localeIdentifier;
+
+//name cannot be whitespace
+const regex = "[a-z|A-Z|0-9]";
 
 class Add extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -56,6 +51,7 @@ class Add extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      //user chosen details for the new guitar
       newGuitar: {
         key: uuidv1(),
         name: "",
@@ -65,10 +61,12 @@ class Add extends Component {
         coated: false,
         photo: null
       },
+      //are details validated?
       nameValidated: true,
       typeValidated: true,
       useValidated: true,
       stampValidated: true,
+      //show 'unsaved changes' prompt
       warningPopup: false
     };
     this.notif = new NotifService();
@@ -87,7 +85,6 @@ class Add extends Component {
   };
 
   handleSubmit = () => {
-    const regex = "[a-z|A-Z|0-9]";
     const { name, type, use, timestamp } = this.state.newGuitar;
     //check that no details are missing
     if (
@@ -98,9 +95,11 @@ class Add extends Component {
     ) {
       this.props.addGuitar(this.state.newGuitar);
       this.props.navigation.navigate("Home");
+      //schedule restring reminder
       if (this.props.notifications) {
         this.notif.scheduleNotif(this.state.newGuitar);
       }
+      //validating details
     } else {
       this.refs.toast.show("Fill in all details");
       if (!name.match(regex)) {
@@ -135,6 +134,7 @@ class Add extends Component {
     });
   };
 
+  //format date based on locale
   getFormattedDate = () => {
     const { timestamp } = this.state.newGuitar;
     if (timestamp !== null) {
@@ -151,6 +151,7 @@ class Add extends Component {
     }
   };
 
+  //getting current date with locale accounted date format
   getCurrentDate = () => {
     let today = new Date();
     const day = String(today.getDate()).padStart(2, "0");
@@ -167,7 +168,7 @@ class Add extends Component {
   };
 
   handleBackPressed = () => {
-    const regex = "[a-z|A-Z|0-9]";
+    //check if user has unsaved changes
     if (
       this.state.newGuitar.name.match(regex) !== null ||
       this.state.newGuitar.type !== null ||
@@ -197,13 +198,15 @@ class Add extends Component {
   }
 
   render() {
+    //invalid name input needs a red background
     nameStyle = this.state.nameValidated
       ? styles.nameInput
-      : styles.nameUnvalidatedInput;
+      : styles.nameInvalidInput;
 
+    //invalid date needs a red border
     stampStyle = this.state.stampValidated
       ? styles.datePickerBtn
-      : styles.unvalidatedDatePickerBtn;
+      : styles.invalidDatePickerBtn;
 
     return (
       <View style={styles.parent}>

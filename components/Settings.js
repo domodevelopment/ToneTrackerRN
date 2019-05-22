@@ -3,20 +3,15 @@ import { View, Text, Switch } from "react-native";
 import { connect } from "react-redux";
 import { showNotifications } from "../actions/actions";
 import styles from "../styles/settingsStyles";
-import colors from "../colors";
 
+/**
+ * settings screen only has option to enable/disable notifications
+ */
 class Settings extends Component {
-  // static navigationOptions = ({ navigation }) => {
-  //   return {
-  //     headerStyle: {
-  //       backgroundColor: colors.primary
-  //     },
-  //     headerTintColor: colors.white
-  //   };
-  // };
   onSwitchChanged = () => {
     this.props.showNotifications(!this.props.notifications);
   };
+
   render() {
     return (
       <View style={styles.parent}>
