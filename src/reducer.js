@@ -7,7 +7,8 @@ getInitialState = () => {
     guitars: [],
     notifications: null,
     selectedForEditing: null,
-    changeAge: null
+    changeAge: null,
+    nightShade: false
   };
 };
 
@@ -94,6 +95,12 @@ const reducer = (state = getInitialState(), action) => {
       return {
         ...state,
         notifications: action.payload
+      };
+    //Has user selected nightshade or normal theme
+    case constants.nightShade:
+      return {
+        ...state,
+        nightShade: !nightShade
       };
     default:
       return state;

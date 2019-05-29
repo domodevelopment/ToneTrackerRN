@@ -48,3 +48,9 @@ export function showNotifications(show) {
     payload: show
   };
 }
+
+export function toggleNightShade() {
+  return {
+    type: constants.toggleNightShade
+  };
+}

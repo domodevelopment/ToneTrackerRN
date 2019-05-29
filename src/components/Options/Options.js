@@ -33,7 +33,7 @@ class Options extends Component {
         <MenuTrigger>
           <Icon
             name="options-vertical"
-            color={colors.dark}
+            color={colors.notQuiteWhite}
             size={20}
             style={{ margin: 10 }}
           />

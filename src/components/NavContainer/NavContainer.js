@@ -14,15 +14,15 @@ getNavigationOptions = () => {
   return ios
     ? {
         headerStyle: {
-          backgroundColor: colors.white
+          backgroundColor: colors.darkDark
         },
-        headerTintColor: colors.dark
+        headerTintColor: colors.notQuiteWhite
       }
     : {
         headerStyle: {
-          backgroundColor: colors.white
+          backgroundColor: colors.darkDark
         },
-        headerTintColor: colors.dark,
+        headerTintColor: colors.notQuiteWhite,
         header: null
       };
 };

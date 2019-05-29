@@ -36,12 +36,9 @@ class Add extends Component {
   static navigationOptions = ({ navigation }) => {
     const { params = {} } = navigation.state;
     return {
-      headerStyle: {
-        backgroundColor: colors.white
-      },
       headerLeft: (
         <HeaderBackButton
-          tintColor={colors.dark}
+          tintColor={colors.light}
           onPress={() => params.handleBack()}
         />
       )
@@ -218,6 +215,7 @@ class Add extends Component {
             onChangeText={this.handleNameChange}
             maxLength={15}
             autoFocus={true}
+            selectionColor={colors.primary}
           />
         </View>
         <View style={styles.questionRow}>
@@ -261,7 +259,10 @@ class Add extends Component {
             }}
             customStyles={{
               btnTextConfirm: {
-                color: colors.dark
+                color: colors.light
+              },
+              dateText: {
+                color: colors.notQuiteWhite
               }
             }}
           />
@@ -279,10 +280,10 @@ class Add extends Component {
             onPress={() => {
               this.handleSubmit();
             }}
-            underlayColor={colors.light}
+            underlayColor={colors.notQuiteBlack}
           >
             <LinearGradient
-              colors={[colors.light, colors.primary, colors.dark]}
+              colors={[colors.light, colors.light, colors.primary]}
               style={styles.gradient}
             >
               <Text style={styles.btnText}>Submit</Text>
@@ -301,14 +302,14 @@ class Add extends Component {
                 this.setState({ warningPopup: false });
                 this.props.navigation.navigate("Home");
               }}
-              color={colors.dark}
+              color={colors.primary}
             />
             <Dialog.Button
               label="Stay Here"
               onPress={() => {
                 this.setState({ warningPopup: false });
               }}
-              color={colors.dark}
+              color={colors.primary}
             />
           </Dialog.Container>
         </View>

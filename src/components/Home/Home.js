@@ -17,10 +17,10 @@ class Home extends Component {
     return {
       title: navigation.getParam("Title", "Tone Tracker"),
       headerTitleStyle: {
-        color: colors.dark
+        color: colors.notQuiteWhite
       },
       headerStyle: {
-        backgroundColor: colors.white
+        backgroundColor: colors.darkDark
       },
       headerRight: <Options navigation={navigation} />
     };
@@ -67,8 +67,9 @@ class Home extends Component {
       <TouchableHighlight
         onPress={() => this.props.navigation.navigate("Add")}
         style={styles.fab}
+        underlayColor={colors.light}
       >
-        <Icon name="add" color={"#fff"} size={45} />
+        <Icon name="add" color={colors.notQuiteWhite} size={45} />
       </TouchableHighlight>
     );
   };

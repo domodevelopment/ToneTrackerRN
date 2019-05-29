@@ -32,21 +32,21 @@ class InstrumentUse extends Component {
         <TouchableHighlight
           style={styles.imgWrapper}
           onPress={() => this.props.handleUseChange(constants.daily)}
-          underlayColor={colors.light}
+          underlayColor={colors.notQuiteBlack}
         >
           <Image source={dailyImg} style={styles.img} resizeMode="contain" />
         </TouchableHighlight>
         <TouchableHighlight
           style={styles.imgWrapper}
           onPress={() => this.props.handleUseChange(constants.somedays)}
-          underlayColor={colors.light}
+          underlayColor={colors.notQuiteBlack}
         >
           <Image source={somedaysImg} style={styles.img} resizeMode="contain" />
         </TouchableHighlight>
         <TouchableHighlight
           style={styles.imgWrapper}
           onPress={() => this.props.handleUseChange(constants.weekly)}
-          underlayColor={colors.light}
+          underlayColor={colors.notQuiteBlack}
         >
           <Image source={weeklyImg} style={styles.img} resizeMode="contain" />
         </TouchableHighlight>

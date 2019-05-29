@@ -2,7 +2,7 @@ import colors from "../../colors";
 
 export default {
   parent: {
-    backgroundColor: colors.lessWhite,
+    backgroundColor: colors.lightDark,
     height: "100%",
     flexDirection: "row"
   },
@@ -13,7 +13,7 @@ export default {
   },
   text: {
     fontSize: 20,
-    color: colors.notQuiteBlack,
+    color: colors.notQuiteWhite,
     padding: 10
   },
   switchWrapper: {

@@ -174,7 +174,7 @@ class ListItem extends Component {
               style={styles.editBtnWrapper}
             >
               <LinearGradient
-                colors={[colors.white, colors.lessWhite, colors.evenLessWhite]}
+                colors={["#fff", "#eee", "#ccc"]}
                 style={styles.editButton}
               >
                 <Icon name="edit" color={colors.notQuiteBlack} size={20} />
@@ -217,7 +217,7 @@ class ListItem extends Component {
                   this.notif.scheduleNotif(this.props.item);
                 }
               }}
-              color={colors.dark}
+              color={colors.primary}
             />
             <Dialog.Button
               label="Some other day"
@@ -227,14 +227,14 @@ class ListItem extends Component {
                 this.props.showDatePicker(true);
                 this.props.navigation.navigate("Edit", { photo: null });
               }}
-              color={colors.dark}
+              color={colors.primary}
             />
             <Dialog.Button
               label="Cancel"
               onPress={() => {
                 this.setState({ restringPopup: false });
               }}
-              color={colors.dark}
+              color={colors.primary}
             />
           </Dialog.Container>
         </View>

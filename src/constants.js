@@ -13,5 +13,6 @@ export default {
   deleteGuitar: "DELETE_GUITAR",
   persistedNotifications: "PERSISTED_NOTIFICATIONS",
   persistedGuitars: "PERSISTED_GUITARS",
-  initializeGuitars: "INITIALIZE_GUITARS"
+  initializeGuitars: "INITIALIZE_GUITARS",
+  toggleNightShade: "TOGGLE_NIGHT_SHADE"
 };

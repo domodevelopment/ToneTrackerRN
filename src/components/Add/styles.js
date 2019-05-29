@@ -3,20 +3,20 @@ import colors from "../../colors";
 export default {
   parent: {
     height: "100%",
-    backgroundColor: colors.lessWhite
+    backgroundColor: colors.lightDark
   },
   nameInputWrapper: {
     height: "12%",
     alignItems: "center"
   },
   nameInput: {
-    backgroundColor: "#ccc",
+    backgroundColor: colors.mediumDark,
     marginTop: "5%",
     height: "60%",
     width: "95%",
     paddingLeft: "3%",
     fontSize: 20,
-    color: colors.dark
+    color: colors.light
   },
   nameInvalidInput: {
     backgroundColor: colors.rusty,
@@ -83,11 +83,11 @@ export default {
     borderRadius: 15
   },
   text: {
-    color: colors.notQuiteBlack,
+    color: colors.notQuiteWhite,
     fontSize: 17
   },
   btnText: {
-    color: colors.white,
+    color: colors.notQuiteWhite,
     fontSize: 21
   }
 };

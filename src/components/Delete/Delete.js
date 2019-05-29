@@ -12,7 +12,7 @@ import { deleteGuitar } from "../../actions";
 import colors from "../../colors";
 import NotifService from "../../NotifService";
 
-const iconColor = Platform.OS === "ios" ? colors.dark : colors.white;
+const iconColor = Platform.OS === "ios" ? colors.notQuiteWhite : colors.white;
 
 /**
  * This options menu only has one option: delete

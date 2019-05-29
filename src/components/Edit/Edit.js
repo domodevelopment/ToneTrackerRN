@@ -57,13 +57,10 @@ class Edit extends Component {
       ? ({ navigation }) => {
           const { params = {} } = navigation.state;
           return {
-            headerStyle: {
-              backgroundColor: colors.white
-            },
             headerRight: <Delete navigation={navigation} />,
             headerLeft: (
               <HeaderBackButton
-                tintColor={colors.datePickerBtn}
+                tintColor={colors.notQuiteWhite}
                 onPress={() => params.handleBack()}
               />
             )
@@ -226,6 +223,7 @@ class Edit extends Component {
             this.refs.toast.show("Name cannot be empty");
           }
         }}
+        selectionColor={colors.primary}
       />
     ) : (
       <Text
@@ -371,7 +369,10 @@ class Edit extends Component {
             }}
             customStyles={{
               btnTextConfirm: {
-                color: colors.dark
+                color: colors.primary
+              },
+              dateText: {
+                color: colors.notQuiteWhite
               }
             }}
           />
@@ -391,7 +392,7 @@ class Edit extends Component {
             }}
           >
             <LinearGradient
-              colors={[colors.light, colors.primary, colors.dark]}
+              colors={[colors.light, colors.light, colors.primary]}
               style={styles.gradient}
             >
               <Text style={styles.btnText}>Update</Text>
@@ -410,14 +411,14 @@ class Edit extends Component {
                 this.setState({ ...this.state, warningPopup: false });
                 this.props.navigation.navigate("Home");
               }}
-              color={colors.dark}
+              color={colors.primary}
             />
             <Dialog.Button
               label="Stay Here"
               onPress={() => {
                 this.setState({ ...this.state, warningPopup: false });
               }}
-              color={colors.dark}
+              color={colors.primary}
             />
           </Dialog.Container>
         </View>
