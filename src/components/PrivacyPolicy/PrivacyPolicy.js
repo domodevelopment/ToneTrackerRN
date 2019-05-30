@@ -1,11 +1,11 @@
 import React, { Component } from "react";
-import { Text, ScrollView, SafeAreaView } from "react-native";
+import { Text, ScrollView, SafeAreaView, Animated } from "react-native";
 import styles from "./styles";
 
 class PrivacyPolicy extends Component {
   render() {
     return (
-      <SafeAreaView>
+      <SafeAreaView style={styles.container}>
         <ScrollView style={styles.scrollView}>
           <Text style={styles.title}>Privacy Policy</Text>
           <Text style={styles.content}>{thePolicy}</Text>

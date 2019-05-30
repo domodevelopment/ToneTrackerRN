@@ -67,14 +67,26 @@ export default {
     height: "18%",
     alignItems: "center"
   },
-  submit: {
+  submitAnimationWrapper: {
     height: "55%",
-    width: "90%",
+    width: "90%"
+  },
+  submit: {
+    height: "100%",
+    width: "100%",
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 15,
     marginTop: "3%"
   },
+  // submit: {
+  //   height: "55%",
+  //   width: "90%",
+  //   justifyContent: "center",
+  //   alignItems: "center",
+  //   borderRadius: 15,
+  //   marginTop: "3%"
+  // },
   gradient: {
     height: "100%",
     width: "100%",

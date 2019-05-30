@@ -7,7 +7,8 @@ import {
   Switch,
   NativeModules,
   Platform,
-  BackHandler
+  BackHandler,
+  Alert
 } from "react-native";
 import styles from "./styles";
 import LinearGradient from "react-native-linear-gradient";
@@ -22,6 +23,7 @@ import { HeaderBackButton } from "react-navigation";
 import Dialog from "react-native-dialog";
 import Toast from "react-native-easy-toast";
 import NotifService from "../../NotifService";
+import * as Animatable from "react-native-animatable";
 
 //need to know locale for date formatting
 const locale =
@@ -83,43 +85,46 @@ class Add extends Component {
 
   handleSubmit = () => {
     const { name, type, use, timestamp } = this.state.newGuitar;
-    //check that no details are missing
-    if (
-      name.match(regex) &&
-      type !== null &&
-      use !== null &&
-      timestamp !== null
-    ) {
-      this.props.addGuitar(this.state.newGuitar);
-      this.props.navigation.navigate("Home");
-      //schedule restring reminder
-      if (this.props.notifications) {
-        this.notif.scheduleNotif(this.state.newGuitar);
-      }
-      //validating details
-    } else {
-      this.refs.toast.show("Fill in all details");
-      if (!name.match(regex)) {
-        this.setState({ nameValidated: false });
+    //animate the submit button before doing anything
+    this.refs["submit"].rubberBand(500).then(endState => {
+      //check that no details are missing
+      if (
+        name.match(regex) &&
+        type !== null &&
+        use !== null &&
+        timestamp !== null
+      ) {
+        this.props.addGuitar(this.state.newGuitar);
+        this.props.navigation.navigate("Home");
+        //schedule restring reminder
+        if (this.props.notifications) {
+          this.notif.scheduleNotif(this.state.newGuitar);
+        }
+        //validating details
       } else {
-        this.setState({ nameValidated: true });
+        this.refs.toast.show("Fill in all details");
+        if (!name.match(regex)) {
+          this.setState({ nameValidated: false });
+        } else {
+          this.setState({ nameValidated: true });
+        }
+        if (type === null) {
+          this.setState({ typeValidated: false });
+        } else {
+          this.setState({ typeValidated: true });
+        }
+        if (use === null) {
+          this.setState({ useValidated: false });
+        } else {
+          this.setState({ useValidated: true });
+        }
+        if (timestamp === null) {
+          this.setState({ stampValidated: false });
+        } else {
+          this.setState({ stampValidated: true });
+        }
       }
-      if (type === null) {
-        this.setState({ typeValidated: false });
-      } else {
-        this.setState({ typeValidated: true });
-      }
-      if (use === null) {
-        this.setState({ useValidated: false });
-      } else {
-        this.setState({ useValidated: true });
-      }
-      if (timestamp === null) {
-        this.setState({ stampValidated: false });
-      } else {
-        this.setState({ stampValidated: true });
-      }
-    }
+    });
   };
 
   onSwitchChanged = () => {
@@ -275,20 +280,22 @@ class Add extends Component {
           />
         </View>
         <View style={styles.submitWrapper}>
-          <TouchableHighlight
-            style={styles.submit}
-            onPress={() => {
-              this.handleSubmit();
-            }}
-            underlayColor={colors.evenLessWhite}
-          >
-            <LinearGradient
-              colors={[colors.primary, colors.primary, colors.dark]}
-              style={styles.gradient}
+          <Animatable.View ref="submit" style={styles.submitAnimationWrapper}>
+            <TouchableHighlight
+              style={styles.submit}
+              onPress={() => {
+                this.handleSubmit();
+              }}
+              underlayColor={colors.evenLessWhite}
             >
-              <Text style={styles.btnText}>Submit</Text>
-            </LinearGradient>
-          </TouchableHighlight>
+              <LinearGradient
+                colors={[colors.primary, colors.primary, colors.dark]}
+                style={styles.gradient}
+              >
+                <Text style={styles.btnText}>Submit</Text>
+              </LinearGradient>
+            </TouchableHighlight>
+          </Animatable.View>
         </View>
         <View>
           <Dialog.Container visible={this.state.warningPopup}>

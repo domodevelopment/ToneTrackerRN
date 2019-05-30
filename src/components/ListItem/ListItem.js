@@ -3,8 +3,11 @@ import {
   View,
   Text,
   TouchableHighlight,
+  TouchableWithoutFeedback,
   Image,
-  Dimensions
+  Dimensions,
+  Animated,
+  Alert
 } from "react-native";
 import { selectedGuitar, editGuitar, showDatePicker } from "../../actions";
 import { connect } from "react-redux";
@@ -31,6 +34,39 @@ class ListItem extends Component {
     };
     this.notif = new NotifService();
   }
+
+  componentWillMount() {
+    //each animated button needs an animated value
+    this.animatedEditValue = new Animated.Value(1);
+    this.animatedRestringValue = new Animated.Value(1);
+  }
+
+  //shrink selected button
+  handlePressIn = valueToAnimate => {
+    Animated.spring(valueToAnimate, {
+      toValue: 0.8
+    }).start();
+  };
+
+  //bounce the selected button
+  handlePressOut = valueToAnimate => {
+    Animated.spring(valueToAnimate, {
+      toValue: 1,
+      friction: 3,
+      tension: 40
+      //perform the selected button's job
+    }).start(
+      valueToAnimate === this.animatedEditValue
+        ? this.goToEdit
+        : this.setState({ restringPopup: true })
+    );
+  };
+
+  //navigate to Edit screen
+  goToEdit = () => {
+    this.props.selectedGuitar(this.props.item.key);
+    this.props.navigation.navigate("Edit", { photo: null });
+  };
 
   instrumentImage = () => {
     let { type, photo } = this.props.item;
@@ -144,6 +180,12 @@ class ListItem extends Component {
   };
 
   render() {
+    const animatedEditStyle = {
+      transform: [{ scale: this.animatedEditValue }]
+    };
+    const animatedRestringStyle = {
+      transform: [{ scale: this.animatedRestringValue }]
+    };
     return (
       <View style={styles.parent}>
         <View style={styles.imageWrapper}>
@@ -166,40 +208,39 @@ class ListItem extends Component {
         <View style={styles.detailsWrapper}>
           <View style={styles.detailsRowOne}>
             <Text style={styles.nameText}>{this.props.item.name}</Text>
-            <TouchableHighlight
-              onPress={() => {
-                this.props.selectedGuitar(this.props.item.key);
-                this.props.navigation.navigate("Edit", { photo: null });
-              }}
+            <TouchableWithoutFeedback
+              onPressIn={() => this.handlePressIn(this.animatedEditValue)}
+              onPressOut={() => this.handlePressOut(this.animatedEditValue)}
               style={styles.editBtnWrapper}
-              underlayColor={colors.evenLessWhite}
             >
-              <LinearGradient
-                colors={["#fff", "#eee", "#ccc"]}
-                style={styles.editButton}
-              >
-                <Icon name="edit" color={colors.notQuiteBlack} size={20} />
-              </LinearGradient>
-            </TouchableHighlight>
+              <Animated.View style={animatedEditStyle}>
+                <LinearGradient
+                  colors={["#fff", "#eee", "#ccc"]}
+                  style={styles.editButton}
+                >
+                  <Icon name="edit" color={colors.notQuiteBlack} size={20} />
+                </LinearGradient>
+              </Animated.View>
+            </TouchableWithoutFeedback>
           </View>
           <View style={styles.detailsRowTwo}>
             <View style={styles.ageTextWrapper}>
               <Text style={styles.ageText}>{this.getDisplayAge()}</Text>
             </View>
-            <TouchableHighlight
-              onPress={() => {
-                this.setState({ restringPopup: true });
-              }}
+            <TouchableWithoutFeedback
+              onPressIn={() => this.handlePressIn(this.animatedRestringValue)}
+              onPressOut={() => this.handlePressOut(this.animatedRestringValue)}
               style={styles.restringBtnWrapper}
-              underlayColor={colors.evenLessWhite}
             >
-              <LinearGradient
-                colors={[colors.light, colors.primary, colors.dark]}
-                style={styles.restringButton}
-              >
-                <Text style={styles.btnText}>Restring</Text>
-              </LinearGradient>
-            </TouchableHighlight>
+              <Animated.View style={animatedRestringStyle}>
+                <LinearGradient
+                  colors={[colors.light, colors.primary, colors.dark]}
+                  style={styles.restringButton}
+                >
+                  <Text style={styles.btnText}>Restring</Text>
+                </LinearGradient>
+              </Animated.View>
+            </TouchableWithoutFeedback>
           </View>
         </View>
         <View>

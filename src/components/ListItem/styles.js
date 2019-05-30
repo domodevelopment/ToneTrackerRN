@@ -83,4 +83,9 @@ export default {
     color: "#333",
     textAlign: "center"
   }
+  // temp: {
+  //   backgroundColor: "#ccc",
+  //   width: 100,
+  //   height: 50
+  // }
 };
