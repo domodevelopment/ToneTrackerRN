@@ -438,7 +438,14 @@ class Edit extends Component {
             />
           </Dialog.Container>
         </View>
-        <Toast ref="toast" />
+        <Toast
+          ref="toast"
+          style={{
+            backgroundColor: colors.notQuiteBlack,
+            position: "absolute",
+            bottom: "10%"
+          }}
+        />
       </View>
     );
   }

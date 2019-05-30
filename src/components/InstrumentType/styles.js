@@ -12,11 +12,12 @@ export default {
     alignItems: "center"
   },
   invalidSelectableImgRow: {
-    height: "16%",
+    // height: "16%",
     width: "96%",
+    height: height * 0.16,
     flexDirection: "row",
     justifyContent: "space-around",
-    paddingTop: "2%",
+    paddingTop: "4%",
     margin: "2%",
     borderColor: colors.rusty,
     borderWidth: 3,
