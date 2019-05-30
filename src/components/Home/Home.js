@@ -109,8 +109,8 @@ class Home extends Component {
               }, 1000);
             }}
           />
-          {this.fab(this.state.hideFab)}
         </SafeAreaView>
+        {this.fab(this.state.hideFab)}
       </View>
     );
   }
