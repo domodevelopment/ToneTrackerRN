@@ -83,9 +83,13 @@ export default {
     height: "18%",
     alignItems: "center"
   },
-  submit: {
+  updateAnimationWrapper: {
     height: "55%",
-    width: "90%",
+    width: "90%"
+  },
+  submit: {
+    height: "100%",
+    width: "100%",
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 15,

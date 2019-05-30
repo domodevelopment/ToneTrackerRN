@@ -85,7 +85,7 @@ class Add extends Component {
 
   handleSubmit = () => {
     const { name, type, use, timestamp } = this.state.newGuitar;
-    //animate the submit button before doing anything
+    //animate the submit button before doing anything else
     this.refs["submit"].rubberBand(500).then(endState => {
       //check that no details are missing
       if (

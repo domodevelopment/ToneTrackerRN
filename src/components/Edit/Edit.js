@@ -28,6 +28,7 @@ import Dialog from "react-native-dialog";
 import Toast from "react-native-easy-toast";
 import ImagePicker from "react-native-image-picker";
 import NotifService from "../../NotifService";
+import * as Animatable from "react-native-animatable";
 
 function getGuitar(props) {
   return props.guitars.find(x => x.key === props.selectedForEditing);
@@ -121,37 +122,40 @@ class Edit extends Component {
   };
 
   handleSubmit = () => {
-    //cannot submit an empty name
-    if (this.state.editedGuitar.name.match(regex)) {
-      //just go back if there are no changes
-      if (
-        this.state.originalGuitar.name === this.state.editedGuitar.name &&
-        this.state.originalGuitar.type === this.state.editedGuitar.type &&
-        this.state.originalGuitar.use === this.state.editedGuitar.use &&
-        this.state.originalGuitar.timestamp ===
-          this.state.editedGuitar.timestamp &&
-        this.state.originalGuitar.coated === this.state.editedGuitar.coated &&
-        this.state.originalGuitar.photo === this.state.editedGuitar.photo
-      ) {
-        this.props.navigation.navigate("Home");
-        //save changes
-      } else {
-        this.props.editGuitar(this.state.editedGuitar);
-        //determine if reminder needs to be scheduled
+    //animate the update button before doing anything else
+    this.refs["update"].rubberBand(500).then(endState => {
+      //cannot submit an empty name
+      if (this.state.editedGuitar.name.match(regex)) {
+        //just go back if there are no changes
         if (
-          this.state.originalGuitar.timestamp !==
+          this.state.originalGuitar.name === this.state.editedGuitar.name &&
+          this.state.originalGuitar.type === this.state.editedGuitar.type &&
+          this.state.originalGuitar.use === this.state.editedGuitar.use &&
+          this.state.originalGuitar.timestamp ===
             this.state.editedGuitar.timestamp &&
-          this.props.notifications
+          this.state.originalGuitar.coated === this.state.editedGuitar.coated &&
+          this.state.originalGuitar.photo === this.state.editedGuitar.photo
         ) {
-          this.notif.cancelNotif(this.state.originalGuitar.key);
-          this.notif.scheduleNotif(this.state.editedGuitar);
+          this.props.navigation.navigate("Home");
+          //save changes
+        } else {
+          this.props.editGuitar(this.state.editedGuitar);
+          //determine if reminder needs to be scheduled
+          if (
+            this.state.originalGuitar.timestamp !==
+              this.state.editedGuitar.timestamp &&
+            this.props.notifications
+          ) {
+            this.notif.cancelNotif(this.state.originalGuitar.key);
+            this.notif.scheduleNotif(this.state.editedGuitar);
+          }
+          this.props.navigation.navigate("Home");
         }
-        this.props.navigation.navigate("Home");
+      } else {
+        this.setState({ ...this.state, nameValid: false });
+        this.refs.toast.show("Name cannot be empty");
       }
-    } else {
-      this.setState({ ...this.state, nameValid: false });
-      this.refs.toast.show("Name cannot be empty");
-    }
+    });
   };
 
   //getting selected restring date accounting for locale adjusted date format
@@ -386,20 +390,22 @@ class Edit extends Component {
           />
         </View>
         <View style={styles.submitWrapper}>
-          <TouchableHighlight
-            style={styles.submit}
-            onPress={() => {
-              this.handleSubmit();
-            }}
-            underlayColor={colors.evenLessWhite}
-          >
-            <LinearGradient
-              colors={[colors.primary, colors.primary, colors.dark]}
-              style={styles.gradient}
+          <Animatable.View ref="update" style={styles.updateAnimationWrapper}>
+            <TouchableHighlight
+              style={styles.submit}
+              onPress={() => {
+                this.handleSubmit();
+              }}
+              underlayColor={colors.evenLessWhite}
             >
-              <Text style={styles.btnText}>Update</Text>
-            </LinearGradient>
-          </TouchableHighlight>
+              <LinearGradient
+                colors={[colors.primary, colors.primary, colors.dark]}
+                style={styles.gradient}
+              >
+                <Text style={styles.btnText}>Update</Text>
+              </LinearGradient>
+            </TouchableHighlight>
+          </Animatable.View>
         </View>
         <View>
           <Dialog.Container visible={this.state.warningPopup}>

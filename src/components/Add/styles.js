@@ -79,14 +79,6 @@ export default {
     borderRadius: 15,
     marginTop: "3%"
   },
-  // submit: {
-  //   height: "55%",
-  //   width: "90%",
-  //   justifyContent: "center",
-  //   alignItems: "center",
-  //   borderRadius: 15,
-  //   marginTop: "3%"
-  // },
   gradient: {
     height: "100%",
     width: "100%",

@@ -180,6 +180,7 @@ class ListItem extends Component {
   };
 
   render() {
+    //the animateable buttons need to reference size values which can dynamically change
     const animatedEditStyle = {
       transform: [{ scale: this.animatedEditValue }]
     };
