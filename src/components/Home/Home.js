@@ -21,6 +21,7 @@ import colors from "../../colors";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import appConfig from "../../../app.json";
 import NotifService from "../../NotifService";
+import * as Animatable from "react-native-animatable";
 
 class Home extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -78,17 +79,30 @@ class Home extends Component {
     let guitars = await AsyncStorage.getItem(constants.persistedGuitars);
     this.props.initializeGuitars(JSON.parse(guitars));
   };
+  handleViewRef = ref => (this.view = ref);
+
+  //animate the fab then navigate to Add screen
+  handleAdd = () => {
+    this.view.bounce(500);
+    setTimeout(() => {
+      this.view.stopAnimation();
+      this.props.navigation.navigate("Add");
+    }, 300);
+  };
   //the floating action button
   fab = scrolling => {
-    //momentarily hide the fab on scroll. this gives the user a chance to click on elements which may be hidden beneath it
-    return scrolling ? null : (
-      <TouchableHighlight
-        onPress={() => this.props.navigation.navigate("Add")}
-        style={styles.fab}
-        underlayColor={colors.light}
-      >
-        <Icon name="add" color={colors.white} size={45} />
-      </TouchableHighlight>
+    return (
+      !scrolling && (
+        <TouchableHighlight
+          onPress={() => {
+            this.handleAdd();
+          }}
+          style={styles.fab}
+          underlayColor={colors.light}
+        >
+          <Icon name="add" color={colors.white} size={45} />
+        </TouchableHighlight>
+      )
     );
   };
   render() {
@@ -110,7 +124,22 @@ class Home extends Component {
             }}
           />
         </SafeAreaView>
-        {this.fab(this.state.hideFab)}
+        <Animatable.View
+          animation="slideInUp"
+          duration={1000}
+          style={styles.fabSlideAnimationWrapper}
+        >
+          <Animatable.View
+            ref={this.handleViewRef}
+            animation="pulse"
+            easing="ease-out"
+            iterationCount="infinite"
+            delay={1000}
+            style={styles.fabPulseAnimationWrapper}
+          >
+            {this.fab(this.state.hideFab)}
+          </Animatable.View>
+        </Animatable.View>
       </View>
     );
   }
