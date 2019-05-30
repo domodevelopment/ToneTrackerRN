@@ -1,6 +1,8 @@
 import { Dimensions } from "react-native";
 import colors from "../../colors";
 
+const height = Dimensions.get("window").height;
+
 export default {
   selectableImgRow: {
     height: "20%",
@@ -22,9 +24,10 @@ export default {
     borderStyle: "solid"
   },
   imgWrapper: {
-    height: "100%",
-    width: Dimensions.get("window").height * 0.15 - 10,
-    borderRadius: 50
+    // height: "100%",
+    height: height * 0.15 - 10,
+    width: height * 0.15 - 10,
+    borderRadius: (height * 0.15 - 10) / 2
   },
   img: {
     height: "100%",

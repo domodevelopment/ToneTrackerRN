@@ -54,3 +54,10 @@ export function toggleNightShade() {
     type: constants.toggleNightShade
   };
 }
+
+export function initializeTheme(theme) {
+  return {
+    type: constants.initializeTheme,
+    payload: theme
+  };
+}

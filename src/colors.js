@@ -1,11 +1,12 @@
-import { connect } from "react-redux";
 import store from "./store";
 import { Alert } from "react-native";
 
-const qualityIndicators = {
+const commonColors = {
   good: "#32cd32",
   dull: "#ffa500",
-  rusty: "#dc143c"
+  rusty: "#dc143c",
+  notQuiteBlack: "#111",
+  notQuiteWhite: "#eee"
 };
 
 const normal = {
@@ -17,9 +18,7 @@ const normal = {
   white: "#fff",
   lessWhite: "#eee",
   evenLessWhite: "#ccc",
-  notQuiteBlack: "#111",
-  notQuiteWhite: "#eee",
-  ...qualityIndicators
+  ...commonColors
 };
 
 const nightShade = {
@@ -31,21 +30,8 @@ const nightShade = {
   lightDark: "#263238",
   mediumDark: "#4f5b62",
   darkDark: "#1c2226",
-  notQuiteBlack: "#111",
-  notQuiteWhite: "#eee",
-  ...qualityIndicators
+  ...commonColors
 };
 
-// const mapStateToProps = state => {
-//   return {
-//     nightShade: state.nightShade
-//   };
-// };
-
-// export default connect(
-//   mapStateToProps,
-//   null
-// )(nightShade);
-// Alert.alert("", JSON.stringify(store.getState()));
-// export default nightShade;
-export default (store.getState().nightShade ? nightShade : normal);
+export default normal;
+// export default (store.getState().theme === "normal" ? normal : nightShade);

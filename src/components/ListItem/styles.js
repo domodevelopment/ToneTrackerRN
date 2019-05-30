@@ -9,7 +9,7 @@ export default {
     borderBottomColor: "#888",
     borderBottomWidth: 1,
     flexDirection: "row",
-    backgroundColor: colors.mediumDark
+    backgroundColor: colors.white
   },
   imageWrapper: {
     height: width * 0.27,
@@ -65,14 +65,14 @@ export default {
   },
   nameText: {
     fontSize: 22,
-    color: colors.notQuiteWhite,
+    color: colors.notQuiteBlack,
     flex: 1,
     paddingTop: 5,
     paddingLeft: 5
   },
   btnText: {
     fontSize: 17,
-    color: colors.notQuiteWhite
+    color: colors.white
   },
   ageTextWrapper: {
     justifyContent: "center",
@@ -80,7 +80,7 @@ export default {
   },
   ageText: {
     fontSize: 15,
-    color: colors.notQuiteWhite,
+    color: "#333",
     textAlign: "center"
   }
 };

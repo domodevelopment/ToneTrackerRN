@@ -172,6 +172,7 @@ class ListItem extends Component {
                 this.props.navigation.navigate("Edit", { photo: null });
               }}
               style={styles.editBtnWrapper}
+              underlayColor={colors.evenLessWhite}
             >
               <LinearGradient
                 colors={["#fff", "#eee", "#ccc"]}
@@ -190,6 +191,7 @@ class ListItem extends Component {
                 this.setState({ restringPopup: true });
               }}
               style={styles.restringBtnWrapper}
+              underlayColor={colors.evenLessWhite}
             >
               <LinearGradient
                 colors={[colors.light, colors.primary, colors.dark]}

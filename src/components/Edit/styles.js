@@ -4,7 +4,7 @@ import { Dimensions } from "react-native";
 export default {
   parent: {
     height: "100%",
-    backgroundColor: colors.lightDark
+    backgroundColor: colors.lessWhite
   },
   optionsWrapper: {
     position: "absolute",
@@ -17,13 +17,13 @@ export default {
     backgroundColor: colors.primary
   },
   nameInput: {
-    backgroundColor: colors.mediumDark,
+    backgroundColor: colors.evenLessWhite,
     height: "60%",
     width: "70%",
     marginLeft: "5%",
     paddingLeft: "3%",
     fontSize: 20,
-    color: colors.notQuiteWhite
+    color: colors.dark
   },
   nameInvalidInput: {
     backgroundColor: colors.rusty,
@@ -35,7 +35,7 @@ export default {
   },
   nameText: {
     fontSize: 25,
-    color: colors.notQuiteWhite,
+    color: colors.white,
     width: "70%",
     marginLeft: "10%"
   },
@@ -99,11 +99,11 @@ export default {
     borderRadius: 15
   },
   text: {
-    color: colors.notQuiteWhite,
+    color: colors.notQuiteBlack,
     fontSize: 17
   },
   btnText: {
-    color: colors.notQuiteWhite,
+    color: colors.white,
     fontSize: 21
   }
 };

@@ -34,21 +34,21 @@ class InstrumentType extends Component {
         <TouchableHighlight
           style={styles.imgWrapper}
           onPress={() => this.props.handleTypeChange(constants.electric)}
-          underlayColor={colors.notQuiteBlack}
+          underlayColor={colors.evenLessWhite}
         >
           <Image source={electricImg} style={styles.img} resizeMode="contain" />
         </TouchableHighlight>
         <TouchableHighlight
           style={styles.imgWrapper}
           onPress={() => this.props.handleTypeChange(constants.bass)}
-          underlayColor={colors.notQuiteBlack}
+          underlayColor={colors.evenLessWhite}
         >
           <Image source={bassImg} style={styles.img} resizeMode="contain" />
         </TouchableHighlight>
         <TouchableHighlight
           style={styles.imgWrapper}
           onPress={() => this.props.handleTypeChange(constants.acoustic)}
-          underlayColor={colors.notQuiteBlack}
+          underlayColor={colors.evenLessWhite}
         >
           <Image source={acousticImg} style={styles.img} resizeMode="contain" />
         </TouchableHighlight>

@@ -6,7 +6,7 @@ const width = Dimensions.get("window").width;
 export default {
   parent: {
     height: "100%",
-    backgroundColor: colors.lightDark
+    backgroundColor: colors.lessWhite
   },
   fab: {
     position: "absolute",

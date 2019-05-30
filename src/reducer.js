@@ -1,5 +1,6 @@
 import constants from "./constants";
 import AsyncStorage from "@react-native-community/async-storage";
+import { Alert } from "react-native";
 
 //placeholder state
 getInitialState = () => {
@@ -8,7 +9,7 @@ getInitialState = () => {
     notifications: null,
     selectedForEditing: null,
     changeAge: null,
-    nightShade: false
+    theme: "normal"
   };
 };
 
@@ -96,11 +97,22 @@ const reducer = (state = getInitialState(), action) => {
         ...state,
         notifications: action.payload
       };
-    //Has user selected nightshade or normal theme
-    case constants.nightShade:
+    //changingTheTheme
+    case constants.toggleNightShade:
+      //Persisting the theme
+      AsyncStorage.setItem(
+        constants.persistedTheme,
+        state.theme === "normal" ? "nightShade" : "normal"
+      );
       return {
         ...state,
-        nightShade: !nightShade
+        theme: state.theme === "normal" ? "nightShade" : "normal"
+      };
+    //Setting the persisted theme
+    case constants.initializeTheme:
+      return {
+        ...state,
+        theme: action.payload
       };
     default:
       return state;

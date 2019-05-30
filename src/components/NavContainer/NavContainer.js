@@ -14,9 +14,9 @@ getNavigationOptions = () => {
   return ios
     ? {
         headerStyle: {
-          backgroundColor: colors.darkDark
+          backgroundColor: colors.white
         },
-        headerTintColor: colors.notQuiteWhite
+        headerTintColor: colors.primary
       }
     : {
         headerStyle: {

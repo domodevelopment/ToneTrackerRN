@@ -9,6 +9,8 @@ import {
 } from "react-native-popup-menu";
 import Share from "react-native-share";
 import colors from "../../colors";
+import { connect } from "react-redux";
+import { toggleNightShade } from "../../actions";
 
 //developer email
 const EMAIL = "violenthoboenterprises@gmail.com";
@@ -33,12 +35,20 @@ class Options extends Component {
         <MenuTrigger>
           <Icon
             name="options-vertical"
-            color={colors.notQuiteWhite}
+            color={colors.primary}
             size={20}
             style={{ margin: 10 }}
           />
         </MenuTrigger>
         <MenuOptions>
+          {/* <MenuOption
+            style={{ padding: 12 }}
+            //change theme
+            onSelect={() => {
+              this.props.toggleNightShade();
+            }}
+            text="Nightshade: off"
+          /> */}
           <MenuOption
             style={{ padding: 12 }}
             //share this app
@@ -66,4 +76,21 @@ class Options extends Component {
   }
 }
 
-export default Options;
+const mapStateToProps = state => {
+  return {
+    nightShade: state.nightShade
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    toggleNightShade: () => {
+      dispatch(toggleNightShade());
+    }
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Options);

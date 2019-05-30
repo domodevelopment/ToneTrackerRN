@@ -60,7 +60,7 @@ class Edit extends Component {
             headerRight: <Delete navigation={navigation} />,
             headerLeft: (
               <HeaderBackButton
-                tintColor={colors.notQuiteWhite}
+                tintColor={colors.primary}
                 onPress={() => params.handleBack()}
               />
             )
@@ -318,6 +318,7 @@ class Edit extends Component {
               }
             });
           }}
+          underlayColor={colors.evenLessWhite}
         >
           <Image
             style={styles.image}
@@ -370,10 +371,10 @@ class Edit extends Component {
             customStyles={{
               btnTextConfirm: {
                 color: colors.primary
-              },
-              dateText: {
-                color: colors.notQuiteWhite
               }
+              // dateText: {
+              //   color: colors.notQuiteWhite
+              // }
             }}
           />
         </View>
@@ -390,9 +391,10 @@ class Edit extends Component {
             onPress={() => {
               this.handleSubmit();
             }}
+            underlayColor={colors.evenLessWhite}
           >
             <LinearGradient
-              colors={[colors.light, colors.light, colors.primary]}
+              colors={[colors.primary, colors.primary, colors.dark]}
               style={styles.gradient}
             >
               <Text style={styles.btnText}>Update</Text>
