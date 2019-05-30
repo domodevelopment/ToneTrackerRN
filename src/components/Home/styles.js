@@ -17,9 +17,6 @@ export default {
   },
   fabSlideAnimationWrapper: {
     position: "absolute",
-    // width: width * 0.2,
-    // height: width * 0.2,
-    // backgroundColor: colors.primary,
     justifyContent: "center",
     alignItems: "center",
     bottom: "6%",
@@ -33,16 +30,4 @@ export default {
     height: width * 0.2,
     borderRadius: (width * 0.2) / 2
   }
-  // fabWrapper: {
-  //   position: "absolute",
-  //   width: width * 0.2,
-  //   height: width * 0.2,
-  //   backgroundColor: colors.primary,
-  //   justifyContent: "center",
-  //   alignItems: "center",
-  //   bottom: "6%",
-  //   right: "7%",
-  //   borderRadius: (width * 0.2) / 2,
-  //   elevation: 10
-  // }
 };

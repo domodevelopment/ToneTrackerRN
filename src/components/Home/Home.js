@@ -23,6 +23,9 @@ import appConfig from "../../../app.json";
 import NotifService from "../../NotifService";
 import * as Animatable from "react-native-animatable";
 
+//If there are no items in the FlatList then FAB should pulse to get the user's attention
+let shouldPulse = "";
+
 class Home extends Component {
   static navigationOptions = ({ navigation }) => {
     return {
@@ -48,12 +51,14 @@ class Home extends Component {
   handlePerm(perms) {
     Alert.alert("Permissions", JSON.stringify(perms));
   }
+
   componentWillMount() {
     if (!this.state.initialized) {
       this.getPersistedData();
       this.setState({ initialized: true });
     }
   }
+
   getPersistedData = async () => {
     //getting theme from async storage
     // let theme = await AsyncStorage.getItem(constants.persistedTheme);
@@ -78,9 +83,10 @@ class Home extends Component {
     //getting guitars from async storage
     let guitars = await AsyncStorage.getItem(constants.persistedGuitars);
     this.props.initializeGuitars(JSON.parse(guitars));
+    shouldPulse = this.props.guitars.length > 0 && "pulse";
   };
-  handleViewRef = ref => (this.view = ref);
 
+  handleViewRef = ref => (this.view = ref);
   //animate the fab then navigate to Add screen
   handleAdd = () => {
     this.view.bounce(500);
@@ -89,6 +95,7 @@ class Home extends Component {
       this.props.navigation.navigate("Add");
     }, 300);
   };
+
   //the floating action button
   fab = scrolling => {
     return (
@@ -105,6 +112,7 @@ class Home extends Component {
       )
     );
   };
+
   render() {
     return (
       <View style={styles.parent}>
@@ -131,7 +139,7 @@ class Home extends Component {
         >
           <Animatable.View
             ref={this.handleViewRef}
-            animation="pulse"
+            animation={shouldPulse}
             easing="ease-out"
             iterationCount="infinite"
             delay={1000}
