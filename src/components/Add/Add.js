@@ -7,8 +7,7 @@ import {
   Switch,
   NativeModules,
   Platform,
-  BackHandler,
-  Alert
+  BackHandler
 } from "react-native";
 import styles from "./styles";
 import LinearGradient from "react-native-linear-gradient";
@@ -266,9 +265,6 @@ class Add extends Component {
               btnTextConfirm: {
                 color: colors.primary
               }
-              // dateText: {
-              //   color: colors.notQuiteWhite
-              // }
             }}
           />
         </View>

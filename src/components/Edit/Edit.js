@@ -384,9 +384,6 @@ class Edit extends Component {
               btnTextConfirm: {
                 color: colors.primary
               }
-              // dateText: {
-              //   color: colors.notQuiteWhite
-              // }
             }}
           />
         </View>

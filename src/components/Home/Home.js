@@ -100,15 +100,30 @@ class Home extends Component {
   fab = scrolling => {
     return (
       !scrolling && (
-        <TouchableHighlight
-          onPress={() => {
-            this.handleAdd();
-          }}
-          style={styles.fab}
-          underlayColor={colors.light}
+        <Animatable.View
+          animation="slideInRight"
+          duration={500}
+          style={styles.fabSlideAnimationWrapper}
         >
-          <Icon name="add" color={colors.white} size={45} />
-        </TouchableHighlight>
+          <Animatable.View
+            ref={this.handleRef}
+            animation={shouldPulse}
+            easing="ease-out"
+            iterationCount="infinite"
+            delay={500}
+            style={styles.fabPulseAnimationWrapper}
+          >
+            <TouchableHighlight
+              onPress={() => {
+                this.handleAdd();
+              }}
+              style={styles.fab}
+              underlayColor={colors.light}
+            >
+              <Icon name="add" color={colors.white} size={45} />
+            </TouchableHighlight>
+          </Animatable.View>
+        </Animatable.View>
       )
     );
   };
@@ -128,26 +143,11 @@ class Home extends Component {
             onScrollEndDrag={() => {
               setTimeout(() => {
                 this.setState({ hideFab: false });
-              }, 1000);
+              }, 750);
             }}
           />
         </SafeAreaView>
-        <Animatable.View
-          animation="slideInUp"
-          duration={1000}
-          style={styles.fabSlideAnimationWrapper}
-        >
-          <Animatable.View
-            ref={this.handleRef}
-            animation={shouldPulse}
-            easing="ease-out"
-            iterationCount="infinite"
-            delay={1000}
-            style={styles.fabPulseAnimationWrapper}
-          >
-            {this.fab(this.state.hideFab)}
-          </Animatable.View>
-        </Animatable.View>
+        {this.fab(this.state.hideFab)}
       </View>
     );
   }

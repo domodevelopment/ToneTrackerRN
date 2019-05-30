@@ -12,7 +12,6 @@ export default {
     alignItems: "center"
   },
   invalidSelectableImgRow: {
-    // height: "16%",
     width: "96%",
     height: height * 0.16,
     flexDirection: "row",
