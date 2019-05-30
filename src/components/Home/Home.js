@@ -129,13 +129,22 @@ class Home extends Component {
   };
 
   render() {
+    //used for delaying every individual rendering of list items for a sweet animation effect
+    let count = 0;
     return (
       <View style={styles.parent}>
         <SafeAreaView>
           <FlatList
             data={this.props.guitars}
             renderItem={({ item }) => (
-              <ListItem item={item} navigation={this.props.navigation} />
+              //animate every individual lit item
+              <Animatable.View
+                animation="bounceInDown"
+                duration={1000}
+                delay={count++ * 250}
+              >
+                <ListItem item={item} navigation={this.props.navigation} />
+              </Animatable.View>
             )}
             onScrollBeginDrag={() => {
               this.setState({ hideFab: true });
