@@ -248,6 +248,31 @@ class Edit extends Component {
     ) : null;
   };
 
+  changePhoto = () => {
+    //animate the photo first
+    this.refs["photo"].swing(500).then(endState => {
+      //only have delete option if photo exists in the first place
+      const optionToRemove =
+        this.state.editedGuitar.photo === null ? null : options;
+      ImagePicker.showImagePicker(optionToRemove, response => {
+        if (response.customButton) {
+          this.setState({
+            ...this.state,
+            editedGuitar: { ...this.state.editedGuitar, photo: null }
+          });
+        } else if (!response.didCancel) {
+          this.setState({
+            ...this.state,
+            editedGuitar: {
+              ...this.state.editedGuitar,
+              photo: response.uri
+            }
+          });
+        }
+      });
+    });
+  };
+
   handleBackPressed = () => {
     //check for unsaved changes
     if (
@@ -300,36 +325,39 @@ class Edit extends Component {
           {this.name(this.state.editingName)}
         </View>
         <View style={styles.optionsWrapper}>{this.options()}</View>
-        <TouchableHighlight
-          style={styles.profileImg}
-          onPress={() => {
-            const optionToRemove =
-              this.state.editedGuitar.photo === null ? null : options;
-            ImagePicker.showImagePicker(optionToRemove, response => {
-              if (response.customButton) {
-                this.setState({
-                  ...this.state,
-                  editedGuitar: { ...this.state.editedGuitar, photo: null }
-                });
-              } else if (!response.didCancel) {
-                this.setState({
-                  ...this.state,
-                  editedGuitar: {
-                    ...this.state.editedGuitar,
-                    photo: response.uri
-                  }
-                });
-              }
-            });
-          }}
-          underlayColor={colors.evenLessWhite}
-        >
-          <Image
-            style={styles.image}
-            source={this.instrumentImage()}
-            resizeMode="cover"
-          />
-        </TouchableHighlight>
+        <Animatable.View ref="photo" style={styles.photoAnimationWrapper}>
+          <TouchableHighlight
+            style={styles.photo}
+            // onPress={() => {
+            //   const optionToRemove =
+            //     this.state.editedGuitar.photo === null ? null : options;
+            //   ImagePicker.showImagePicker(optionToRemove, response => {
+            //     if (response.customButton) {
+            //       this.setState({
+            //         ...this.state,
+            //         editedGuitar: { ...this.state.editedGuitar, photo: null }
+            //       });
+            //     } else if (!response.didCancel) {
+            //       this.setState({
+            //         ...this.state,
+            //         editedGuitar: {
+            //           ...this.state.editedGuitar,
+            //           photo: response.uri
+            //         }
+            //       });
+            //     }
+            //   });
+            // }}
+            onPress={this.changePhoto}
+            underlayColor={colors.evenLessWhite}
+          >
+            <Image
+              style={styles.image}
+              source={this.instrumentImage()}
+              resizeMode="cover"
+            />
+          </TouchableHighlight>
+        </Animatable.View>
         <View style={styles.questionRow}>
           <Text style={styles.text}>What type of guitar is this?</Text>
         </View>

@@ -39,14 +39,27 @@ export default {
     width: "70%",
     marginLeft: "10%"
   },
-  profileImg: {
+  photoAnimationWrapper: {
     position: "absolute",
     top: "5%",
     right: "5%",
     height: Dimensions.get("window").width * 0.25,
     width: Dimensions.get("window").width * 0.25,
-    borderRadius: 50
+    borderRadius: (Dimensions.get("window").width * 0.25) / 2
   },
+  photo: {
+    height: "100%",
+    width: "100%",
+    borderRadius: (Dimensions.get("window").width * 0.25) / 2
+  },
+  // profileImg: {
+  //   position: "absolute",
+  //   top: "5%",
+  //   right: "5%",
+  //   height: Dimensions.get("window").width * 0.25,
+  //   width: Dimensions.get("window").width * 0.25,
+  //   borderRadius: 50
+  // },
   image: {
     width: "100%",
     height: "100%",
