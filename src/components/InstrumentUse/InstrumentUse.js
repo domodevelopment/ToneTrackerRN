@@ -9,8 +9,15 @@ import weeklySelectedImg from "../../images/calendar_weekly_selected.png";
 import styles from "../InstrumentType/styles";
 import constants from "../../constants";
 import colors from "../../colors";
+import * as Animatable from "react-native-animatable";
 
 class InstrumentUse extends Component {
+  //animate the selection
+  handlePress = use => {
+    this.props.handleUseChange(use);
+    this.refs[use].swing(500);
+  };
+
   render() {
     //show grayscale image if not selected, show colored image if selected
     dailyImg =
@@ -29,27 +36,37 @@ class InstrumentUse extends Component {
 
     return (
       <View style={imgRowStyle}>
-        <TouchableHighlight
-          style={styles.imgWrapper}
-          onPress={() => this.props.handleUseChange(constants.daily)}
-          underlayColor={colors.evenLessWhite}
-        >
-          <Image source={dailyImg} style={styles.img} resizeMode="contain" />
-        </TouchableHighlight>
-        <TouchableHighlight
-          style={styles.imgWrapper}
-          onPress={() => this.props.handleUseChange(constants.somedays)}
-          underlayColor={colors.evenLessWhite}
-        >
-          <Image source={somedaysImg} style={styles.img} resizeMode="contain" />
-        </TouchableHighlight>
-        <TouchableHighlight
-          style={styles.imgWrapper}
-          onPress={() => this.props.handleUseChange(constants.weekly)}
-          underlayColor={colors.evenLessWhite}
-        >
-          <Image source={weeklyImg} style={styles.img} resizeMode="contain" />
-        </TouchableHighlight>
+        <Animatable.View ref={constants.daily}>
+          <TouchableHighlight
+            style={styles.imgWrapper}
+            onPress={() => this.handlePress(constants.daily)}
+            underlayColor={colors.evenLessWhite}
+          >
+            <Image source={dailyImg} style={styles.img} resizeMode="contain" />
+          </TouchableHighlight>
+        </Animatable.View>
+        <Animatable.View ref={constants.somedays}>
+          <TouchableHighlight
+            style={styles.imgWrapper}
+            onPress={() => this.handlePress(constants.somedays)}
+            underlayColor={colors.evenLessWhite}
+          >
+            <Image
+              source={somedaysImg}
+              style={styles.img}
+              resizeMode="contain"
+            />
+          </TouchableHighlight>
+        </Animatable.View>
+        <Animatable.View ref={constants.weekly}>
+          <TouchableHighlight
+            style={styles.imgWrapper}
+            onPress={() => this.handlePress(constants.weekly)}
+            underlayColor={colors.evenLessWhite}
+          >
+            <Image source={weeklyImg} style={styles.img} resizeMode="contain" />
+          </TouchableHighlight>
+        </Animatable.View>
       </View>
     );
   }

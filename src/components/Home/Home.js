@@ -24,7 +24,7 @@ import NotifService from "../../NotifService";
 import * as Animatable from "react-native-animatable";
 
 //If there are no items in the FlatList then FAB should pulse to get the user's attention
-let shouldPulse = "";
+let shouldPulse = "pulse";
 
 class Home extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -83,17 +83,17 @@ class Home extends Component {
     //getting guitars from async storage
     let guitars = await AsyncStorage.getItem(constants.persistedGuitars);
     this.props.initializeGuitars(JSON.parse(guitars));
-    shouldPulse = this.props.guitars.length > 0 && "pulse";
+    shouldPulse = this.props.guitars.length > 0 ? "pulse" : null;
   };
 
-  handleViewRef = ref => (this.view = ref);
+  handleRef = ref => (this.view = ref);
   //animate the fab then navigate to Add screen
   handleAdd = () => {
     this.view.bounce(500);
     setTimeout(() => {
       this.view.stopAnimation();
       this.props.navigation.navigate("Add");
-    }, 300);
+    }, 500);
   };
 
   //the floating action button
@@ -138,7 +138,7 @@ class Home extends Component {
           style={styles.fabSlideAnimationWrapper}
         >
           <Animatable.View
-            ref={this.handleViewRef}
+            ref={this.handleRef}
             animation={shouldPulse}
             easing="ease-out"
             iterationCount="infinite"
