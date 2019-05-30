@@ -97,6 +97,10 @@ class ListItem extends Component {
     ) : null;
   };
 
+  whenDidRestring = () => {
+    return `When did you restring ${String(this.props.item.name)}?`;
+  };
+
   getDaysElapsed = () => {
     let diffStamp = new Date().getTime() - this.props.item.timestamp;
     diffStamp /= 86400000;
@@ -244,44 +248,40 @@ class ListItem extends Component {
             </TouchableWithoutFeedback>
           </View>
         </View>
-        <View>
-          <Dialog.Container visible={this.state.restringPopup}>
-            <Dialog.Title>Restring Guitar</Dialog.Title>
-            <Dialog.Description>
-              When did you restring this guitar?
-            </Dialog.Description>
-            <Dialog.Button
-              label="Today"
-              onPress={() => {
-                this.setState({ restringPopup: false });
-                this.props.item.timestamp = new Date().getTime();
-                this.props.editGuitar(this.props.item);
-                this.notif.cancelNotif(this.props.item.key);
-                if (this.props.notifications) {
-                  this.notif.scheduleNotif(this.props.item);
-                }
-              }}
-              color={colors.primary}
-            />
-            <Dialog.Button
-              label="Some other day"
-              onPress={() => {
-                this.setState({ restringPopup: false });
-                this.props.selectedGuitar(this.props.item.key);
-                this.props.showDatePicker(true);
-                this.props.navigation.navigate("Edit", { photo: null });
-              }}
-              color={colors.primary}
-            />
-            <Dialog.Button
-              label="Cancel"
-              onPress={() => {
-                this.setState({ restringPopup: false });
-              }}
-              color={colors.primary}
-            />
-          </Dialog.Container>
-        </View>
+        <Dialog.Container visible={this.state.restringPopup}>
+          <Dialog.Title>Restring Guitar</Dialog.Title>
+          <Dialog.Description>{this.whenDidRestring()}</Dialog.Description>
+          <Dialog.Button
+            label="Today"
+            onPress={() => {
+              this.setState({ restringPopup: false });
+              this.props.item.timestamp = new Date().getTime();
+              this.props.editGuitar(this.props.item);
+              this.notif.cancelNotif(this.props.item.key);
+              if (this.props.notifications) {
+                this.notif.scheduleNotif(this.props.item);
+              }
+            }}
+            color={colors.primary}
+          />
+          <Dialog.Button
+            label="Some other day"
+            onPress={() => {
+              this.setState({ restringPopup: false });
+              this.props.selectedGuitar(this.props.item.key);
+              this.props.showDatePicker(true);
+              this.props.navigation.navigate("Edit", { photo: null });
+            }}
+            color={colors.primary}
+          />
+          <Dialog.Button
+            label="Cancel"
+            onPress={() => {
+              this.setState({ restringPopup: false });
+            }}
+            color={colors.primary}
+          />
+        </Dialog.Container>
       </View>
     );
   }

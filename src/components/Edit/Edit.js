@@ -412,29 +412,27 @@ class Edit extends Component {
             </TouchableHighlight>
           </Animatable.View>
         </View>
-        <View>
-          <Dialog.Container visible={this.state.warningPopup}>
-            <Dialog.Title>Warning</Dialog.Title>
-            <Dialog.Description>
-              You have unsaved changes. Are you sure you want to leave?
-            </Dialog.Description>
-            <Dialog.Button
-              label="Leave"
-              onPress={() => {
-                this.setState({ ...this.state, warningPopup: false });
-                this.props.navigation.navigate("Home");
-              }}
-              color={colors.primary}
-            />
-            <Dialog.Button
-              label="Stay Here"
-              onPress={() => {
-                this.setState({ ...this.state, warningPopup: false });
-              }}
-              color={colors.primary}
-            />
-          </Dialog.Container>
-        </View>
+        <Dialog.Container visible={this.state.warningPopup}>
+          <Dialog.Title>Warning</Dialog.Title>
+          <Dialog.Description>
+            You have unsaved changes. Are you sure you want to leave?
+          </Dialog.Description>
+          <Dialog.Button
+            label="Leave"
+            onPress={() => {
+              this.setState({ ...this.state, warningPopup: false });
+              this.props.navigation.navigate("Home");
+            }}
+            color={colors.primary}
+          />
+          <Dialog.Button
+            label="Stay Here"
+            onPress={() => {
+              this.setState({ ...this.state, warningPopup: false });
+            }}
+            color={colors.primary}
+          />
+        </Dialog.Container>
         <Toast
           ref="toast"
           style={{

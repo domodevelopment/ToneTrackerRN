@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Platform } from "react-native";
+import { Platform, Alert } from "react-native";
 import Icon from "react-native-vector-icons/SimpleLineIcons";
 import {
   Menu,
@@ -11,8 +11,13 @@ import { connect } from "react-redux";
 import { deleteGuitar } from "../../actions";
 import colors from "../../colors";
 import NotifService from "../../NotifService";
+import Dialog from "react-native-dialog";
 
 const iconColor = Platform.OS === "ios" ? colors.primary : colors.white;
+
+function getGuitar(props) {
+  return props.guitars.find(x => x.key === props.selectedForEditing).name;
+}
 
 /**
  * This options menu only has one option: delete
@@ -20,8 +25,19 @@ const iconColor = Platform.OS === "ios" ? colors.primary : colors.white;
 class Delete extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      warningPopup: false
+    };
     this.notif = new NotifService();
   }
+
+  guitarName = getGuitar(this.props);
+
+  warningString = () => {
+    return `Are you sure you want to delete ${
+      /*getGuitar(this.props)*/ this.guitarName
+    }?`;
+  };
 
   render() {
     return (
@@ -38,13 +54,34 @@ class Delete extends Component {
           <MenuOption
             style={{ padding: 15 }}
             onSelect={() => {
-              this.props.deleteGuitar(this.props.selectedForEditing);
-              this.notif.cancelNotif(this.props.selectedForEditing);
-              this.props.navigation.navigate(`Home`);
+              //show warning
+              this.setState({ warningPopup: true });
             }}
             text="Delete"
           />
         </MenuOptions>
+        <Dialog.Container visible={this.state.warningPopup}>
+          <Dialog.Title>Warning</Dialog.Title>
+          <Dialog.Description>{this.warningString()}</Dialog.Description>
+          <Dialog.Button
+            label="Yes"
+            onPress={() => {
+              //delete guitar, cancel related notification, navigate home
+              this.setState({ warningPopup: false });
+              this.props.deleteGuitar(this.props.selectedForEditing);
+              this.notif.cancelNotif(this.props.selectedForEditing);
+              this.props.navigation.navigate("Home");
+            }}
+            color={"#f00"}
+          />
+          <Dialog.Button
+            label="No"
+            onPress={() => {
+              this.setState({ warningPopup: false });
+            }}
+            color={colors.primary}
+          />
+        </Dialog.Container>
       </Menu>
     );
   }
@@ -52,7 +89,8 @@ class Delete extends Component {
 
 const mapStateToProps = state => {
   return {
-    selectedForEditing: state.selectedForEditing
+    selectedForEditing: state.selectedForEditing,
+    guitars: state.guitars
   };
 };
 
