@@ -18,7 +18,7 @@ const MyStatusBar = ({ backgroundColor, ...props }) => (
   >
     <StatusBar
       translucent
-      barStyle="light-content"
+      // barStyle="light-content"
       backgroundColor={colors.dark}
       {...props}
     />

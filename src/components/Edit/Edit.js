@@ -328,26 +328,6 @@ class Edit extends Component {
         <Animatable.View ref="photo" style={styles.photoAnimationWrapper}>
           <TouchableHighlight
             style={styles.photo}
-            // onPress={() => {
-            //   const optionToRemove =
-            //     this.state.editedGuitar.photo === null ? null : options;
-            //   ImagePicker.showImagePicker(optionToRemove, response => {
-            //     if (response.customButton) {
-            //       this.setState({
-            //         ...this.state,
-            //         editedGuitar: { ...this.state.editedGuitar, photo: null }
-            //       });
-            //     } else if (!response.didCancel) {
-            //       this.setState({
-            //         ...this.state,
-            //         editedGuitar: {
-            //           ...this.state.editedGuitar,
-            //           photo: response.uri
-            //         }
-            //       });
-            //     }
-            //   });
-            // }}
             onPress={this.changePhoto}
             underlayColor={colors.evenLessWhite}
           >

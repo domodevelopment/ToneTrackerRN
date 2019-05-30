@@ -90,7 +90,8 @@ export default {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    marginLeft: "3%"
+    marginLeft: "3%",
+    paddingRight: "3%"
   },
   submitWrapper: {
     height: "18%",
