@@ -41,7 +41,7 @@ export default {
   },
   photoAnimationWrapper: {
     position: "absolute",
-    top: "5%",
+    top: "3%",
     right: "5%",
     height: Dimensions.get("window").width * 0.25,
     width: Dimensions.get("window").width * 0.25,
