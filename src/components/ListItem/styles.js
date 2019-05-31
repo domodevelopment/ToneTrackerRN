@@ -25,12 +25,6 @@ export default {
   progressCircle: {
     position: "absolute"
   },
-  // coatedImg: {
-  //   position: "absolute",
-  //   bottom: "2%",
-  //   left: "15%",
-  //   height: "30%"
-  // },
   coatedImg: {
     position: "absolute",
     top: width * 0.18,

@@ -7,7 +7,8 @@ import {
   Switch,
   NativeModules,
   Platform,
-  BackHandler
+  BackHandler,
+  Image
 } from "react-native";
 import styles from "./styles";
 import LinearGradient from "react-native-linear-gradient";
@@ -22,6 +23,8 @@ import { HeaderBackButton } from "react-navigation";
 import Dialog from "react-native-dialog";
 import Toast from "react-native-easy-toast";
 import NotifService from "../../NotifService";
+import ImagePicker from "react-native-image-picker";
+import cameraImg from "../../images/camera.png";
 import * as Animatable from "react-native-animatable";
 
 //need to know locale for date formatting
@@ -32,6 +35,15 @@ const locale =
 
 //name cannot be whitespace
 const regex = "[a-z|A-Z|0-9]";
+
+//options for the image picker
+const photoOptions = {
+  customButtons: [{ name: "delete", title: "Remove photo..." }],
+  storageOptions: {
+    skipBackup: true,
+    path: "images"
+  }
+};
 
 class Add extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -168,6 +180,42 @@ class Add extends Component {
     return locale === "en_US" ? "MM-DD-YYYY" : "DD-MM-YYYY";
   };
 
+  instrumentImage = () => {
+    let { photo } = this.state.newGuitar;
+    //No photo exists. Use a  default image
+    if (photo === null) {
+      //put camera icon here
+      return cameraImg;
+    }
+    //Return the photo
+    return { uri: photo };
+  };
+
+  changePhoto = () => {
+    //animate the photo first
+    this.refs["photo"].swing(500).then(endState => {
+      //only have delete option if photo exists in the first place
+      const optionToRemove =
+        this.state.newGuitar.photo === null ? null : photoOtions;
+      ImagePicker.showImagePicker(optionToRemove, response => {
+        if (response.customButton) {
+          this.setState({
+            ...this.state,
+            newGuitar: { ...this.state.newGuitar, photo: null }
+          });
+        } else if (!response.didCancel) {
+          this.setState({
+            ...this.state,
+            newGuitar: {
+              ...this.state.newGuitar,
+              photo: response.uri
+            }
+          });
+        }
+      });
+    });
+  };
+
   handleBackPressed = () => {
     //check if user has unsaved changes
     if (
@@ -211,6 +259,7 @@ class Add extends Component {
 
     return (
       <View style={styles.parent}>
+        {/* guitar's name */}
         <View style={styles.nameInputWrapper}>
           <TextInput
             placeholder="Name (eg. Stratocaster)"
@@ -222,6 +271,7 @@ class Add extends Component {
             selectionColor={colors.dark}
           />
         </View>
+        {/* guitar type */}
         <View style={styles.questionRow}>
           <Text style={styles.text}>What type of guitar is this?</Text>
         </View>
@@ -230,6 +280,21 @@ class Add extends Component {
           handleTypeChange={this.handleTypeChange}
           validated={this.state.typeValidated}
         />
+        {/* profile photo */}
+        <Animatable.View ref="photo" style={styles.photoAnimationWrapper}>
+          <TouchableHighlight
+            style={styles.photo}
+            onPress={this.changePhoto}
+            underlayColor={colors.evenLessWhite}
+          >
+            <Image
+              style={styles.image}
+              source={this.instrumentImage()}
+              resizeMode="cover"
+            />
+          </TouchableHighlight>
+        </Animatable.View>
+        {/* guitar usage */}
         <View style={styles.questionRow}>
           <Text style={styles.text}>How often do you play this guitar?</Text>
         </View>
@@ -238,6 +303,7 @@ class Add extends Component {
           handleUseChange={this.handleUseChange}
           validated={this.state.useValidated}
         />
+        {/* strings age */}
         <View style={styles.lastChanged}>
           <Text style={styles.text}>Strings last changed</Text>
           <DatePicker
@@ -268,6 +334,7 @@ class Add extends Component {
             }}
           />
         </View>
+        {/* are the strings coated */}
         <View style={styles.coated}>
           <Text style={styles.text}>This guitar has coated strings</Text>
           <Switch
@@ -275,6 +342,7 @@ class Add extends Component {
             onValueChange={() => this.onSwitchChanged()}
           />
         </View>
+        {/* submit button */}
         <View style={styles.submitWrapper}>
           <Animatable.View ref="submit" style={styles.submitAnimationWrapper}>
             <TouchableHighlight
@@ -293,6 +361,7 @@ class Add extends Component {
             </TouchableHighlight>
           </Animatable.View>
         </View>
+        {/* back pressed warning */}
         <Dialog.Container visible={this.state.warningPopup}>
           <Dialog.Title>Warning</Dialog.Title>
           <Dialog.Description>
@@ -314,6 +383,7 @@ class Add extends Component {
             color={colors.primary}
           />
         </Dialog.Container>
+        {/* invalid data toast */}
         <Toast
           ref="toast"
           style={{

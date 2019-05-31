@@ -34,7 +34,8 @@ function getGuitar(props) {
   return props.guitars.find(x => x.key === props.selectedForEditing);
 }
 
-const options = {
+//options for the image picker
+const photoOptions = {
   customButtons: [{ name: "delete", title: "Remove photo..." }],
   storageOptions: {
     skipBackup: true,
@@ -254,7 +255,7 @@ class Edit extends Component {
     this.refs["photo"].swing(500).then(endState => {
       //only have delete option if photo exists in the first place
       const optionToRemove =
-        this.state.editedGuitar.photo === null ? null : options;
+        this.state.editedGuitar.photo === null ? null : photoOptions;
       ImagePicker.showImagePicker(optionToRemove, response => {
         if (response.customButton) {
           this.setState({
@@ -322,11 +323,13 @@ class Edit extends Component {
 
     return (
       <View style={styles.parent}>
+        {/* name. changes from Text to TextInput on press */}
         <View style={styles.nameInputWrapper}>
           {this.name(this.state.editingName)}
         </View>
+        {/* options (Android only) */}
         <View style={styles.optionsWrapper}>{this.options()}</View>
-
+        {/* guitar type */}
         <View style={styles.questionRow}>
           <Text style={styles.text}>What type of guitar is this?</Text>
         </View>
@@ -335,6 +338,7 @@ class Edit extends Component {
           handleTypeChange={this.handleTypeChange}
           validated={true}
         />
+        {/* profile photo */}
         <Animatable.View ref="photo" style={styles.photoAnimationWrapper}>
           <TouchableHighlight
             style={styles.photo}
@@ -348,6 +352,7 @@ class Edit extends Component {
             />
           </TouchableHighlight>
         </Animatable.View>
+        {/* guitar usage */}
         <View style={styles.questionRow}>
           <Text style={styles.text}>How often do you play this guitar?</Text>
         </View>
@@ -356,6 +361,7 @@ class Edit extends Component {
           handleUseChange={this.handleUseChange}
           validated={true}
         />
+        {/* strings age */}
         <View style={styles.lastChanged}>
           <Text style={styles.text}>Strings last changed</Text>
           <DatePicker
@@ -389,6 +395,7 @@ class Edit extends Component {
             }}
           />
         </View>
+        {/* are strings coated */}
         <View style={styles.coated}>
           <Text style={styles.text}>This guitar has coated strings</Text>
           <Switch
@@ -396,6 +403,7 @@ class Edit extends Component {
             onValueChange={() => this.onSwitchChanged()}
           />
         </View>
+        {/* update button */}
         <View style={styles.submitWrapper}>
           <Animatable.View ref="update" style={styles.updateAnimationWrapper}>
             <TouchableHighlight
@@ -414,6 +422,7 @@ class Edit extends Component {
             </TouchableHighlight>
           </Animatable.View>
         </View>
+        {/* back pressed warning */}
         <Dialog.Container visible={this.state.warningPopup}>
           <Dialog.Title>Warning</Dialog.Title>
           <Dialog.Description>
@@ -435,6 +444,7 @@ class Edit extends Component {
             color={colors.primary}
           />
         </Dialog.Container>
+        {/* name cannot be null toast */}
         <Toast
           ref="toast"
           style={{
