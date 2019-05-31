@@ -51,6 +51,10 @@ class Home extends Component {
     this.notif = new NotifService();
   }
 
+  change(x) {
+    return x * 10;
+  }
+
   handlePerm(perms) {
     Alert.alert("Permissions", JSON.stringify(perms));
   }
