@@ -3,6 +3,7 @@ import { View, Text, Switch } from "react-native";
 import { connect } from "react-redux";
 import { showNotifications } from "../../actions";
 import styles from "./styles";
+import PropTypes from "prop-types";
 
 /**
  * settings screen only has option to enable/disable notifications
@@ -31,6 +32,10 @@ class Settings extends Component {
     );
   }
 }
+
+Settings.propTypes = {
+  notifications: PropTypes.bool.isRequired
+};
 
 const mapStateToProps = state => {
   return {

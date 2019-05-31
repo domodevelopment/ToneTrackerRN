@@ -2,12 +2,10 @@ import React, { Component } from "react";
 import {
   View,
   Text,
-  TouchableHighlight,
   TouchableWithoutFeedback,
   Image,
   Dimensions,
-  Animated,
-  Alert
+  Animated
 } from "react-native";
 import { selectedGuitar, editGuitar, showDatePicker } from "../../actions";
 import { connect } from "react-redux";
@@ -23,6 +21,7 @@ import Icon from "react-native-vector-icons/AntDesign";
 import colors from "../../colors";
 import Dialog from "react-native-dialog";
 import NotifService from "../../NotifService";
+import PropTypes from "prop-types";
 
 const width = Dimensions.get("window").width;
 
@@ -230,7 +229,9 @@ class ListItem extends Component {
           </View>
           <View style={styles.detailsRowTwo}>
             <View style={styles.ageTextWrapper}>
-              <Text style={styles.ageText}>{this.getDisplayAge()}</Text>
+              <Text style={[styles.ageText, { color: this.getCondition() }]}>
+                {this.getDisplayAge()}
+              </Text>
             </View>
             <TouchableWithoutFeedback
               onPressIn={() => this.handlePressIn(this.animatedRestringValue)}
@@ -286,6 +287,26 @@ class ListItem extends Component {
     );
   }
 }
+
+ListItem.propTypes = {
+  item: PropTypes.shape({
+    key: PropTypes.string.isRequired,
+    coated: PropTypes.bool.isRequired,
+    photo: PropTypes.string,
+    name: PropTypes.string.isRequired,
+    type: PropTypes.string.isRequired,
+    use: PropTypes.string.isRequired,
+    timestamp: PropTypes.number.isRequired
+  }).isRequired
+};
+
+ListItem.defaultProps = {
+  item: PropTypes.objectOf(
+    PropTypes.shape({
+      photo: null
+    })
+  )
+};
 
 const mapStateToProps = state => {
   return {

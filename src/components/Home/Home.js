@@ -22,6 +22,7 @@ import Icon from "react-native-vector-icons/MaterialIcons";
 import appConfig from "../../../app.json";
 import NotifService from "../../NotifService";
 import * as Animatable from "react-native-animatable";
+import PropTypes from "prop-types";
 
 //If there are no items in the FlatList then FAB should pulse to get the user's attention
 let shouldPulse = "pulse";
@@ -39,6 +40,7 @@ class Home extends Component {
       headerRight: <Options navigation={navigation} />
     };
   };
+
   constructor(props) {
     super(props);
     this.state = {
@@ -48,6 +50,7 @@ class Home extends Component {
     };
     this.notif = new NotifService();
   }
+
   handlePerm(perms) {
     Alert.alert("Permissions", JSON.stringify(perms));
   }
@@ -162,11 +165,15 @@ class Home extends Component {
   }
 }
 
+Home.propTypes = {
+  guitars: PropTypes.array.isRequired
+};
+
 const mapStateToProps = state => {
   return {
     guitars: state.guitars,
-    notifications: state.notifications,
-    theme: state.theme
+    notifications: state.notifications
+    // theme: state.theme
   };
 };
 

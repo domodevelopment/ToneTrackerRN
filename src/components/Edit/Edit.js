@@ -29,6 +29,7 @@ import Toast from "react-native-easy-toast";
 import ImagePicker from "react-native-image-picker";
 import NotifService from "../../NotifService";
 import * as Animatable from "react-native-animatable";
+import PropTypes from "prop-types";
 
 function getGuitar(props) {
   return props.guitars.find(x => x.key === props.selectedForEditing);
@@ -457,6 +458,30 @@ class Edit extends Component {
     );
   }
 }
+
+Edit.propTypes = {
+  selectedForEditing: PropTypes.string.isRequired,
+  guitars: PropTypes.arrayOf(
+    PropTypes.shape({
+      coated: PropTypes.bool.isRequired,
+      photo: PropTypes.string,
+      name: PropTypes.string.isRequired,
+      type: PropTypes.string.isRequired,
+      use: PropTypes.string.isRequired,
+      timestamp: PropTypes.number.isRequired,
+      changeAge: PropTypes.bool
+    })
+  ).isRequired
+};
+
+Edit.defaultProps = {
+  guitars: PropTypes.arrayOf(
+    PropTypes.shape({
+      photo: null,
+      changeAge: false
+    })
+  )
+};
 
 const mapStateToProps = state => {
   return {

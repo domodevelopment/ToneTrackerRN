@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Platform, Alert } from "react-native";
+import { Platform } from "react-native";
 import Icon from "react-native-vector-icons/SimpleLineIcons";
 import {
   Menu,
@@ -12,6 +12,7 @@ import { deleteGuitar } from "../../actions";
 import colors from "../../colors";
 import NotifService from "../../NotifService";
 import Dialog from "react-native-dialog";
+import PropTypes from "prop-types";
 
 const iconColor = Platform.OS === "ios" ? colors.primary : colors.white;
 
@@ -34,9 +35,7 @@ class Delete extends Component {
   guitarName = getGuitar(this.props);
 
   warningString = () => {
-    return `Are you sure you want to delete ${
-      /*getGuitar(this.props)*/ this.guitarName
-    }?`;
+    return `Are you sure you want to delete ${this.guitarName}?`;
   };
 
   render() {
@@ -86,6 +85,11 @@ class Delete extends Component {
     );
   }
 }
+
+Delete.propTypes = {
+  selectedForEditing: PropTypes.string.isRequired,
+  guitars: PropTypes.array.isRequired
+};
 
 const mapStateToProps = state => {
   return {

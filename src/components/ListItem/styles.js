@@ -80,7 +80,6 @@ export default {
   },
   ageText: {
     fontSize: 15,
-    color: "#333",
     textAlign: "center"
   }
 };

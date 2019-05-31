@@ -10,6 +10,7 @@ import styles from "../InstrumentType/styles";
 import constants from "../../constants";
 import colors from "../../colors";
 import * as Animatable from "react-native-animatable";
+import PropTypes from "prop-types";
 
 class InstrumentUse extends Component {
   //animate the selection
@@ -71,5 +72,15 @@ class InstrumentUse extends Component {
     );
   }
 }
+
+InstrumentUse.propTypes = {
+  use: PropTypes.string,
+  validated: PropTypes.bool
+};
+
+InstrumentUse.defaultProps = {
+  use: null,
+  validated: true
+};
 
 export default InstrumentUse;

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, TouchableHighlight, Image, Alert } from "react-native";
+import { View, TouchableHighlight, Image } from "react-native";
 import electricFadedImg from "../../images/electric_faded.png";
 import electricSelectedImg from "../../images/electric_selected.png";
 import bassFadedImg from "../../images/bass_faded.png";
@@ -10,6 +10,7 @@ import styles from "./styles";
 import constants from "../../constants";
 import colors from "../../colors";
 import * as Animatable from "react-native-animatable";
+import PropTypes from "prop-types";
 
 class InstrumentType extends Component {
   //animate the selection
@@ -77,5 +78,15 @@ class InstrumentType extends Component {
     );
   }
 }
+
+InstrumentType.propTypes = {
+  type: PropTypes.string,
+  validated: PropTypes.bool
+};
+
+InstrumentType.defaultProps = {
+  type: null,
+  validated: true
+};
 
 export default InstrumentType;
