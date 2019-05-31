@@ -213,7 +213,7 @@ class Edit extends Component {
         style={nameStyle}
         value={this.state.editedGuitar.name}
         onChangeText={this.handleNameChange}
-        maxLength={15}
+        maxLength={20}
         autoFocus={true}
         onBlur={() => {
           if (this.state.editedGuitar.name.match(regex)) {
@@ -235,6 +235,7 @@ class Edit extends Component {
         onPress={() => {
           this.setState({ ...this.state, editingName: true });
         }}
+        numberOfLines={1}
       >
         {this.state.editedGuitar.name}
       </Text>
@@ -325,6 +326,15 @@ class Edit extends Component {
           {this.name(this.state.editingName)}
         </View>
         <View style={styles.optionsWrapper}>{this.options()}</View>
+
+        <View style={styles.questionRow}>
+          <Text style={styles.text}>What type of guitar is this?</Text>
+        </View>
+        <InstrumentType
+          type={this.state.editedGuitar.type}
+          handleTypeChange={this.handleTypeChange}
+          validated={true}
+        />
         <Animatable.View ref="photo" style={styles.photoAnimationWrapper}>
           <TouchableHighlight
             style={styles.photo}
@@ -338,14 +348,6 @@ class Edit extends Component {
             />
           </TouchableHighlight>
         </Animatable.View>
-        <View style={styles.questionRow}>
-          <Text style={styles.text}>What type of guitar is this?</Text>
-        </View>
-        <InstrumentType
-          type={this.state.editedGuitar.type}
-          handleTypeChange={this.handleTypeChange}
-          validated={true}
-        />
         <View style={styles.questionRow}>
           <Text style={styles.text}>How often do you play this guitar?</Text>
         </View>

@@ -16,7 +16,7 @@ export default {
     width: "95%",
     paddingLeft: "3%",
     fontSize: 20,
-    color: colors.primary
+    color: colors.dark
   },
   nameInvalidInput: {
     backgroundColor: colors.rusty,

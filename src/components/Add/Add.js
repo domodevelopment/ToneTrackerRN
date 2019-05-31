@@ -217,9 +217,9 @@ class Add extends Component {
             style={nameStyle}
             value={this.state.newGuitar.name}
             onChangeText={this.handleNameChange}
-            maxLength={15}
+            maxLength={20}
             autoFocus={true}
-            selectionColor={colors.primary}
+            selectionColor={colors.dark}
           />
         </View>
         <View style={styles.questionRow}>

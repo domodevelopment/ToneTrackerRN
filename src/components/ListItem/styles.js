@@ -25,11 +25,17 @@ export default {
   progressCircle: {
     position: "absolute"
   },
+  // coatedImg: {
+  //   position: "absolute",
+  //   bottom: "2%",
+  //   left: "15%",
+  //   height: "30%"
+  // },
   coatedImg: {
     position: "absolute",
-    bottom: "2%",
-    left: "15%",
-    height: "30%"
+    top: width * 0.18,
+    left: "13%",
+    height: width * 0.075
   },
   detailsWrapper: {
     flex: 1,
@@ -83,9 +89,4 @@ export default {
     color: "#333",
     textAlign: "center"
   }
-  // temp: {
-  //   backgroundColor: "#ccc",
-  //   width: 100,
-  //   height: 50
-  // }
 };
