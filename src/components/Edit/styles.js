@@ -48,7 +48,7 @@ export default {
     borderRadius: (Dimensions.get("window").width * 0.25) / 2,
     borderStyle: "solid",
     borderWidth: 1,
-    borderColor: colors.primary
+    borderColor: colors.dark
   },
   photo: {
     height: "100%",

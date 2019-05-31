@@ -5,7 +5,8 @@ import {
   TouchableWithoutFeedback,
   Image,
   Dimensions,
-  Animated
+  Animated,
+  Alert
 } from "react-native";
 import { selectedGuitar, editGuitar, showDatePicker } from "../../actions";
 import { connect } from "react-redux";
@@ -22,6 +23,7 @@ import colors from "../../colors";
 import Dialog from "react-native-dialog";
 import NotifService from "../../NotifService";
 import PropTypes from "prop-types";
+import * as Animatable from "react-native-animatable";
 
 const width = Dimensions.get("window").width;
 
@@ -38,6 +40,7 @@ class ListItem extends Component {
     //each animated button needs an animated value
     this.animatedEditValue = new Animated.Value(1);
     this.animatedRestringValue = new Animated.Value(1);
+    this.pulseValue = new Animated.Value(5);
   }
 
   //shrink selected button
@@ -91,9 +94,28 @@ class ListItem extends Component {
   };
 
   isCoated = () => {
-    return this.props.item.coated ? (
-      <Image source={coatedImg} style={styles.coatedImg} resizeMode="contain" />
-    ) : null;
+    return (
+      this.props.item.coated && (
+        <Image
+          source={coatedImg}
+          style={styles.coatedImg}
+          resizeMode="contain"
+        />
+      )
+    );
+  };
+
+  getPulsar = () => {
+    return (
+      this.getCondition() === "#dc143c" && (
+        <Animatable.View
+          style={styles.pulse}
+          animation="pulse"
+          easing="ease-out"
+          iterationCount="infinite"
+        />
+      )
+    );
   };
 
   whenDidRestring = () => {
@@ -193,6 +215,7 @@ class ListItem extends Component {
     return (
       <View style={styles.parent}>
         <View style={styles.imageWrapper}>
+          {this.getPulsar()}
           <Image
             source={this.instrumentImage()}
             style={styles.instrumentImg}

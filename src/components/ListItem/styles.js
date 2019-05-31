@@ -17,10 +17,17 @@ export default {
     justifyContent: "center",
     alignItems: "center"
   },
+  pulse: {
+    width: "89%",
+    height: "89%",
+    borderRadius: (width * 0.27) / 2,
+    backgroundColor: colors.rusty
+  },
   instrumentImg: {
     width: "90%",
     height: "90%",
-    borderRadius: (width * 0.27) / 2
+    borderRadius: (width * 0.27) / 2,
+    position: "absolute"
   },
   progressCircle: {
     position: "absolute"
