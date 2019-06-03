@@ -24,6 +24,7 @@ import Dialog from "react-native-dialog";
 import NotifService from "../../NotifService";
 import PropTypes from "prop-types";
 import * as Animatable from "react-native-animatable";
+import strings from "../../strings";
 
 const width = Dimensions.get("window").width;
 
@@ -40,7 +41,6 @@ class ListItem extends Component {
     //each animated button needs an animated value
     this.animatedEditValue = new Animated.Value(1);
     this.animatedRestringValue = new Animated.Value(1);
-    this.pulseValue = new Animated.Value(5);
   }
 
   //shrink selected button
@@ -119,7 +119,7 @@ class ListItem extends Component {
   };
 
   whenDidRestring = () => {
-    return `When did you restring ${String(this.props.item.name)}?`;
+    return `${strings.whenDidRestring} ${String(this.props.item.name)}?`;
   };
 
   getDaysElapsed = () => {
@@ -132,11 +132,11 @@ class ListItem extends Component {
   getDisplayAge = () => {
     const age = this.getDaysElapsed();
     if (age === 0) {
-      return "Restrung today";
+      return strings.restrungToday;
     } else if (age === 1) {
-      return `${age} day ago`;
+      return `${age} ${strings.dayAgo}`;
     } else {
-      return `${age} days ago`;
+      return `${age} ${strings.daysAgo}`;
     }
   };
 
@@ -266,17 +266,17 @@ class ListItem extends Component {
                   colors={[colors.light, colors.primary, colors.dark]}
                   style={styles.restringButton}
                 >
-                  <Text style={styles.btnText}>Restring</Text>
+                  <Text style={styles.btnText}>{strings.restring}</Text>
                 </LinearGradient>
               </Animated.View>
             </TouchableWithoutFeedback>
           </View>
         </View>
         <Dialog.Container visible={this.state.restringPopup}>
-          <Dialog.Title>Restring Guitar</Dialog.Title>
+          <Dialog.Title>{strings.restringGuitar}</Dialog.Title>
           <Dialog.Description>{this.whenDidRestring()}</Dialog.Description>
           <Dialog.Button
-            label="Today"
+            label={strings.today}
             onPress={() => {
               this.setState({ restringPopup: false });
               this.props.item.timestamp = new Date().getTime();
@@ -289,7 +289,7 @@ class ListItem extends Component {
             color={colors.primary}
           />
           <Dialog.Button
-            label="Some other day"
+            label={strings.someOtherDay}
             onPress={() => {
               this.setState({ restringPopup: false });
               this.props.selectedGuitar(this.props.item.key);
@@ -299,7 +299,7 @@ class ListItem extends Component {
             color={colors.primary}
           />
           <Dialog.Button
-            label="Cancel"
+            label={strings.cancel}
             onPress={() => {
               this.setState({ restringPopup: false });
             }}

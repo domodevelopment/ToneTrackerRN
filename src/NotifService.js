@@ -1,5 +1,6 @@
 import PushNotification from "react-native-push-notification";
 import constants from "./constants";
+import strings from "./strings";
 
 /**
  * handling the notifications
@@ -33,7 +34,7 @@ export default class NotifService {
     PushNotification.localNotificationSchedule({
       userInfo: { id: details.key },
       date: due,
-      message: `Time to restring ${guitar}`
+      message: `${timeToRestring} ${guitar}`
     });
   }
 

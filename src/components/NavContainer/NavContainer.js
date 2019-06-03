@@ -6,6 +6,7 @@ import Edit from "../Edit";
 import Settings from "../Settings";
 import PrivacyPolicy from "../PrivacyPolicy";
 import colors from "../../colors";
+import strings from "../../strings";
 
 const ios = Platform.OS === "ios" ? true : false;
 
@@ -31,7 +32,7 @@ const Navigator = createStackNavigator({
   Home: {
     screen: Home,
     navigationOptions: {
-      headerBackTitle: "Back"
+      headerBackTitle: strings.back
     }
   },
   Add: {

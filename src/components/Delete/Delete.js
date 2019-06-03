@@ -13,6 +13,7 @@ import colors from "../../colors";
 import NotifService from "../../NotifService";
 import Dialog from "react-native-dialog";
 import PropTypes from "prop-types";
+import strings from "../../strings";
 
 const iconColor = Platform.OS === "ios" ? colors.primary : colors.white;
 
@@ -35,7 +36,7 @@ class Delete extends Component {
   guitarName = getGuitar(this.props);
 
   warningString = () => {
-    return `Are you sure you want to delete ${this.guitarName}?`;
+    return `${strings.sureWantToDelete} ${this.guitarName}?`;
   };
 
   render() {
@@ -56,14 +57,14 @@ class Delete extends Component {
               //show warning
               this.setState({ warningPopup: true });
             }}
-            text="Delete"
+            text={strings.delete}
           />
         </MenuOptions>
         <Dialog.Container visible={this.state.warningPopup}>
-          <Dialog.Title>Warning</Dialog.Title>
+          <Dialog.Title>{strings.warning}</Dialog.Title>
           <Dialog.Description>{this.warningString()}</Dialog.Description>
           <Dialog.Button
-            label="Yes"
+            label={strings.yes}
             onPress={() => {
               //delete guitar, cancel related notification, navigate home
               this.setState({ warningPopup: false });
@@ -74,7 +75,7 @@ class Delete extends Component {
             color={"#f00"}
           />
           <Dialog.Button
-            label="No"
+            label={strings.no}
             onPress={() => {
               this.setState({ warningPopup: false });
             }}

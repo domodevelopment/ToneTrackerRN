@@ -23,6 +23,7 @@ import appConfig from "../../../app.json";
 import NotifService from "../../NotifService";
 import * as Animatable from "react-native-animatable";
 import PropTypes from "prop-types";
+import strings from "../../strings";
 
 //If there are no items in the FlatList then FAB should pulse to get the user's attention
 let shouldPulse = "pulse";
@@ -30,7 +31,7 @@ let shouldPulse = "pulse";
 class Home extends Component {
   static navigationOptions = ({ navigation }) => {
     return {
-      title: navigation.getParam("Title", "Tone Tracker"),
+      title: navigation.getParam("Title", strings.title),
       headerTitleStyle: {
         color: colors.primary
       },
@@ -49,10 +50,6 @@ class Home extends Component {
       senderId: appConfig.senderID
     };
     this.notif = new NotifService();
-  }
-
-  change(x) {
-    return x * 10;
   }
 
   handlePerm(perms) {

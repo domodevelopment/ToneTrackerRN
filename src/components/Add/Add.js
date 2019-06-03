@@ -26,6 +26,7 @@ import NotifService from "../../NotifService";
 import ImagePicker from "react-native-image-picker";
 import cameraImg from "../../images/camera.png";
 import * as Animatable from "react-native-animatable";
+import strings from "../../strings";
 
 //need to know locale for date formatting
 const locale =
@@ -38,7 +39,7 @@ const regex = "[a-z|A-Z|0-9]";
 
 //options for the image picker
 const photoOptions = {
-  customButtons: [{ name: "delete", title: "Remove photo..." }],
+  customButtons: [{ name: "delete", title: strings.removePhoto }],
   storageOptions: {
     skipBackup: true,
     path: "images"
@@ -113,7 +114,7 @@ class Add extends Component {
         }
         //validating details
       } else {
-        this.refs.toast.show("Fill in all details");
+        this.refs.toast.show(strings.fillInDetails);
         if (!name.match(regex)) {
           this.setState({ nameValidated: false });
         } else {
@@ -262,7 +263,7 @@ class Add extends Component {
         {/* guitar's name */}
         <View style={styles.nameInputWrapper}>
           <TextInput
-            placeholder="Name (eg. Stratocaster)"
+            placeholder={strings.namePlaceholder}
             style={nameStyle}
             value={this.state.newGuitar.name}
             onChangeText={this.handleNameChange}
@@ -273,7 +274,7 @@ class Add extends Component {
         </View>
         {/* guitar type */}
         <View style={styles.questionRow}>
-          <Text style={styles.text}>What type of guitar is this?</Text>
+          <Text style={styles.text}>{strings.whatTypeOfGuitar}</Text>
         </View>
         <InstrumentType
           type={this.state.newGuitar.type}
@@ -296,7 +297,7 @@ class Add extends Component {
         </Animatable.View>
         {/* guitar usage */}
         <View style={styles.questionRow}>
-          <Text style={styles.text}>How often do you play this guitar?</Text>
+          <Text style={styles.text}>{strings.howOftenPlayGuitar}</Text>
         </View>
         <InstrumentUse
           use={this.state.newGuitar.use}
@@ -305,17 +306,17 @@ class Add extends Component {
         />
         {/* strings age */}
         <View style={styles.lastChanged}>
-          <Text style={styles.text}>Strings last changed</Text>
+          <Text style={styles.text}>{strings.lastChanged}</Text>
           <DatePicker
             style={stampStyle}
             date={this.getFormattedDate()}
             mode="date"
-            placeholder="choose..."
+            placeholder={strings.choose}
             format={this.getDateFormat()}
             minDate="01-01-14"
             maxDate={this.getCurrentDate()}
-            confirmBtnText="Confirm"
-            cancelBtnText="Cancel"
+            confirmBtnText={strings.confirm}
+            cancelBtnText={strings.cancel}
             onDateChange={date => {
               date = date.split("-");
               let timestamp = null;
@@ -336,7 +337,7 @@ class Add extends Component {
         </View>
         {/* are the strings coated */}
         <View style={styles.coated}>
-          <Text style={styles.text}>This guitar has coated strings</Text>
+          <Text style={styles.text}>{strings.coatedStrings}</Text>
           <Switch
             value={this.state.newGuitar.coated}
             onValueChange={() => this.onSwitchChanged()}
@@ -356,19 +357,17 @@ class Add extends Component {
                 colors={[colors.primary, colors.primary, colors.dark]}
                 style={styles.gradient}
               >
-                <Text style={styles.btnText}>Submit</Text>
+                <Text style={styles.btnText}>{strings.submit}</Text>
               </LinearGradient>
             </TouchableHighlight>
           </Animatable.View>
         </View>
         {/* back pressed warning */}
         <Dialog.Container visible={this.state.warningPopup}>
-          <Dialog.Title>Warning</Dialog.Title>
-          <Dialog.Description>
-            You have unsaved changes. Are you sure you want to leave?
-          </Dialog.Description>
+          <Dialog.Title>{strings.warning}</Dialog.Title>
+          <Dialog.Description>{strings.unsavedChanges}</Dialog.Description>
           <Dialog.Button
-            label="Leave"
+            label={strings.leave}
             onPress={() => {
               this.setState({ warningPopup: false });
               this.props.navigation.navigate("Home");
@@ -376,7 +375,7 @@ class Add extends Component {
             color={colors.primary}
           />
           <Dialog.Button
-            label="Stay Here"
+            label={strings.stayHere}
             onPress={() => {
               this.setState({ warningPopup: false });
             }}

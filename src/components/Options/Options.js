@@ -11,6 +11,7 @@ import Share from "react-native-share";
 import colors from "../../colors";
 import { connect } from "react-redux";
 import { toggleNightShade } from "../../actions";
+import strings from "../../strings";
 
 //developer email
 const EMAIL = "violenthoboenterprises@gmail.com";
@@ -24,7 +25,7 @@ const shareOptions = {
 class Options extends Component {
   //open email app and populate 'to' field with developer email
   handleEmail = () => {
-    email(EMAIL, { subject: "RE: Tone Tracker" }).catch(err =>
+    email(EMAIL, { subject: strings.emailSubject }).catch(err =>
       console.error("An error occured", err)
     );
   };
@@ -53,22 +54,22 @@ class Options extends Component {
             style={{ padding: 12 }}
             //share this app
             onSelect={() => Share.open(shareOptions)}
-            text="Share"
+            text={strings.share}
           />
           <MenuOption
             style={{ padding: 12 }}
             onSelect={() => this.handleEmail()}
-            text="Contact"
+            text={strings.contact}
           />
           <MenuOption
             style={{ padding: 12 }}
             onSelect={() => this.props.navigation.navigate(`Settings`)}
-            text="Settings"
+            text={strings.settings}
           />
           <MenuOption
             style={{ padding: 12 }}
             onSelect={() => this.props.navigation.navigate(`PrivacyPolicy`)}
-            text="Privacy Policy"
+            text={strings.privacyPolicyTitle}
           />
         </MenuOptions>
       </Menu>

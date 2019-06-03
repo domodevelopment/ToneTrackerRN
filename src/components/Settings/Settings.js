@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { showNotifications } from "../../actions";
 import styles from "./styles";
 import PropTypes from "prop-types";
+import strings from "../../strings";
 
 /**
  * settings screen only has option to enable/disable notifications
@@ -18,7 +19,7 @@ class Settings extends Component {
       <View style={styles.parent}>
         <View style={styles.textWrapper}>
           <Text style={styles.text}>
-            Remind me when my guitar needs new strings
+            {strings.remindWhenGuitarNeedsStrings}
           </Text>
         </View>
         <View style={styles.switchWrapper}>
