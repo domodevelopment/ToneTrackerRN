@@ -34,7 +34,7 @@ export default class NotifService {
     PushNotification.localNotificationSchedule({
       userInfo: { id: details.key },
       date: due,
-      message: `${timeToRestring} ${guitar}`
+      message: `${strings.timeToRestring} ${guitar}`
     });
   }
 
